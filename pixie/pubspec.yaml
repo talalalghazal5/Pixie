@@ -11,11 +11,14 @@ dependencies:
   dio: ^5.7.0
   flutter:
     sdk: flutter
+  flutter_cache_manager: ^3.4.1
   flutter_floating_bottom_bar: ^1.2.1+1
   font_awesome_flutter: ^10.8.0
   get: ^4.6.6
   google_nav_bar: ^5.0.7
   line_icons: ^2.0.3
+  lottie: ^3.2.0
+  shared_preferences: ^2.3.5
 
 dev_dependencies:
   flutter_test:
@@ -40,3 +43,19 @@ flutter:
     - family: spaceBold
       fonts:
         - asset: assets/fonts/SpaceGrotesk-Bold.ttf
+        
+    - family: sellena
+      fonts:
+        - asset: assets/fonts/SellenaBrush.ttf
+    - family: anything
+      fonts:
+        - asset: assets/fonts/Anything.otf
+    - family: quagera
+      fonts:
+        - asset: assets/fonts/QuageraRegular.otf
+    - family: yesterday
+      fonts:
+        - asset: assets/fonts/Yesterday.otf
+  
+  assets: 
+    - assets/animations/ 
