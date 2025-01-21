@@ -24,3 +24,19 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: space
+      fonts:
+        - asset: assets/fonts/SpaceGrotesk-Regular.ttf
+
+    - family: spaceMedium
+      fonts:
+        - asset: assets/fonts/SpaceGrotesk-Medium.ttf
+
+    - family: spaceSemiBold
+      fonts:
+        - asset: assets/fonts/SpaceGrotesk-SemiBold.ttf
+
+    - family: spaceBold
+      fonts:
+        - asset: assets/fonts/SpaceGrotesk-Bold.ttf
