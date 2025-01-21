@@ -2,26 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MainController extends GetxController {
-  int navIndex = 0;
+  RxInt navIndex = 0.obs;
   PageController pageController = PageController();
 
   void onPageChanged(int index) {
-    navIndex = index;
-    pageController.animateToPage(
-      index,
-      duration: const Duration(milliseconds: 200),
-      curve: Curves.ease,
-    );
-    update();
+    navIndex.value = index;
   }
 
   void onTabTapped(int index) {
-    navIndex = index;
+    navIndex.value = index;
     pageController.animateToPage(
-      index,
-      duration: const Duration(milliseconds: 200),
+      navIndex.value,
+      duration: const Duration(milliseconds: 50),
       curve: Curves.ease,
     );
-    update();
   }
 }
