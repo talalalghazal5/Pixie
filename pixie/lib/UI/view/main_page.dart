@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -29,6 +32,12 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     MainController mainController = Get.put(MainController());
     return Scaffold(
+      appBar: PreferredSize(
+          preferredSize: Size(double.infinity, 60),
+          child: AppBar(
+            forceMaterialTransparency: true,
+            title: Text('Pixie', style: TextStyle(fontFamily: 'spaceSemiBold'),),
+          )),
       body: PageView(
           controller: mainController.pageController,
           onPageChanged: (value) => mainController.onPageChanged(value),
