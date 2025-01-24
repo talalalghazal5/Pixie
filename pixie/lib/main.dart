@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pixie/UI/view/main_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+late SharedPreferences preferences;
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  preferences = await SharedPreferences.getInstance();
   runApp(const MainApp());
 }
 
