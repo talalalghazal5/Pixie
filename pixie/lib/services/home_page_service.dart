@@ -1,20 +1,54 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+import 'package:pixie/data/models/photo.dart';
+import 'package:pixie/main.dart';
 
 class HomePageService extends GetxService {
-  /// todo: add functions to get photos from the api.
-  static final Dio dio = Dio(
-    BaseOptions(
-      baseUrl: 'https://api.pexels.com/v1',
-      headers: {
-        'Content-type' : 'application/json',
-        'Authorization' : 'Bearer gmoUMTU5wTBUcUJj9WFUY6LjfhMjMtmDZponkUkVYBjKI4kLOqhZAiDA'
-      },
-      connectTimeout: Duration(milliseconds: 5000),
-    )
-  );
+  String baseUrl = 'https://api.pexels.com/v1';
+  final String apiKey =
+      'gmoUMTU5wTBUcUJj9WFUY6LjfhMjMtmDZponkUkVYBjKI4kLOqhZAiDA';
+  // String cachedImages = preferences.getString('cachedPhotos') ?? '';
+  static final Dio dio = Dio();
 
-  Future<void> getCuratedPhotos() async {
-    // todo: get photos curated from the api.
+  Future<List<Photo>> getCuratedPhotos({int page = 1, int perPage = 40}) async {
+    List<Photo> photos;
+    try {
+
+      // if (cachedImages != '') {
+      //   List<dynamic> jsonPhotos = jsonDecode(cachedImages);
+      //   photos = jsonPhotos.map((photo) => Photo.fromJson(photo)).toList();
+      //   return photos;
+      // }
+      var response = await dio
+          .get(
+            '$baseUrl/curated',
+            queryParameters: {
+              'page' : page,
+              'per_page': perPage,
+            },
+            options: Options(
+              headers: {
+                'Authorization': apiKey,
+              },
+            ),
+          )
+          .timeout(const Duration(minutes: 5));
+
+      if (response.statusCode == 200) {
+        var responseBody = response.data;
+        List<dynamic> jsonPhotos = responseBody['photos'];
+        // await preferences.setString('cachedPhotos', jsonEncode(jsonPhotos)); // caching the images when fetching them.
+        photos = jsonPhotos.map((photo) => Photo.fromJson(photo)).toList();
+        return photos;
+      }
+      // ignore: avoid_print
+      print(response.statusCode);
+      throw {'message': response.statusMessage};
+    } on DioException catch (e) {
+      throw e.error!;
+    }
   }
 }
