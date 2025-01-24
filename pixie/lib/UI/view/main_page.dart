@@ -1,11 +1,5 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:line_icons/line_icons.dart';
 import 'package:pixie/UI/components/navbar.dart';
 import 'package:pixie/UI/view/favorites_page.dart';
 import 'package:pixie/UI/view/home_page.dart';
@@ -32,16 +26,21 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     MainController mainController = Get.put(MainController());
     return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: Size(double.infinity, 60),
-          child: AppBar(
-            forceMaterialTransparency: true,
-            title: Text('Pixie', style: TextStyle(fontFamily: 'spaceSemiBold'),),
-          )),
+      appBar: AppBar(
+        toolbarHeight: kToolbarHeight + 5,
+        elevation: 10,
+        forceMaterialTransparency: true,
+        title: const Text(
+          'Pixie',
+          overflow: TextOverflow.visible,
+          style: TextStyle(fontFamily: 'yesterday', fontSize: 40),
+        ),
+      ),
       body: PageView(
-          controller: mainController.pageController,
-          onPageChanged: (value) => mainController.onPageChanged(value),
-          children: pages),
+        controller: mainController.pageController,
+        onPageChanged: (value) => mainController.onPageChanged(value),
+        children: pages,
+      ),
       bottomNavigationBar: const Navbar(),
     );
   }
