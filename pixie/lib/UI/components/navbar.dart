@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:pixie/controllers/main_controller.dart';
-import 'package:pixie/main.dart';
 
 class Navbar extends StatelessWidget {
   const Navbar({super.key});
@@ -12,12 +11,14 @@ class Navbar extends StatelessWidget {
   Widget build(BuildContext context) {
     MainController mainController = Get.find<MainController>();
     return Container(
+      margin: const EdgeInsets.only(bottom: 15, left: 4, right: 4),
       decoration: const BoxDecoration(
-        color: Colors.transparent,
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(100)),
       ),
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
           child: Obx(
             () => GNav(
               rippleColor: Colors.grey[300]!,
@@ -25,12 +26,12 @@ class Navbar extends StatelessWidget {
               gap: 8,
               activeColor: Colors.black,
               iconSize: 24,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               duration: const Duration(milliseconds: 200),
               curve: Curves.easeInCubic,
               tabBackgroundColor: Colors.grey[100]!,
-              
               color: Colors.black,
+              tabMargin: const EdgeInsets.all(5),
               tabs: [
                 GButton(
                   icon: LineIcons.home,
