@@ -58,4 +58,4 @@ flutter:
         - asset: assets/fonts/Yesterday.otf
   
   assets: 
-    - assets/animations/ 
+    - assets/animations/
