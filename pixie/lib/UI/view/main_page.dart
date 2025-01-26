@@ -3,8 +3,9 @@ import 'package:get/get.dart';
 import 'package:pixie/UI/components/navbar.dart';
 import 'package:pixie/UI/view/favorites_page.dart';
 import 'package:pixie/UI/view/home_page.dart';
-import 'package:pixie/UI/view/profile_page.dart';
 import 'package:pixie/UI/view/search_page.dart';
+import 'package:pixie/UI/view/settings_page.dart';
+import 'package:pixie/UI/view/home_page.dart';
 import 'package:pixie/controllers/main_controller.dart';
 
 class MainPage extends StatefulWidget {
@@ -20,7 +21,7 @@ class _MainPageState extends State<MainPage> {
     HomePage(),
     FavoritesPage(),
     SearchPage(),
-    ProfilePage()
+    SettingsPage(),
   ];
   @override
   Widget build(BuildContext context) {

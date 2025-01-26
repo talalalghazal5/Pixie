@@ -67,8 +67,8 @@ class Navbar extends StatelessWidget {
                   ),
                 ),
                 GButton(
-                  icon: LineIcons.user,
-                  text: 'Profile',
+                  icon: Icons.settings_outlined,
+                  text: 'Settings',
                   iconActiveColor: const Color(0xffFfa500),
                   backgroundColor: const Color(0xffFfa500).withAlpha(40),
                   textStyle: const TextStyle(
