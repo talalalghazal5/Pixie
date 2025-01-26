@@ -11,14 +11,14 @@ class Navbar extends StatelessWidget {
   Widget build(BuildContext context) {
     MainController mainController = Get.find<MainController>();
     return Container(
-      margin: const EdgeInsets.only(bottom: 15, left: 4, right: 4),
+      margin: const EdgeInsets.only(bottom: 10, left: 4, right: 4),
       decoration: const BoxDecoration(
-        color: Colors.white,
+        color: Colors.transparent,
         borderRadius: BorderRadius.all(Radius.circular(100)),
       ),
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Obx(
             () => GNav(
               rippleColor: Colors.grey[300]!,
