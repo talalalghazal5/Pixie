@@ -10,18 +10,11 @@ class HomePageService extends GetxService {
   String baseUrl = 'https://api.pexels.com/v1';
   final String apiKey =
       'gmoUMTU5wTBUcUJj9WFUY6LjfhMjMtmDZponkUkVYBjKI4kLOqhZAiDA';
-  // String cachedImages = preferences.getString('cachedPhotos') ?? '';
   static final Dio dio = Dio();
 
   Future<List<Photo>> getCuratedPhotos({int page = 1, int perPage = 40}) async {
     List<Photo> photos;
     try {
-
-      // if (cachedImages != '') {
-      //   List<dynamic> jsonPhotos = jsonDecode(cachedImages);
-      //   photos = jsonPhotos.map((photo) => Photo.fromJson(photo)).toList();
-      //   return photos;
-      // }
       var response = await dio
           .get(
             '$baseUrl/curated',
