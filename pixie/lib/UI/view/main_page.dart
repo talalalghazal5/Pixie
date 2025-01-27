@@ -25,7 +25,7 @@ class _MainPageState extends State<MainPage> {
   ];
   @override
   Widget build(BuildContext context) {
-    MainController mainController = Get.put(MainController());
+    MainController mainController = Get.find<MainController>();
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: kToolbarHeight + 5,
@@ -34,21 +34,24 @@ class _MainPageState extends State<MainPage> {
         title: const Text(
           'Pixie',
           overflow: TextOverflow.visible,
-          style: TextStyle(fontFamily: 'anything', fontSize: 40,),
-        ),
-        actions: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              const Text('powered by', style: TextStyle(fontSize: 10, fontFamily: 'space'),),
-              const SizedBox(width: 6,),
-              Padding(
-                padding: const EdgeInsets.only(right: 16.0),
-                child: Image.asset('assets/images/pexels_logo_black.png', width: 60,),
-              ),
-            ],
+          style: TextStyle(
+            fontFamily: 'yesterday',
+            fontSize: 40,
           ),
-        ],
+        ),
+        // actions: [
+        //   Row(
+        //     crossAxisAlignment: CrossAxisAlignment.end,
+        //     children: [
+        //       const Text('powered by', style: TextStyle(fontSize: 8, fontFamily: 'space'),),
+        //       const SizedBox(width: 6,),
+        //       Padding(
+        //         padding: const EdgeInsets.only(right: 16.0),
+        //         child: Image.asset('assets/images/pexels_logo_black.png', width: 50,),
+        //       ),
+        //     ],
+        //   ),
+        // ],
       ),
       body: PageView(
         controller: mainController.pageController,

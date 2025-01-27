@@ -136,7 +136,7 @@ class _PreviewPageState extends State<PreviewPage> {
                 icon: const LineIcon(
                   LineIcons.horizontalEllipsis,
                   color: Colors.white,
-                  size: 40,
+                  size: 30,
                 )))
       ]),
     );

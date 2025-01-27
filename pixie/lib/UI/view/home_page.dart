@@ -72,7 +72,7 @@ class _TestHomePageState extends State<HomePage> {
                             onTap: () {
                               Get.to(() => PreviewPage(
                                     photo: photo,
-                                  ));
+                                  ), transition: Transition.cupertino,);
                             },
                             child: Container(
                               height: 400,
