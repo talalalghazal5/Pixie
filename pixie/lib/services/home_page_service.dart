@@ -8,8 +8,6 @@ import 'package:pixie/main.dart';
 
 class HomePageService extends GetxService {
   String baseUrl = 'https://api.pexels.com/v1';
-  final String apiKey =
-      'gmoUMTU5wTBUcUJj9WFUY6LjfhMjMtmDZponkUkVYBjKI4kLOqhZAiDA';
   static final Dio dio = Dio();
 
   Future<List<Photo>> getCuratedPhotos({int page = 1, int perPage = 40}) async {
