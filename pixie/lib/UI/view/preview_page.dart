@@ -6,8 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:pixie/controllers/color_controller.dart';
 import 'package:pixie/data/models/photo.dart';
+import 'package:pixie/services/home_page_service.dart';
+import 'package:pixie/services/permssion_service.dart';
 
 class PreviewPage extends StatefulWidget {
   const PreviewPage({super.key, required this.photo});
@@ -132,7 +135,18 @@ class _PreviewPageState extends State<PreviewPage> {
             bottom: 10,
             right: 10,
             child: IconButton(
-                onPressed: () => (),
+                onPressed: () async {
+                  var status = await PermissionService().requestPermissions();
+                  if (status == PermissionStatus.granted) {
+                    HomePageService().downloadPhoto(
+                      imageId: widget.photo.id,
+                      imageUrl:
+                          widget.photo.src.original!,
+                      context: context.mounted ? context : context,
+                    );
+                    
+                  }
+                },
                 icon: const LineIcon(
                   LineIcons.horizontalEllipsis,
                   color: Colors.white,
