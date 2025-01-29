@@ -7,12 +7,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:pixie/bindings/my_api_key.dart';
 import 'package:pixie/data/models/photo.dart';
 
 class HomePageService extends GetxService {
   String baseUrl = 'https://api.pexels.com/v1';
-  final String apiKey =
-      'gmoUMTU5wTBUcUJj9WFUY6LjfhMjMtmDZponkUkVYBjKI4kLOqhZAiDA';
+  final String apiKey = MyApiKey.apiKey;
+
   static final Dio dio = Dio();
 
   Future<List<Photo>> getCuratedPhotos({int page = 1, int perPage = 40}) async {
@@ -58,7 +59,7 @@ class HomePageService extends GetxService {
       var downloadsPath = Directory(
         '/storage/emulated/0/DCIM/Pixie',
       );
-      var imagePath = '${downloadsPath.path}/$imageId.HEIC';
+      var imagePath = '${downloadsPath.path}/$imageId.png';
       if (!downloadsPath.existsSync()) {
         downloadsPath.createSync(recursive: true);
       }
