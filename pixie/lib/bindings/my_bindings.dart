@@ -7,6 +7,5 @@ class MyBindings extends Bindings {
   void dependencies() {
     Get.put(PhotosController());
     Get.put(MainController());
-    Get.put(MainController());
   }
 }
