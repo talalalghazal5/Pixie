@@ -408,6 +408,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.8"
+  popover:
+    dependency: "direct main"
+    description:
+      name: popover
+      sha256: "0606f3e10f92fc0459f5c52fd917738c29e7552323b28694d50c2d3312d0e1a2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.1"
   rxdart:
     dependency: transitive
     description:
@@ -613,6 +621,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "14.2.5"
+  wallpaper_manager_plus:
+    dependency: "direct main"
+    description:
+      name: wallpaper_manager_plus
+      sha256: c1a27d3330b4da27253069a436caa6e8f29ecc0cd515e303118f080ac9357354
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.4"
   web:
     dependency: transitive
     description:
