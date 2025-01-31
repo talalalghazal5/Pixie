@@ -1,19 +1,15 @@
 // ignore_for_file: use_build_context_synchronously, avoid_print
 
+import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:pixie/bindings/my_api_key.dart';
 import 'package:pixie/data/models/photo.dart';
+import 'package:pixie/main.dart';
 
 class HomePageService extends GetxService {
   String baseUrl = 'https://api.pexels.com/v1';
-  final String apiKey = MyApiKey.apiKey;
-
   static final Dio dio = Dio();
 
   Future<List<Photo>> getCuratedPhotos({int page = 1, int perPage = 40}) async {
@@ -64,7 +60,6 @@ class HomePageService extends GetxService {
         downloadsPath.createSync(recursive: true);
       }
 
-
       var response = await dio.get(imageUrl,
           options: Options(responseType: ResponseType.bytes, headers: {
             'Authorization': apiKey,
@@ -75,29 +70,43 @@ class HomePageService extends GetxService {
 
         File file = File(imagePath);
         await file.writeAsBytes(bytes);
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            behavior: SnackBarBehavior.floating,
-            shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
-            backgroundColor: Colors.lightGreen[600],
-            content: const Text(
-              'Downloaded Successfully',
-              style: TextStyle(fontFamily: 'space'),
+        if (scaffoldKey.currentContext != null) {
+          ScaffoldMessenger.of(scaffoldKey.currentContext!).showSnackBar(
+            SnackBar(
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.lightGreen[600],
+              content: const Text(
+                'Downloaded Successfully',
+                style: TextStyle(fontFamily: 'space'),
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
             ),
-          ),
-        );
+          );
+        }
         // Save the image to the gallery
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            'Download failed',
-            style: TextStyle(fontFamily: 'space'),
+      if (scaffoldKey.currentContext != null) {
+        ScaffoldMessenger.maybeOf(scaffoldKey.currentContext!)!.showSnackBar(
+          const SnackBar(
+            content: Text(
+              'Download failed',
+              style: TextStyle(fontFamily: 'space'),
+            ),
+            padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
+            ),
           ),
-        ),
-      );
+        );
+      }
       print('${e.toString()}======');
     }
   }
