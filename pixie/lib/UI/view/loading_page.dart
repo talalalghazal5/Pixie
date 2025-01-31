@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pixie/UI/view/home_page.dart';
 import 'package:pixie/UI/view/main_page.dart';
 import 'package:pixie/controllers/photos_controller.dart';
 
@@ -23,7 +22,7 @@ class _LoadingPageState extends State<LoadingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         height: MediaQuery.of(context).size.height,
         child: Center(
           child: GetBuilder<PhotosController>(

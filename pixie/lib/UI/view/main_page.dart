@@ -5,7 +5,6 @@ import 'package:pixie/UI/view/favorites_page.dart';
 import 'package:pixie/UI/view/home_page.dart';
 import 'package:pixie/UI/view/search_page.dart';
 import 'package:pixie/UI/view/settings_page.dart';
-import 'package:pixie/UI/view/home_page.dart';
 import 'package:pixie/controllers/main_controller.dart';
 
 class MainPage extends StatefulWidget {
@@ -39,19 +38,6 @@ class _MainPageState extends State<MainPage> {
             fontSize: 40,
           ),
         ),
-        // actions: [
-        //   Row(
-        //     crossAxisAlignment: CrossAxisAlignment.end,
-        //     children: [
-        //       const Text('powered by', style: TextStyle(fontSize: 8, fontFamily: 'space'),),
-        //       const SizedBox(width: 6,),
-        //       Padding(
-        //         padding: const EdgeInsets.only(right: 16.0),
-        //         child: Image.asset('assets/images/pexels_logo_black.png', width: 50,),
-        //       ),
-        //     ],
-        //   ),
-        // ],
       ),
       body: PageView(
         controller: mainController.pageController,
