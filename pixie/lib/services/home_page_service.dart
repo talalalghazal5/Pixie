@@ -110,4 +110,35 @@ class HomePageService extends GetxService {
       print('${e.toString()}======');
     }
   }
+
+  Future<List<Photo>> searchPhotos(
+      {String? query, int page = 1, int perPage = 25}) async {
+    List<Photo> results = [];
+    try {
+      var response = await dio
+          .get(
+            '$baseUrl/search',
+            queryParameters: {
+              'query': query,
+              'page': page,
+              'per_page': perPage,
+            },
+            options: Options(
+              headers: {
+                'Authorization': apiKey,
+              },
+            ),
+          )
+          .timeout(const Duration(minutes: 5));
+      if (response.statusCode == 200) {
+        var responseBody = response.data;
+        List<dynamic> jsonPhotos = responseBody['photos'];
+        results = jsonPhotos.map((photo) => Photo.fromJson(photo)).toList();
+        return results;
+      }
+      throw {'message': response.statusMessage};
+    } on DioException catch (e) {
+      throw e.message!;
+    }
+  }
 }

@@ -18,8 +18,8 @@ class _MainPageState extends State<MainPage> {
   int navIndex = 0;
   List<Widget> pages = const [
     HomePage(),
-    FavoritesPage(),
     SearchPage(),
+    FavoritesPage(),
     SettingsPage(),
   ];
   @override
