@@ -33,7 +33,7 @@ class SearchPage extends StatelessWidget {
               style: TextStyle(fontFamily: 'space', fontSize: 16),
             ),
             const SizedBox(
-              height: 8,
+              height: 20,
             ),
             SearchGrid(queries: CategoriesController.colors),
           ],

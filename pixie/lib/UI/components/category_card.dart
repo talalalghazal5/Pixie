@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pixie/UI/view/results_page.dart';
 import 'package:pixie/UI/view/search_page.dart';
 import 'package:pixie/data/models/search_category.dart';
 
@@ -11,7 +12,7 @@ class CategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, CupertinoPageRoute(builder: (context) => SearchPage(),)); /// TODO: REPLACE THE PAGE W/ RESULTS PAGE.
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ResultsPage(query: searchCategory.name!,),)); /// TODO: REPLACE THE PAGE W/ RESULTS PAGE.
       },
       child: SizedBox(
         child: Stack(
