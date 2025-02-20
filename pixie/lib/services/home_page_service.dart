@@ -112,7 +112,7 @@ class HomePageService extends GetxService {
   }
 
   Future<List<Photo>> searchPhotos(
-      {String? query, int page = 1, int perPage = 25}) async {
+      {String? query, int page = 1, int perPage = 20}) async {
     List<Photo> results = [];
     try {
       var response = await dio

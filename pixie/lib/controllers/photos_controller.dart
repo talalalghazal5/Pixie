@@ -42,7 +42,7 @@ class PhotosController extends GetxController {
     }
   }
 
-  void loadResults({String? query, int page = 1, int perPage = 25}) async {
+  void loadResults({String? query, int page = 1, int perPage = 20}) async {
     try {
       isLoading(true);
       results = await homePageService.searchPhotos(query: query, page: page, perPage: perPage);
