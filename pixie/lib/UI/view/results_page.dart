@@ -1,7 +1,10 @@
 import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -10,14 +13,15 @@ import 'package:pixie/controllers/photos_controller.dart';
 import 'package:pixie/data/models/photo.dart';
 import 'package:pixie/services/home_page_service.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
+class ResultsPage extends StatefulWidget {
+  const ResultsPage({super.key, required this.query});
+  final String query;
   @override
-  State<HomePage> createState() => _TestHomePageState();
+  State<ResultsPage> createState() => _ResultsPageState();
 }
 
-class _TestHomePageState extends State<HomePage> {
+class _ResultsPageState extends State<ResultsPage> {
+  PhotosController photosController = Get.find<PhotosController>();
   bool isLoading = false;
   ScrollController scrollController = ScrollController();
   int pageNumber = 1;
@@ -28,14 +32,24 @@ class _TestHomePageState extends State<HomePage> {
       maxNrOfCacheObjects: 100,
     ),
   );
-
-  void refresh() async {
-    setState(() {});
+  @override
+  void initState() {
+    super.initState();
+    photosController.loadResults(query: widget.query);
   }
-
+  @override
+  void dispose() {
+    super.dispose();
+    photosController.results.clear();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Showing results for "${widget.query.trim()}"',),
+        titleTextStyle: const TextStyle(fontFamily: 'space', fontWeight: FontWeight.w600, color: Colors.black, fontSize: 17),
+        surfaceTintColor: Colors.blue,
+      ),
       body: GetBuilder<PhotosController>(
         builder: (controller) {
           if (controller.isLoading.value) {
@@ -47,7 +61,7 @@ class _TestHomePageState extends State<HomePage> {
             );
           }
 
-          if (controller.photos.isNotEmpty) {
+          if (controller.results.isNotEmpty) {
             return Padding(
               padding: const EdgeInsets.all(10),
               child: SingleChildScrollView(
@@ -65,9 +79,9 @@ class _TestHomePageState extends State<HomePage> {
                           childAspectRatio: .6,
                         ),
                         shrinkWrap: true,
-                        itemCount: controller.photos.length,
+                        itemCount: controller.results.length,
                         itemBuilder: (context, index) {
-                          Photo photo = controller.photos[index];
+                          Photo photo = controller.results[index];
                           return GestureDetector(
                             onTap: () {
                               Get.to(() => PreviewPage(
@@ -84,7 +98,7 @@ class _TestHomePageState extends State<HomePage> {
                                 key: UniqueKey(),
                                 cacheManager: cacheManager,
                                 fit: BoxFit.cover,
-                                imageUrl: photo.src.large!,
+                                imageUrl: photo.src.portrait!,
                                 placeholder: (context, url) => Container(
                                   decoration: BoxDecoration(
                                     color: const Color(0xffeeeeee),
@@ -94,7 +108,7 @@ class _TestHomePageState extends State<HomePage> {
                                 errorWidget: (context, error, stackTrace) =>
                                     const Center(
                                   child: Icon(
-                                      CupertinoIcons.exclamationmark_circle_fill), /// TODO: CHANGE THIS ICON WHEN FIXING BUGS.
+                                      CupertinoIcons.exclamationmark_circle_fill),
                                 ),
                               ),
                             ),
@@ -111,12 +125,12 @@ class _TestHomePageState extends State<HomePage> {
                         try {
                           pageNumber++;
                           List<Photo> newPhotos = await HomePageService()
-                              .getCuratedPhotos(page: pageNumber, perPage: 40);
+                              .searchPhotos(page: pageNumber, query: widget.query);
                           setState(() {
-                            controller.photos = newPhotos;
+                            controller.results = newPhotos;
                           });
                         } on SocketException {
-                          ScaffoldMessenger.of(context).showSnackBar(
+                          ScaffoldMessenger.of(context.mounted ? context : context).showSnackBar(
                             const SnackBar(
                               content: Text(
                                 'No internet connection, please try again later',
@@ -148,6 +162,11 @@ class _TestHomePageState extends State<HomePage> {
               ),
             );
           }
+          else if(controller.results.isEmpty) {
+            return Center(
+              child: Text('Results not found for "${widget.query.trim()}"', style: const TextStyle(fontFamily: 'space'),),
+            );
+          }
           if (controller.errorMessage.value.isNotEmpty) {
             return Center(
               child: Column(
@@ -155,12 +174,12 @@ class _TestHomePageState extends State<HomePage> {
                 children: [
                   Text(
                     controller.errorMessage.value,
-                    style: TextStyle(fontFamily: 'space'),
+                    style: const TextStyle(fontFamily: 'space'),
                   ),
                   const SizedBox(height: 15,),
                   MaterialButton(
                     onPressed: () {
-                      controller.loadPhotos();
+                      controller.loadResults(query: widget.query);
                       setState(() {
                         
                       });

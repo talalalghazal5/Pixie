@@ -45,23 +45,23 @@ class Navbar extends StatelessWidget {
                   ),
                 ),
                 GButton(
-                  icon: LineIcons.heart,
-                  text: 'Favorites',
-                  iconActiveColor: const Color(0xffff0000),
-                  backgroundColor: const Color(0xffff0000).withAlpha(30),
-                  textStyle: const TextStyle(
-                    color: Color(0xffff0000),
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'space',
-                  ),
-                ),
-                GButton(
                   icon: LineIcons.search,
                   text: 'Search',
                   iconActiveColor: Colors.cyan[800],
                   backgroundColor: const Color(0xFFB2EBF2).withAlpha(120),
                   textStyle: TextStyle(
                     color: Colors.cyan[800],
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'space',
+                  ),
+                ),
+                GButton(
+                  icon: LineIcons.heart,
+                  text: 'Favorites',
+                  iconActiveColor: const Color(0xffff0000),
+                  backgroundColor: const Color(0xffff0000).withAlpha(30),
+                  textStyle: const TextStyle(
+                    color: Color(0xffff0000),
                     fontWeight: FontWeight.bold,
                     fontFamily: 'space',
                   ),
