@@ -39,7 +39,6 @@ class _ResultsPageState extends State<ResultsPage> {
   }
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     photosController.results.clear();
   }
@@ -47,8 +46,8 @@ class _ResultsPageState extends State<ResultsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Showing results for ${widget.query}',),
-        titleTextStyle: TextStyle(fontFamily: 'space', fontWeight: FontWeight.w600, color: Colors.black, fontSize: 17),
+        title: Text('Showing results for "${widget.query.trim()}"',),
+        titleTextStyle: const TextStyle(fontFamily: 'space', fontWeight: FontWeight.w600, color: Colors.black, fontSize: 17),
         surfaceTintColor: Colors.blue,
       ),
       body: GetBuilder<PhotosController>(
@@ -163,6 +162,11 @@ class _ResultsPageState extends State<ResultsPage> {
               ),
             );
           }
+          else if(controller.results.isEmpty) {
+            return Center(
+              child: Text('Results not found for "${widget.query.trim()}"', style: const TextStyle(fontFamily: 'space'),),
+            );
+          }
           if (controller.errorMessage.value.isNotEmpty) {
             return Center(
               child: Column(
@@ -170,7 +174,7 @@ class _ResultsPageState extends State<ResultsPage> {
                 children: [
                   Text(
                     controller.errorMessage.value,
-                    style: TextStyle(fontFamily: 'space'),
+                    style: const TextStyle(fontFamily: 'space'),
                   ),
                   const SizedBox(height: 15,),
                   MaterialButton(

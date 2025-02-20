@@ -49,7 +49,7 @@ class PhotosController extends GetxController {
     } on SocketException {
       errorMessage.value = 'No internet connection';
     } catch (e) {
-      errorMessage.value = 'No internet connection';
+      errorMessage.value = 'Error occured';
     } finally {
       isLoading(false);
       update();
