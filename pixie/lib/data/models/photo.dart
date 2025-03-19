@@ -23,7 +23,7 @@ class Photo {
       required this.photographerUrl,
       required this.avgColor,
       required this.src,
-      this.liked,
+      this.liked = false,
       this.alt});
 
   factory Photo.fromJson(Map<String, dynamic> json) {

@@ -8,24 +8,69 @@ class PhotosController extends GetxController {
   final HomePageService homePageService = HomePageService();
   final _photos = <Photo>[].obs;
   final _resultPhotos = <Photo>[].obs;
+  final _favorites = <Photo>[].obs;
+  final _ids = <String>[].obs;
   RxBool isLoading = false.obs;
   RxString errorMessage = ''.obs;
 
-  List<Photo> get photos => _photos;
-  List<Photo> get results => _resultPhotos;
+  List<Photo> get photos => _photos.value;
+  List<Photo> get results => _resultPhotos.value;
+  List<Photo> get favorites => _favorites.value;
+  List<String> get ids => _ids;
 
   set photos(List<Photo> photolist) {
     if (photolist.isNotEmpty) {
-      _photos.addAll(photolist);
+      _photos.value.addAll(photolist);
     }
     update();
   }
 
   set results(List<Photo> photolist) {
     if (photolist.isNotEmpty) {
-      _resultPhotos.addAll(photolist);
+      _resultPhotos.value.addAll(photolist);
     }
     update();
+  }
+
+  set favorites(List<Photo> photolist) {
+    if (photolist.isNotEmpty) {
+      _favorites.value.addAll(photolist);
+    }
+    update();
+  }
+
+  void addToIds(String id) {
+    ids.add(id);
+    addToFaves(id);
+    update();
+  }
+
+  void removeFromIds(String id) {
+    ids.remove(id);
+    removeFromFaves(id);
+    update();
+  }
+
+  void addToFaves(String id) async {
+    try {
+      Photo photo = await homePageService.getImageById(id);
+      if (!favorites.contains(photo)) {
+        favorites.add(photo);
+      }
+      update();
+    } on SocketException {
+      errorMessage.value = 'No internet connection';
+    } catch (e) {
+      errorMessage.value = 'Error occured';
+    } finally {
+      update();
+    }
+  }
+
+  void removeFromFaves(String id) {
+    favorites.removeWhere(
+      (element) => element.id.toString() == id,
+    );
   }
 
   void loadPhotos() async {
@@ -45,7 +90,11 @@ class PhotosController extends GetxController {
   void loadResults({String? query, int page = 1, int perPage = 20}) async {
     try {
       isLoading(true);
-      results = await homePageService.searchPhotos(query: query, page: page, perPage: perPage);
+      results = await homePageService.searchPhotos(
+        query: query,
+        page: page,
+        perPage: perPage,
+      );
     } on SocketException {
       errorMessage.value = 'No internet connection';
     } catch (e) {

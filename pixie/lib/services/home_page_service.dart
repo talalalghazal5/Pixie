@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously, avoid_print
 
-import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -135,6 +134,30 @@ class HomePageService extends GetxService {
         List<dynamic> jsonPhotos = responseBody['photos'];
         results = jsonPhotos.map((photo) => Photo.fromJson(photo)).toList();
         return results;
+      }
+      throw {'message': response.statusMessage};
+    } on DioException catch (e) {
+      throw e.message!;
+    }
+  }
+
+  Future<Photo> getImageById(String id) async {
+    Photo photo;
+    try {
+      var response = await dio
+          .get(
+            '$baseUrl/photos/$id',
+            options: Options(
+              headers: {
+                'Authorization': apiKey,
+              },
+            ),
+          )
+          .timeout(const Duration(minutes: 5));
+      if (response.statusCode == 200) {
+        var responseBody = response.data;
+        photo = Photo.fromJson(responseBody);
+        return photo;
       }
       throw {'message': response.statusMessage};
     } on DioException catch (e) {
