@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pixie/UI/view/results_page.dart';
-import 'package:pixie/UI/view/search_page.dart';
 import 'package:pixie/data/models/search_category.dart';
 
 class CategoryCard extends StatelessWidget {

@@ -23,9 +23,9 @@ class SearchTextField extends StatelessWidget {
           fillColor: Colors.grey.withAlpha(100),
           hintText: 'Search anything',
           hintStyle: const TextStyle(fontFamily: 'space', color: Colors.grey, fontSize: 14),
-          suffixIcon: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: const FaIcon(FontAwesomeIcons.wandMagicSparkles, color: Colors.grey,),
+          suffixIcon: const Padding(
+            padding: EdgeInsets.all(10.0),
+            child: FaIcon(FontAwesomeIcons.wandMagicSparkles, color: Colors.grey,),
           ), // TODO: EDIT THE CURSOR COLOR WHEN SETTING THEMES.
         ),
         onSubmitted: (value) {
