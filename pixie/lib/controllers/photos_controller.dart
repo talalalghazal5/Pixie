@@ -39,23 +39,22 @@ class PhotosController extends GetxController {
     update();
   }
 
-  void addToIds(String id) {
-    ids.add(id);
-    addToFaves(id);
+  void addToIds(Photo photo) {
+    ids.add(photo.id.toString());
     update();
   }
 
-  void removeFromIds(String id) {
-    ids.remove(id);
-    removeFromFaves(id);
+  void removeFromIds(Photo photo) {
+    ids.remove(photo.id.toString());
+
     update();
   }
 
-  void addToFaves(String id) async {
+  void addToFaves(Photo photo) async {
     try {
-      Photo photo = await homePageService.getImageById(id);
       if (!favorites.contains(photo)) {
         favorites.add(photo);
+        addToIds(photo);
       }
       update();
     } on SocketException {
@@ -67,10 +66,11 @@ class PhotosController extends GetxController {
     }
   }
 
-  void removeFromFaves(String id) {
+  void removeFromFaves(Photo photo) {
     favorites.removeWhere(
-      (element) => element.id.toString() == id,
+      (element) => element.id.toString() == photo.id.toString(),
     );
+    removeFromIds(photo);
   }
 
   void loadPhotos() async {

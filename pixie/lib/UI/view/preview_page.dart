@@ -154,15 +154,14 @@ class _PreviewPageState extends State<PreviewPage> {
                         iconColor: WidgetStatePropertyAll(Colors.black87),
                       ),
                       onPressed: () {
-                        var id = widget.photo.id.toString();
                         if (!widget.photo.liked!) {
-                          photosController.addToIds(id);
+                          photosController.addToFaves(widget.photo);
                           widget.photo.liked = true;
                           setState(() {
                             
                           });
                         } else {
-                          photosController.removeFromIds(id);
+                          photosController.removeFromFaves(widget.photo);
                           widget.photo.liked = false;
                           setState(() {
                             

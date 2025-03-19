@@ -1,8 +1,8 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pixie/UI/view/preview_page.dart';
@@ -33,7 +33,6 @@ class _FavoritesPageState extends State<FavoritesPage>
   void initState() {
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -106,16 +105,24 @@ class _FavoritesPageState extends State<FavoritesPage>
                         );
                       },
                     ),
-                    
                   ],
                 ),
               ),
             );
           } else if (controller.favorites.isEmpty) {
             return const Center(
-              child: Text(
-                'Nothing here',
-                style: TextStyle(fontFamily: 'space'),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.heartCrack,
+                    size: 100,
+                  ),
+                  Text(
+                    'Nothing here',
+                    style: TextStyle(fontFamily: 'space', fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
             );
           }
