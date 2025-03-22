@@ -57,6 +57,7 @@ class _PreviewPageState extends State<PreviewPage> {
                 errorWidget: (context, url, error) => const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    ///Todo: add a retry button to get the image again
                     Text(
                       'Error occured while getting the image',
                       style: TextStyle(fontFamily: 'space'),

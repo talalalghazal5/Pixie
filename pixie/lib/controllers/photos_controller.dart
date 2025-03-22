@@ -1,7 +1,9 @@
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:pixie/data/models/photo.dart';
+import 'package:pixie/main.dart';
 import 'package:pixie/services/home_page_service.dart';
 
 class PhotosController extends GetxController {
@@ -39,14 +41,13 @@ class PhotosController extends GetxController {
     update();
   }
 
-  void addToIds(Photo photo) {
-    ids.add(photo.id.toString());
+  void addToIds(String id) {
+    ids.add(id);
     update();
   }
 
-  void removeFromIds(Photo photo) {
-    ids.remove(photo.id.toString());
-
+  void removeFromIds(String id) {
+    ids.remove(id);
     update();
   }
 
@@ -54,7 +55,7 @@ class PhotosController extends GetxController {
     try {
       if (!favorites.contains(photo)) {
         favorites.add(photo);
-        addToIds(photo);
+        addToIds(photo.id.toString());
       }
       update();
     } on SocketException {
@@ -70,7 +71,7 @@ class PhotosController extends GetxController {
     favorites.removeWhere(
       (element) => element.id.toString() == photo.id.toString(),
     );
-    removeFromIds(photo);
+    removeFromIds(photo.id.toString());
   }
 
   void loadPhotos() async {
@@ -104,4 +105,6 @@ class PhotosController extends GetxController {
       update();
     }
   }
+
+ 
 }

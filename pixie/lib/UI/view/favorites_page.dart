@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -110,17 +111,14 @@ class _FavoritesPageState extends State<FavoritesPage>
               ),
             );
           } else if (controller.favorites.isEmpty) {
-            return const Center(
+            return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  FaIcon(
-                    FontAwesomeIcons.heartCrack,
-                    size: 100,
-                  ),
-                  Text(
+                  SvgPicture.asset('assets/images/svgs/empty.svg', width: 200,),
+                  const Text(
                     'Nothing here',
-                    style: TextStyle(fontFamily: 'space', fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontFamily: 'space', fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black54),
                   ),
                 ],
               ),
