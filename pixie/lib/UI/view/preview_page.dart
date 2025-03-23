@@ -156,23 +156,59 @@ class _PreviewPageState extends State<PreviewPage> {
                       ),
                       onPressed: () {
                         if (!widget.photo.liked!) {
-                          photosController.addToFaves(widget.photo);
+                          photosController.addToFavorites(widget.photo);
                           widget.photo.liked = true;
-                          setState(() {
-                            
-                          });
+                          setState(() {});
+                          ScaffoldMessenger.of(context).clearSnackBars();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              behavior: SnackBarBehavior.floating,
+                              backgroundColor: Colors.lightGreen[600],
+                              content: const Text(
+                                'Added to favorites',
+                                style: TextStyle(fontFamily: 'space'),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 16, horizontal: 20),
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                            ),
+                          );
                         } else {
-                          photosController.removeFromFaves(widget.photo);
+                          photosController.removeFromFavorites(widget.photo);
                           widget.photo.liked = false;
-                          setState(() {
-                            
-                          });
+                          setState(() {});
+                          ScaffoldMessenger.of(context).clearSnackBars();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              behavior: SnackBarBehavior.floating,
+                              backgroundColor: Colors.grey[600],
+                              content: const Text(
+                                'Removed from favorites',
+                                style: TextStyle(fontFamily: 'space'),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 16, horizontal: 20),
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                            ),
+                          );
                         }
                       },
                       icon: Center(
                         child: FaIcon(
-                          widget.photo.liked! ?
-                          FontAwesomeIcons.solidHeart : FontAwesomeIcons.heart
+                          widget.photo.liked!
+                              ? LineIcons.heartAlt
+                              : LineIcons.heart,
+                          color: widget.photo.liked!
+                              ? Colors.red[400]
+                              : Colors.black,
                         ),
                       ),
                     ),
@@ -259,6 +295,7 @@ class _PreviewPageState extends State<PreviewPage> {
     }
   }
 
+
   void setAsWallpaper(String url, int location) async {
     try {
       File imageFile = await DefaultCacheManager().getSingleFile(url);
@@ -286,6 +323,7 @@ class _PreviewPageState extends State<PreviewPage> {
       e.toString();
     }
   }
+
 
   Widget buildWallpaperLocationDialog() {
     return AlertDialog(
