@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import 'package:pixie/UI/components/navbar.dart';
 import 'package:pixie/UI/view/favorites_page.dart';
 import 'package:pixie/UI/view/home_page.dart';
-import 'package:pixie/UI/view/results_page.dart';
 import 'package:pixie/UI/view/search_page.dart';
 import 'package:pixie/UI/view/settings_page.dart';
 import 'package:pixie/controllers/main_controller.dart';
+import 'package:pixie/controllers/photos_controller.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -23,6 +23,21 @@ class _MainPageState extends State<MainPage> {
     FavoritesPage(),
     SettingsPage(),
   ];
+  PhotosController photosController = Get.find();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+   
+  }
+
   @override
   Widget build(BuildContext context) {
     MainController mainController = Get.find<MainController>();

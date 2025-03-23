@@ -1,16 +1,40 @@
+import 'package:hive/hive.dart';
 import 'package:pixie/data/models/photo_src.dart';
+part 'photo.g.dart';
 
+@HiveType(typeId: 0)
 class Photo {
+  @HiveField(0)
   int id;
+  
+  @HiveField(1)
   int width;
+  
+  @HiveField(2)
   int height;
+  
+  @HiveField(3)
   String url;
+  
+  @HiveField(4)
   String photographer;
+  
+  @HiveField(5)
   String? photographerUrl;
+  
+  @HiveField(6)
   int? photographerId;
+  
+  @HiveField(7)
   String avgColor;
+  
+  @HiveField(8)
   PhotoSrc src;
+  
+  @HiveField(9)
   bool? liked;
+  
+  @HiveField(10)
   String? alt;
 
   Photo(
@@ -23,7 +47,7 @@ class Photo {
       required this.photographerUrl,
       required this.avgColor,
       required this.src,
-      this.liked,
+      this.liked = false,
       this.alt});
 
   factory Photo.fromJson(Map<String, dynamic> json) {

@@ -6,11 +6,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:pixie/UI/components/wallpaper_location_dialog_contents.dart';
 import 'package:pixie/controllers/color_controller.dart';
+import 'package:pixie/controllers/photos_controller.dart';
 import 'package:pixie/data/models/photo.dart';
 import 'package:pixie/main.dart';
 import 'package:pixie/services/home_page_service.dart';
@@ -27,8 +29,7 @@ class PreviewPage extends StatefulWidget {
 
 class _PreviewPageState extends State<PreviewPage> {
   int selectedLocation = WallpaperManagerPlus.homeScreen;
-
-
+  PhotosController photosController = Get.find<PhotosController>();
   @override
   Widget build(BuildContext context) {
     print(ColorController().convertColor(widget.photo.avgColor));
@@ -56,6 +57,7 @@ class _PreviewPageState extends State<PreviewPage> {
                 errorWidget: (context, url, error) => const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    ///Todo: add a retry button to get the image again
                     Text(
                       'Error occured while getting the image',
                       style: TextStyle(fontFamily: 'space'),
@@ -139,8 +141,82 @@ class _PreviewPageState extends State<PreviewPage> {
           Positioned(
             bottom: 10,
             right: 10,
-            child: Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
+                ClipOval(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                    child: IconButton(
+                      padding: const EdgeInsets.all(13),
+                      iconSize: 25,
+                      style: const ButtonStyle(
+                        backgroundColor: WidgetStatePropertyAll(Colors.white38),
+                        iconColor: WidgetStatePropertyAll(Colors.black87),
+                      ),
+                      onPressed: () {
+                        if (!widget.photo.liked!) {
+                          photosController.addToFavorites(widget.photo);
+                          widget.photo.liked = true;
+                          setState(() {});
+                          ScaffoldMessenger.of(context).clearSnackBars();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              behavior: SnackBarBehavior.floating,
+                              backgroundColor: Colors.lightGreen[600],
+                              content: const Text(
+                                'Added to favorites',
+                                style: TextStyle(fontFamily: 'space'),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 16, horizontal: 20),
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                            ),
+                          );
+                        } else {
+                          photosController.removeFromFavorites(widget.photo);
+                          widget.photo.liked = false;
+                          setState(() {});
+                          ScaffoldMessenger.of(context).clearSnackBars();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              behavior: SnackBarBehavior.floating,
+                              backgroundColor: Colors.grey[600],
+                              content: const Text(
+                                'Removed from favorites',
+                                style: TextStyle(fontFamily: 'space'),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 16, horizontal: 20),
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                            ),
+                          );
+                        }
+                      },
+                      icon: Center(
+                        child: FaIcon(
+                          widget.photo.liked!
+                              ? LineIcons.heartAlt
+                              : LineIcons.heart,
+                          color: widget.photo.liked!
+                              ? Colors.red[400]
+                              : Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
                 ClipOval(
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
@@ -148,24 +224,25 @@ class _PreviewPageState extends State<PreviewPage> {
                       onPressed: () {
                         savePhoto();
                       },
+                      iconSize: 25,
+                      padding: const EdgeInsets.all(13),
+                      style: const ButtonStyle(
+                        backgroundColor: WidgetStatePropertyAll(Colors.white38),
+                        iconColor: WidgetStatePropertyAll(Colors.black87),
+                      ),
                       icon: const LineIcon(
                         LineIcons.download,
-                        color: Colors.white,
                       ),
                     ),
                   ),
                 ),
                 const SizedBox(
-                  width: 10,
+                  height: 10,
                 ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
+                ClipOval(
                   child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-                    child: TextButton(
-                      style: const ButtonStyle(
-                          padding: WidgetStatePropertyAll(
-                              EdgeInsetsDirectional.symmetric(horizontal: 20))),
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                    child: IconButton(
                       onPressed: () {
                         showDialog(
                           context: context,
@@ -175,16 +252,21 @@ class _PreviewPageState extends State<PreviewPage> {
                           ),
                         );
                       },
-                      child: const Text(
-                        'Set as..',
-                        style: TextStyle(
-                          fontFamily: 'space',
-                          color: Colors.white,
-                        ),
+                      iconSize: 25,
+                      padding: const EdgeInsets.all(13),
+                      style: const ButtonStyle(
+                          backgroundColor:
+                              WidgetStatePropertyAll(Colors.white38),
+                          iconColor: WidgetStatePropertyAll(Colors.black87)),
+                      icon: const LineIcon(
+                        LineIcons.paintRoller,
                       ),
                     ),
                   ),
                 ),
+                const SizedBox(
+                  height: 8,
+                )
               ],
             ),
           ),
@@ -213,6 +295,7 @@ class _PreviewPageState extends State<PreviewPage> {
     }
   }
 
+
   void setAsWallpaper(String url, int location) async {
     try {
       File imageFile = await DefaultCacheManager().getSingleFile(url);
@@ -240,6 +323,7 @@ class _PreviewPageState extends State<PreviewPage> {
       e.toString();
     }
   }
+
 
   Widget buildWallpaperLocationDialog() {
     return AlertDialog(

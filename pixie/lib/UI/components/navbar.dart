@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:line_icons/line_icons.dart';
 import 'package:pixie/controllers/main_controller.dart';
 
+///TODO: MAKE ACTIVE ICON SOLID AND THE OTHER ARE OUTLINED.
 class Navbar extends StatelessWidget {
   const Navbar({super.key});
 
@@ -34,9 +35,10 @@ class Navbar extends StatelessWidget {
               tabMargin: const EdgeInsets.all(5),
               tabs: [
                 GButton(
-                  icon: LineIcons.home,
+                  icon: FontAwesomeIcons.house,
                   iconActiveColor: const Color(0xff0000ff),
                   text: 'Home',
+                  gap: 13,
                   backgroundColor: const Color(0xff0000ff).withAlpha(40),
                   textStyle: const TextStyle(
                     color: Color(0xff0000ff),
@@ -45,7 +47,7 @@ class Navbar extends StatelessWidget {
                   ),
                 ),
                 GButton(
-                  icon: LineIcons.search,
+                  icon: FontAwesomeIcons.magnifyingGlass,
                   text: 'Search',
                   iconActiveColor: Colors.cyan[800],
                   backgroundColor: const Color(0xFFB2EBF2).withAlpha(120),
@@ -56,7 +58,7 @@ class Navbar extends StatelessWidget {
                   ),
                 ),
                 GButton(
-                  icon: LineIcons.heart,
+                  icon: FontAwesomeIcons.heart,
                   text: 'Favorites',
                   iconActiveColor: const Color(0xffff0000),
                   backgroundColor: const Color(0xffff0000).withAlpha(30),
@@ -67,7 +69,7 @@ class Navbar extends StatelessWidget {
                   ),
                 ),
                 GButton(
-                  icon: Icons.settings_outlined,
+                  icon: FontAwesomeIcons.gear,
                   text: 'Settings',
                   iconActiveColor: const Color(0xffFfa500),
                   backgroundColor: const Color(0xffFfa500).withAlpha(40),

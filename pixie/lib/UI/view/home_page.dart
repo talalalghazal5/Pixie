@@ -155,7 +155,7 @@ class _TestHomePageState extends State<HomePage> {
                 children: [
                   Text(
                     controller.errorMessage.value,
-                    style: TextStyle(fontFamily: 'space'),
+                    style: const TextStyle(fontFamily: 'space'),
                   ),
                   const SizedBox(height: 15,),
                   MaterialButton(
