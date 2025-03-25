@@ -26,16 +26,12 @@ class _MainPageState extends State<MainPage> {
   PhotosController photosController = Get.find();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
-
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
-   
   }
 
   @override
@@ -52,6 +48,7 @@ class _MainPageState extends State<MainPage> {
           style: TextStyle(
             fontFamily: 'yesterday',
             fontSize: 40,
+            color: Colors.black,
           ),
         ),
       ),

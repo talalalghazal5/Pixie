@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:pixie/controllers/settings_controller.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -10,6 +12,12 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   String langValue = 'ar';
+  SettingsController settingsController = Get.find<SettingsController>();
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -24,20 +32,27 @@ class _SettingsPageState extends State<SettingsPage> {
           const SizedBox(
             height: 10,
           ),
-          SwitchListTile(
-            value: true,
-            onChanged: (value) {},
-            title: const Text(
-              'Dark mode',
-              style: TextStyle(fontFamily: 'space'),
-            ),
-            contentPadding:
-                const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-            // tileColor: Colors.black12.withAlpha(30),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(13),
-            ),
-          ),
+          Obx(() {
+            return SwitchListTile(
+              value: settingsController.isDarkMode.value,
+              onChanged: (value) {
+                setState(() {
+                  settingsController.toggleThemeMode();
+                });
+                // Get.changeThemeMode(Get.isDarkMode ? ThemeMode.dark : Theme)
+              },
+              title: const Text(
+                'Dark mode',
+                style: TextStyle(fontFamily: 'space'),
+              ),
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+              // tileColor: Colors.black12.withAlpha(30),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(13),
+              ),
+            );
+          }),
           const Divider(
             indent: 10,
             endIndent: 10,
@@ -84,21 +99,41 @@ class _SettingsPageState extends State<SettingsPage> {
               ],
             ),
           ),
-          const Spacer(flex: 10,),
+          const Spacer(
+            flex: 10,
+          ),
           const Align(
             alignment: Alignment.center,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text('Made by: Eng. Talal Alghazal', style: TextStyle(fontFamily: 'space', fontSize: 15, color: Colors.grey),),
-                SizedBox(height: 6,),
+                Text(
+                  'Made by: Eng. Talal Alghazal',
+                  style: TextStyle(
+                      fontFamily: 'space', fontSize: 15, color: Colors.grey),
+                ),
+                SizedBox(
+                  height: 6,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-
                   children: [
-                    FaIcon(FontAwesomeIcons.copyright, color: Colors.grey, size: 15,),
-                    SizedBox(width: 5,),
-                    Text('Copyrights reserved', style: TextStyle(fontFamily: 'space', fontSize: 14, color: Colors.grey)),
+                    FaIcon(
+                      FontAwesomeIcons.copyright,
+                      color: Colors.grey,
+                      size: 15,
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      'Copyrights reserved',
+                      style: TextStyle(
+                        fontFamily: 'space',
+                        fontSize: 14,
+                        color: Colors.grey,
+                      ),
+                    ),
                   ],
                 ),
               ],
