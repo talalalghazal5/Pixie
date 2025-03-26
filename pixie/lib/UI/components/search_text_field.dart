@@ -13,24 +13,42 @@ class SearchTextField extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 5),
       height: 60,
       child: TextField(
-        style: const TextStyle(fontFamily: 'space',),
+        style: const TextStyle(
+          fontFamily: 'space',
+        ),
         decoration: InputDecoration(
           border: OutlineInputBorder(
             borderSide: BorderSide.none,
             borderRadius: BorderRadius.circular(10),
           ),
           filled: true,
-          fillColor: Colors.grey.withAlpha(100),
+          fillColor: Theme.of(context).colorScheme.inversePrimary.withAlpha(50),
           hintText: 'Search anything',
-          hintStyle: const TextStyle(fontFamily: 'space', color: Colors.grey, fontSize: 14),
-          suffixIcon: const Padding(
-            padding: EdgeInsets.all(10.0),
-            child: FaIcon(FontAwesomeIcons.wandMagicSparkles, color: Colors.grey,),
-          ), // TODO: EDIT THE CURSOR COLOR WHEN SETTING THEMES.
+          hintStyle: TextStyle(
+            fontFamily: 'space',
+            color: Theme.of(context).colorScheme.inversePrimary,
+            fontSize: 14,
+          ),
+          suffixIcon: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: FaIcon(
+              FontAwesomeIcons.wandMagicSparkles,
+              color: Theme.of(context).colorScheme.inversePrimary,
+            ),
+          ),
         ),
+        cursorColor: Theme.of(context).colorScheme.inversePrimary,
         onSubmitted: (value) {
           if (value.isNotEmpty) {
-             Navigator.push(context, MaterialPageRoute(builder: (context) => ResultsPage(query: value,),allowSnapshotting: true));
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ResultsPage(
+                  query: value,
+                ),
+                allowSnapshotting: true,
+              ),
+            );
           }
         },
       ),

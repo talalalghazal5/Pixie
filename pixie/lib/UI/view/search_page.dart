@@ -17,9 +17,9 @@ class SearchPage extends StatelessWidget {
             const SizedBox(
               height: 50,
             ),
-            const Text(
+            Text(
               'You might like',
-              style: TextStyle(fontFamily: 'space', fontSize: 16),
+              style: TextStyle(fontFamily: 'space', fontSize: 16, color: Theme.of(context).colorScheme.inversePrimary),
             ),
             const SizedBox(
               height: 20,
@@ -28,9 +28,9 @@ class SearchPage extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            const Text(
+            Text(
               'Search by colors',
-              style: TextStyle(fontFamily: 'space', fontSize: 16),
+              style: TextStyle(fontFamily: 'space', fontSize: 16, color: Theme.of(context).colorScheme.inversePrimary),
             ),
             const SizedBox(
               height: 20,
