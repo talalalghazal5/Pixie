@@ -42,13 +42,13 @@ class _MainPageState extends State<MainPage> {
         toolbarHeight: kToolbarHeight + 5,
         elevation: 10,
         forceMaterialTransparency: true,
-        title: const Text(
+        title: Text(
           'Pixie',
           overflow: TextOverflow.visible,
           style: TextStyle(
             fontFamily: 'yesterday',
             fontSize: 40,
-            color: Colors.black,
+            color: Theme.of(context).colorScheme.inversePrimary,
           ),
         ),
       ),
