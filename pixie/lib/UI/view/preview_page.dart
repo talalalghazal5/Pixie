@@ -54,16 +54,30 @@ class _PreviewPageState extends State<PreviewPage> {
                     ),
                   ),
                 ),
-                errorWidget: (context, url, error) => const Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ///Todo: add a retry button to get the image again
-                    Text(
-                      'Error occured while getting the image',
-                      style: TextStyle(fontFamily: 'space'),
+                errorWidget: (context, url, error) =>
+                    Stack(alignment: Alignment.center, children: [
+                  Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    color: Color(
+                      ColorController().convertColor(widget.photo.avgColor),
                     ),
-                  ],
-                ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      ///Todo: add a retry button to get the image again
+                      Text(
+                        'Error occured while getting the image',
+                        style: TextStyle(
+                          fontFamily: 'space',
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                        ),
+                      ),
+                    ],
+                  ),
+                ]),
                 placeholderFadeInDuration: const Duration(milliseconds: 0),
                 fadeInCurve: Curves.linear,
                 fit: BoxFit.cover,
@@ -71,21 +85,33 @@ class _PreviewPageState extends State<PreviewPage> {
             ),
           ),
           Positioned(
-              top: 50,
-              left: 20,
-              child: ClipOval(
-                child: BackdropFilter(
+            top: 50,
+            left: 20,
+            child: ClipOval(
+              child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                  child: IconButton(
-                    onPressed: () => Navigator.pop(context),
-                    icon: const FaIcon(
-                      FontAwesomeIcons.chevronLeft,
-                      color: Colors.white70,
-                      size: 20,
+                  child: GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Theme.of(context)
+                            .colorScheme
+                            .surface
+                            .withAlpha(100),
+                      ),
+                      child: Center(
+                        child: FaIcon(
+                          FontAwesomeIcons.chevronLeft,
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              )),
+                  )),
+            ),
+          ),
           Positioned(
             bottom: 0,
             child: Stack(
@@ -106,10 +132,11 @@ class _PreviewPageState extends State<PreviewPage> {
                       width: MediaQuery.of(context).size.width,
                       height: 140,
                       decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                        colors: [Colors.black, Colors.transparent],
-                        transform: GradientRotation(-pi / 2),
-                      )),
+                        gradient: LinearGradient(
+                          colors: [Colors.black, Colors.transparent],
+                          transform: GradientRotation(-pi / 2),
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -118,17 +145,22 @@ class _PreviewPageState extends State<PreviewPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'Taken by:',
                         style: TextStyle(
-                            color: Colors.white70, fontFamily: 'space'),
+                          color: Theme.of(context)
+                              .colorScheme
+                              .inversePrimary
+                              .withAlpha(150),
+                          fontFamily: 'space',
+                        ),
                       ),
                       Text(
                         widget.photo.photographer,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 18,
                           fontFamily: 'spaceBold',
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.inversePrimary,
                         ),
                         textAlign: TextAlign.justify,
                       ),
@@ -150,9 +182,14 @@ class _PreviewPageState extends State<PreviewPage> {
                     child: IconButton(
                       padding: const EdgeInsets.all(13),
                       iconSize: 25,
-                      style: const ButtonStyle(
-                        backgroundColor: WidgetStatePropertyAll(Colors.white38),
-                        iconColor: WidgetStatePropertyAll(Colors.black87),
+                      style: ButtonStyle(
+                        backgroundColor: WidgetStatePropertyAll(
+                            Theme.of(context)
+                                .colorScheme
+                                .surface
+                                .withAlpha(100)),
+                        iconColor: WidgetStatePropertyAll(
+                            Theme.of(context).colorScheme.inversePrimary),
                       ),
                       onPressed: () {
                         if (!widget.photo.liked!) {
@@ -163,10 +200,15 @@ class _PreviewPageState extends State<PreviewPage> {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               behavior: SnackBarBehavior.floating,
-                              backgroundColor: Colors.lightGreen[600],
-                              content: const Text(
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.surface,
+                              content: Text(
                                 'Added to favorites',
-                                style: TextStyle(fontFamily: 'space'),
+                                style: TextStyle(
+                                    fontFamily: 'space',
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .inversePrimary),
                               ),
                               padding: const EdgeInsets.symmetric(
                                   vertical: 16, horizontal: 20),
@@ -185,10 +227,15 @@ class _PreviewPageState extends State<PreviewPage> {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               behavior: SnackBarBehavior.floating,
-                              backgroundColor: Colors.grey[600],
-                              content: const Text(
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.surface,
+                              content: Text(
                                 'Removed from favorites',
-                                style: TextStyle(fontFamily: 'space'),
+                                style: TextStyle(
+                                    fontFamily: 'space',
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .inversePrimary),
                               ),
                               padding: const EdgeInsets.symmetric(
                                   vertical: 16, horizontal: 20),
@@ -208,7 +255,7 @@ class _PreviewPageState extends State<PreviewPage> {
                               : LineIcons.heart,
                           color: widget.photo.liked!
                               ? Colors.red[400]
-                              : Colors.black,
+                              : Theme.of(context).colorScheme.inversePrimary,
                         ),
                       ),
                     ),
@@ -226,9 +273,13 @@ class _PreviewPageState extends State<PreviewPage> {
                       },
                       iconSize: 25,
                       padding: const EdgeInsets.all(13),
-                      style: const ButtonStyle(
-                        backgroundColor: WidgetStatePropertyAll(Colors.white38),
-                        iconColor: WidgetStatePropertyAll(Colors.black87),
+                      style: ButtonStyle(
+                        backgroundColor: WidgetStatePropertyAll(
+                          Theme.of(context).colorScheme.surface.withAlpha(100),
+                        ),
+                        iconColor: WidgetStatePropertyAll(
+                          Theme.of(context).colorScheme.inversePrimary,
+                        ),
                       ),
                       icon: const LineIcon(
                         LineIcons.download,
@@ -254,10 +305,14 @@ class _PreviewPageState extends State<PreviewPage> {
                       },
                       iconSize: 25,
                       padding: const EdgeInsets.all(13),
-                      style: const ButtonStyle(
-                          backgroundColor:
-                              WidgetStatePropertyAll(Colors.white38),
-                          iconColor: WidgetStatePropertyAll(Colors.black87)),
+                      style: ButtonStyle(
+                        backgroundColor: WidgetStatePropertyAll(
+                          Theme.of(context).colorScheme.surface.withAlpha(100),
+                        ),
+                        iconColor: WidgetStatePropertyAll(
+                          Theme.of(context).colorScheme.inversePrimary,
+                        ),
+                      ),
                       icon: const LineIcon(
                         LineIcons.paintRoller,
                       ),
@@ -295,7 +350,6 @@ class _PreviewPageState extends State<PreviewPage> {
     }
   }
 
-
   void setAsWallpaper(String url, int location) async {
     try {
       File imageFile = await DefaultCacheManager().getSingleFile(url);
@@ -323,7 +377,6 @@ class _PreviewPageState extends State<PreviewPage> {
       e.toString();
     }
   }
-
 
   Widget buildWallpaperLocationDialog() {
     return AlertDialog(
