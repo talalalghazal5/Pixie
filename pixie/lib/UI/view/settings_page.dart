@@ -23,73 +23,101 @@ class _SettingsPageState extends State<SettingsPage> {
     return Padding(
       padding: const EdgeInsets.all(15),
       child: Center(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const Text(
+        child:
+            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text(
             'Settings',
             style: TextStyle(
-                fontFamily: 'space', fontSize: 25, fontWeight: FontWeight.bold),
+              fontFamily: 'space',
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.inversePrimary,
+            ),
           ),
           const SizedBox(
             height: 10,
           ),
-          Obx(() {
-            return SwitchListTile(
-              value: settingsController.isDarkMode.value,
-              onChanged: (value) {
-                setState(() {
-                  settingsController.toggleThemeMode();
-                });
-                // Get.changeThemeMode(Get.isDarkMode ? ThemeMode.dark : Theme)
-              },
-              title: const Text(
-                'Dark mode',
-                style: TextStyle(fontFamily: 'space'),
-              ),
-              contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-              // tileColor: Colors.black12.withAlpha(30),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(13),
-              ),
-            );
-          }),
-          const Divider(
-            indent: 10,
-            endIndent: 10,
-            thickness: 0.5,
+          Obx(
+            () {
+              return SwitchListTile(
+                value: settingsController.isDarkMode.value,
+                onChanged: (value) {
+                  setState(() {
+                    settingsController.toggleThemeMode();
+                  });
+                  // Get.changeThemeMode(Get.isDarkMode ? ThemeMode.dark : Theme)
+                },
+                title: Text(
+                  'Dark mode',
+                  style: TextStyle(
+                    fontFamily: 'space',
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                  ),
+                ),
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                tileColor:
+                    Theme.of(context).colorScheme.primary.withAlpha(50),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(13),
+                ),
+              );
+            },
+          ),
+          const SizedBox(
+            height: 15,
           ),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
             decoration: BoxDecoration(
-              // color: Colors.black12.withAlpha(30),
+              color: Theme.of(context).colorScheme.primary.withAlpha(50),
               borderRadius: BorderRadius.circular(13),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
+                Text(
                   'Language',
-                  style: TextStyle(fontFamily: 'space', fontSize: 15),
+                  style: TextStyle(
+                    fontFamily: 'space',
+                    fontSize: 15,
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                  ),
                 ),
                 DropdownButton(
                   value: langValue,
-                  items: const [
+                  items: [
                     DropdownMenuItem<String>(
                       value: 'en',
-                      child: Text('English'),
+                      child: Text(
+                        'English',
+                        style: TextStyle(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .inversePrimary),
+                      ),
                     ),
                     DropdownMenuItem<String>(
                       value: 'ar',
-                      child: Text('Arabic'),
+                      child: Text(
+                        'Arabic',
+                        style: TextStyle(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .inversePrimary),
+                      ),
                     ),
                   ],
+                  iconEnabledColor:
+                      Theme.of(context).colorScheme.inversePrimary,
                   underline: Container(
-                    color: Colors.black,
-                    height: 1,
+                    height: 0,
                   ),
                   borderRadius: BorderRadius.circular(10),
-                  style:
-                      const TextStyle(fontFamily: 'space', color: Colors.black),
+                  style: const TextStyle(
+                    fontFamily: 'space',
+                  ),
                   onChanged: (value) {
                     setState(() {
                       langValue = value!;
@@ -100,9 +128,9 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
           ),
           const Spacer(
-            flex: 10,
+            flex: 20,
           ),
-          const Align(
+          Align(
             alignment: Alignment.center,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -110,20 +138,29 @@ class _SettingsPageState extends State<SettingsPage> {
                 Text(
                   'Made by: Eng. Talal Alghazal',
                   style: TextStyle(
-                      fontFamily: 'space', fontSize: 15, color: Colors.grey),
+                    fontFamily: 'space',
+                    fontSize: 15,
+                    color: Theme.of(context)
+                        .colorScheme
+                        .inversePrimary
+                        .withAlpha(100),
+                  ),
                 ),
-                SizedBox(
-                  height: 6,
+                const SizedBox(
+                  height: 10,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     FaIcon(
                       FontAwesomeIcons.copyright,
-                      color: Colors.grey,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .inversePrimary
+                          .withAlpha(100),
                       size: 15,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     Text(
@@ -131,7 +168,10 @@ class _SettingsPageState extends State<SettingsPage> {
                       style: TextStyle(
                         fontFamily: 'space',
                         fontSize: 14,
-                        color: Colors.grey,
+                        color: Theme.of(context)
+                            .colorScheme
+                            .inversePrimary
+                            .withAlpha(100),
                       ),
                     ),
                   ],
@@ -146,15 +186,22 @@ class _SettingsPageState extends State<SettingsPage> {
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
+                Text(
                   'Powered by',
-                  style: TextStyle(fontSize: 11, color: Colors.grey),
+                  style: TextStyle(
+                      fontSize: 11,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .inversePrimary
+                          .withAlpha(100)),
                 ),
                 const SizedBox(
                   width: 10,
                 ),
                 Image.asset(
-                  'assets/images/pexels_logo_black.png',
+                  settingsController.isDarkMode.value
+                      ? 'assets/images/pexels_logo_white.png'
+                      : 'assets/images/pexels_logo_black.png',
                   width: 60,
                 )
               ],
