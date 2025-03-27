@@ -116,9 +116,9 @@ class _FavoritesPageState extends State<FavoritesPage>
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SvgPicture.asset('assets/images/svgs/empty.svg', width: 200,),
-                  const Text(
+                  Text(
                     'Nothing here',
-                    style: TextStyle(fontFamily: 'space', fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black54),
+                    style: TextStyle(fontFamily: 'space', fontSize: 20, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.inversePrimary),
                   ),
                 ],
               ),
