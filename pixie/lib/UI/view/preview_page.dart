@@ -333,11 +333,14 @@ class _PreviewPageState extends State<PreviewPage> {
   void savePhoto() async {
     var status = await PermissionService().requestPermissions();
     ScaffoldMessenger.of(context.mounted ? context : context).showSnackBar(
-      const SnackBar(
+      SnackBar(
         behavior: SnackBarBehavior.floating,
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         content: Text(
           'Downloading photo...',
-          style: TextStyle(fontFamily: 'space'),
+          // ignore: use_build_context_synchronously
+          style: TextStyle(fontFamily: 'space', color: Theme.of(context).colorScheme.inversePrimary),
         ),
       ),
     );
@@ -380,8 +383,8 @@ class _PreviewPageState extends State<PreviewPage> {
 
   Widget buildWallpaperLocationDialog() {
     return AlertDialog(
-      title: const Text('Choose where to apply:',
-          style: TextStyle(fontFamily: 'space')),
+      title: Text('Choose where to apply:',
+          style: TextStyle(fontFamily: 'space', color: Theme.of(context).colorScheme.inversePrimary)),
       content: WallpaperLocationDialogContents(
         onValueChanged: (value) {
           setState(() {
@@ -394,9 +397,9 @@ class _PreviewPageState extends State<PreviewPage> {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: const Text(
+            child: Text(
               'Cancel',
-              style: TextStyle(fontFamily: 'space'),
+              style: TextStyle(fontFamily: 'space', color: Theme.of(context).colorScheme.inversePrimary, fontWeight: FontWeight.w600),
             )),
         TextButton(
           onPressed: () {
@@ -406,10 +409,12 @@ class _PreviewPageState extends State<PreviewPage> {
             );
             Navigator.pop(context);
           },
-          child: const Text(
+          child: Text(
             'Save',
             style: TextStyle(
               fontFamily: 'space',
+              color: Theme.of(context).colorScheme.primary,
+              fontWeight: FontWeight.w600
             ),
           ),
         ),
