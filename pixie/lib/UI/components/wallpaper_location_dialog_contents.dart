@@ -19,9 +19,11 @@ class _WallpaperLocationDialogContentsState
       mainAxisSize: MainAxisSize.min,
       children: [
         RadioListTile<int>(
-          title: const Text(
+          title: Text(
             'Home screen',
-            style: TextStyle(fontFamily: 'space'),
+            style: TextStyle(
+                fontFamily: 'space',
+                color: Theme.of(context).colorScheme.inversePrimary),
           ),
           value: WallpaperManagerPlus.homeScreen,
           groupValue: selectedLocation,
@@ -31,9 +33,11 @@ class _WallpaperLocationDialogContentsState
           }),
         ),
         RadioListTile<int>(
-          title: const Text(
+          title: Text(
             'Lock screen',
-            style: TextStyle(fontFamily: 'space'),
+            style: TextStyle(
+                fontFamily: 'space',
+                color: Theme.of(context).colorScheme.inversePrimary),
           ),
           value: WallpaperManagerPlus.lockScreen,
           groupValue: selectedLocation,
@@ -43,16 +47,20 @@ class _WallpaperLocationDialogContentsState
           }),
         ),
         RadioListTile<int>(
-          title: const Text(
+          title: Text(
             'Both screens',
-            style: TextStyle(fontFamily: 'space'),
+            style: TextStyle(
+                fontFamily: 'space',
+                color: Theme.of(context).colorScheme.inversePrimary),
           ),
           value: WallpaperManagerPlus.bothScreens,
           groupValue: selectedLocation,
-          onChanged: (value) => setState(() {
-            selectedLocation = value!;
-            widget.onValueChanged(value);
-          }),
+          onChanged: (value) => setState(
+            () {
+              selectedLocation = value!;
+              widget.onValueChanged(value);
+            },
+          ),
         ),
       ],
     );

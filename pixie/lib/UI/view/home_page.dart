@@ -3,9 +3,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pixie/UI/view/preview_page.dart';
+import 'package:pixie/controllers/color_controller.dart';
 import 'package:pixie/controllers/photos_controller.dart';
 import 'package:pixie/data/models/photo.dart';
 import 'package:pixie/services/home_page_service.dart';
@@ -56,50 +58,55 @@ class _TestHomePageState extends State<HomePage> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     GridView.builder(
-                        controller: scrollController,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 10,
-                          crossAxisSpacing: 10,
-                          childAspectRatio: .6,
-                        ),
-                        shrinkWrap: true,
-                        itemCount: controller.photos.length,
-                        itemBuilder: (context, index) {
-                          Photo photo = controller.photos[index];
-                          return GestureDetector(
-                            onTap: () {
-                              Get.to(() => PreviewPage(
-                                    photo: photo,
-                                  ), transition: Transition.cupertino,);
-                            },
-                            child: Container(
-                              height: 400,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
+                      controller: scrollController,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                        childAspectRatio: .6,
+                      ),
+                      shrinkWrap: true,
+                      itemCount: controller.photos.length,
+                      itemBuilder: (context, index) {
+                        Photo photo = controller.photos[index];
+                        return GestureDetector(
+                          onTap: () {
+                            Get.to(
+                              () => PreviewPage(
+                                photo: photo,
                               ),
-                              clipBehavior: Clip.hardEdge,
-                              child: CachedNetworkImage(
-                                key: UniqueKey(),
-                                cacheManager: cacheManager,
-                                fit: BoxFit.cover,
-                                imageUrl: photo.src.large!,
-                                placeholder: (context, url) => Container(
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xffeeeeee),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
+                              transition: Transition.cupertino,
+                            );
+                          },
+                          child: Container(
+                            height: 400,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            clipBehavior: Clip.hardEdge,
+                            child: CachedNetworkImage(
+                              key: UniqueKey(),
+                              cacheManager: cacheManager,
+                              fit: BoxFit.cover,
+                              imageUrl: photo.src.large!,
+                              placeholder: (context, url) => Container(
+                                decoration: BoxDecoration(
+                                  color: Color(ColorController().convertColor(photo.avgColor)).withAlpha(200),
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
-                                errorWidget: (context, error, stackTrace) =>
-                                    const Center(
-                                  child: Icon(
-                                      CupertinoIcons.exclamationmark_circle_fill), /// TODO: CHANGE THIS ICON WHEN FIXING BUGS.
+                              ),
+                              errorWidget: (context, error, stackTrace) =>
+                                  const Center(
+                                child: Icon(
+                                  FontAwesomeIcons.exclamation,
                                 ),
                               ),
                             ),
-                          );
-                        }),
+                          ),
+                        );
+                      },
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
@@ -116,11 +123,16 @@ class _TestHomePageState extends State<HomePage> {
                             controller.photos = newPhotos;
                           });
                         } on SocketException {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
+                          ScaffoldMessenger.of(context.mounted ? context : context).showSnackBar(
+                            SnackBar(
                               content: Text(
                                 'No internet connection, please try again later',
-                                style: TextStyle(fontFamily: 'space'),
+                                style: TextStyle(
+                                  fontFamily: 'space',
+                                  color: Theme.of(
+                                    context.mounted ? context : context,
+                                  ).colorScheme.inversePrimary,
+                                ),
                               ),
                             ),
                           );
@@ -138,9 +150,14 @@ class _TestHomePageState extends State<HomePage> {
                                 width: 100,
                               ),
                             )
-                          : const Text(
+                          : Text(
                               'Load more',
-                              style: TextStyle(fontFamily: 'space'),
+                              style: TextStyle(
+                                fontFamily: 'space',
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .inversePrimary,
+                              ),
                             ),
                     )
                   ],
@@ -157,15 +174,15 @@ class _TestHomePageState extends State<HomePage> {
                     controller.errorMessage.value,
                     style: const TextStyle(fontFamily: 'space'),
                   ),
-                  const SizedBox(height: 15,),
+                  const SizedBox(
+                    height: 15,
+                  ),
                   MaterialButton(
                     onPressed: () {
                       controller.loadPhotos();
-                      setState(() {
-                        
-                      });
+                      setState(() {});
                     },
-                    color: const Color(0xff0000ff).withAlpha(50),
+                    color: Theme.of(context).colorScheme.secondary.withAlpha(150),
                     elevation: 0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5),
@@ -174,7 +191,7 @@ class _TestHomePageState extends State<HomePage> {
                       'Retry',
                       style: TextStyle(
                         fontFamily: 'spaceMedium',
-                        color: const Color(0xff0000ff).withAlpha(200),
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
                   )

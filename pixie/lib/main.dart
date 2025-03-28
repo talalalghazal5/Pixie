@@ -1,11 +1,13 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:pixie/UI/themes/dark_theme.dart';
+import 'package:pixie/UI/themes/light_theme.dart';
 import 'package:pixie/UI/view/loading_page.dart';
 import 'package:pixie/UI/view/main_page.dart';
 import 'package:pixie/bindings/my_api_key.dart';
 import 'package:pixie/bindings/my_bindings.dart';
+import 'package:pixie/controllers/settings_controller.dart';
 import 'package:pixie/data/models/photo.dart';
 import 'package:pixie/data/models/photo_src.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,29 +22,33 @@ void main() async {
   Hive.registerAdapter(PhotoAdapter());
   Hive.registerAdapter(PhotoSrcAdapter());
   await Hive.openBox<Photo>('favorites');
+  Get.put(SettingsController());
+
   runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialBinding: MyBindings(),
-      initialRoute: '/loadingPage',
-      getPages: [
-        GetPage(
-          name: '/mainPage',
-          page: () => const MainPage(),
-        ),
-        GetPage(
-          name: '/loadingPage',
-          page: () => const LoadingPage(),
-        ),
-      ],
-      // home: const HomePage(),
-    );
+          debugShowCheckedModeBanner: false,
+          initialBinding: MyBindings(),
+          initialRoute: '/loadingPage',
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          themeMode: SettingsController().isDarkMode.value ? ThemeMode.dark : ThemeMode.light,
+          getPages: [
+            GetPage(
+              name: '/mainPage',
+              page: () => const MainPage(),
+            ),
+            GetPage(
+              name: '/loadingPage',
+              page: () => const LoadingPage(),
+            ),
+          ],
+          // home: const HomePage(),
+        );
   }
 }

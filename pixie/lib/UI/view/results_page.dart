@@ -7,6 +7,7 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pixie/UI/view/preview_page.dart';
+import 'package:pixie/controllers/color_controller.dart';
 import 'package:pixie/controllers/photos_controller.dart';
 import 'package:pixie/data/models/photo.dart';
 import 'package:pixie/services/home_page_service.dart';
@@ -45,7 +46,7 @@ class _ResultsPageState extends State<ResultsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Showing results for "${widget.query.trim()}"',),
-        titleTextStyle: const TextStyle(fontFamily: 'space', fontWeight: FontWeight.w600, color: Colors.black, fontSize: 17),
+        titleTextStyle: TextStyle(fontFamily: 'space', fontWeight: FontWeight.w600, color: Theme.of(context).colorScheme.inversePrimary, fontSize: 17),
         surfaceTintColor: Colors.blue,
       ),
       body: GetBuilder<PhotosController>(
@@ -99,7 +100,7 @@ class _ResultsPageState extends State<ResultsPage> {
                                 imageUrl: photo.src.portrait!,
                                 placeholder: (context, url) => Container(
                                   decoration: BoxDecoration(
-                                    color: const Color(0xffeeeeee),
+                                    color: Color(ColorController().convertColor(photo.avgColor)).withAlpha(200),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                 ),

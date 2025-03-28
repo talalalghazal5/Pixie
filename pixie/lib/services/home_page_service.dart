@@ -58,7 +58,6 @@ class HomePageService extends GetxService {
       if (!downloadsPath.existsSync()) {
         downloadsPath.createSync(recursive: true);
       }
-
       var response = await dio.get(imageUrl,
           options: Options(responseType: ResponseType.bytes, headers: {
             'Authorization': apiKey,
@@ -66,7 +65,6 @@ class HomePageService extends GetxService {
 
       if (response.statusCode == 200) {
         var bytes = response.data;
-
         File file = File(imagePath);
         await file.writeAsBytes(bytes);
         if (scaffoldKey.currentContext != null) {
@@ -74,9 +72,9 @@ class HomePageService extends GetxService {
             SnackBar(
               behavior: SnackBarBehavior.floating,
               backgroundColor: Colors.lightGreen[600],
-              content: const Text(
+              content: Text(
                 'Downloaded Successfully',
-                style: TextStyle(fontFamily: 'space'),
+                style: TextStyle(fontFamily: 'space', color: Theme.of(context).colorScheme.inversePrimary),
               ),
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
               shape: const RoundedRectangleBorder(
@@ -92,13 +90,15 @@ class HomePageService extends GetxService {
     } catch (e) {
       if (scaffoldKey.currentContext != null) {
         ScaffoldMessenger.maybeOf(scaffoldKey.currentContext!)!.showSnackBar(
-          const SnackBar(
+          SnackBar(
+            behavior: SnackBarBehavior.floating,
             content: Text(
               'Download failed',
-              style: TextStyle(fontFamily: 'space'),
+              style: TextStyle(fontFamily: 'space', color: Theme.of(context).colorScheme.inversePrimary),
             ),
-            padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-            shape: RoundedRectangleBorder(
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+            shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(10),
               ),

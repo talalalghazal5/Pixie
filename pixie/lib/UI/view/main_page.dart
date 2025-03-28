@@ -26,16 +26,12 @@ class _MainPageState extends State<MainPage> {
   PhotosController photosController = Get.find();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
-
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
-   
   }
 
   @override
@@ -46,12 +42,13 @@ class _MainPageState extends State<MainPage> {
         toolbarHeight: kToolbarHeight + 5,
         elevation: 10,
         forceMaterialTransparency: true,
-        title: const Text(
+        title: Text(
           'Pixie',
           overflow: TextOverflow.visible,
           style: TextStyle(
             fontFamily: 'yesterday',
             fontSize: 40,
+            color: Theme.of(context).colorScheme.inversePrimary,
           ),
         ),
       ),
