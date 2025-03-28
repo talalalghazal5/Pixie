@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pixie/UI/view/preview_page.dart';
+import 'package:pixie/controllers/color_controller.dart';
 import 'package:pixie/controllers/photos_controller.dart';
 import 'package:pixie/data/models/photo.dart';
 import 'package:pixie/services/home_page_service.dart';
@@ -91,7 +92,7 @@ class _TestHomePageState extends State<HomePage> {
                               imageUrl: photo.src.large!,
                               placeholder: (context, url) => Container(
                                 decoration: BoxDecoration(
-                                  color: const Color(0xffeeeeee),
+                                  color: Color(ColorController().convertColor(photo.avgColor)).withAlpha(200),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
