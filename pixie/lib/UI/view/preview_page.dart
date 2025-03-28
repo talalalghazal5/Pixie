@@ -148,9 +148,7 @@ class _PreviewPageState extends State<PreviewPage> {
                       Text(
                         'Taken by:',
                         style: TextStyle(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .inversePrimary
+                          color: Colors.white
                               .withAlpha(150),
                           fontFamily: 'space',
                         ),
@@ -160,7 +158,7 @@ class _PreviewPageState extends State<PreviewPage> {
                         style: TextStyle(
                           fontSize: 18,
                           fontFamily: 'spaceBold',
-                          color: Theme.of(context).colorScheme.inversePrimary,
+                          color: Colors.white,
                         ),
                         textAlign: TextAlign.justify,
                       ),
@@ -399,7 +397,7 @@ class _PreviewPageState extends State<PreviewPage> {
             },
             child: Text(
               'Cancel',
-              style: TextStyle(fontFamily: 'space', color: Theme.of(context).colorScheme.inversePrimary, fontWeight: FontWeight.w600),
+              style: TextStyle(fontFamily: 'space', color: Theme.of(context).colorScheme.inversePrimary.withAlpha(190), fontWeight: FontWeight.w600),
             )),
         TextButton(
           onPressed: () {
