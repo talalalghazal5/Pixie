@@ -72,9 +72,9 @@ class HomePageService extends GetxService {
             SnackBar(
               behavior: SnackBarBehavior.floating,
               backgroundColor: Colors.lightGreen[600],
-              content: const Text(
+              content: Text(
                 'Downloaded Successfully',
-                style: TextStyle(fontFamily: 'space'),
+                style: TextStyle(fontFamily: 'space', color: Theme.of(context).colorScheme.inversePrimary),
               ),
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
               shape: const RoundedRectangleBorder(
