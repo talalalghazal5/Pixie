@@ -73,7 +73,7 @@ class HomePageService extends GetxService {
               behavior: SnackBarBehavior.floating,
               backgroundColor: Colors.lightGreen[600],
               content: Text(
-                'Downloaded Successfully',
+                'downloadedSuccessfullySnackbarMessage'.tr,
                 style: TextStyle(fontFamily: 'space', color: Theme.of(context).colorScheme.inversePrimary),
               ),
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
@@ -93,7 +93,7 @@ class HomePageService extends GetxService {
           SnackBar(
             behavior: SnackBarBehavior.floating,
             content: Text(
-              'Download failed',
+              'downloadFailedSnackbarMessage'.tr,
               style: TextStyle(fontFamily: 'space', color: Theme.of(context).colorScheme.inversePrimary),
             ),
             backgroundColor: Theme.of(context).colorScheme.surface,
