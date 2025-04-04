@@ -138,7 +138,7 @@ class _SettingsPageState extends State<SettingsPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  'Made by: Eng. Talal Alghazal',
+                  'myName'.tr,
                   style: TextStyle(
                     fontFamily: 'space',
                     fontSize: 15,
@@ -166,7 +166,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       width: 5,
                     ),
                     Text(
-                      'Copyrights reserved',
+                      'copyrights'.tr,
                       style: TextStyle(
                         fontFamily: 'space',
                         fontSize: 14,
@@ -189,7 +189,7 @@ class _SettingsPageState extends State<SettingsPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Powered by',
+                  'poweredBy'.tr,
                   style: TextStyle(
                       fontSize: 11,
                       color: Theme.of(context)
