@@ -47,7 +47,7 @@ class MyLocale implements Translations {
 
           //Results Page
           "noResultsFound" : " لم يتم العثور على نتائج لـ",
-          "resultHearTitle" : " يتم عرض النتائج لـ",
+          "resultHeaderTitle" : " يتم عرض النتائج لـ",
 
           //Favorites Page
           "emptyPageLabel": "لاشيء هنا",
@@ -132,7 +132,7 @@ class MyLocale implements Translations {
 
           //Results Page
           "noResultsFound" : "No results found for",
-          "resultHearTitle" : "Showing results for ",
+          "resultHeaderTitle" : "Showing results for ",
 
           //Favorites Page
           "emptyPageLabel": "Nothing here",
