@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:pixie/controllers/my_locale_controller.dart';
 import 'package:pixie/controllers/settings_controller.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -17,14 +18,13 @@ class _SettingsPageState extends State<SettingsPage> {
   void initState() {
     super.initState();
   }
-
+  MyLocaleController myLocaleController = Get.find<MyLocaleController>();
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15),
       child: Center(
-        child:
-            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(
             'Settings',
             style: TextStyle(
@@ -56,8 +56,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 contentPadding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-                tileColor:
-                    Theme.of(context).colorScheme.primary.withAlpha(50),
+                tileColor: Theme.of(context).colorScheme.primary.withAlpha(50),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(13),
                 ),
@@ -68,8 +67,7 @@ class _SettingsPageState extends State<SettingsPage> {
             height: 15,
           ),
           Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.primary.withAlpha(50),
               borderRadius: BorderRadius.circular(13),
@@ -86,26 +84,26 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                 ),
                 DropdownButton(
-                  value: langValue,
+                  value: myLocaleController.locale.languageCode,
                   items: [
                     DropdownMenuItem<String>(
                       value: 'en',
+                      onTap: () => myLocaleController.changeLanguage('en'),
                       child: Text(
                         'English',
                         style: TextStyle(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .inversePrimary),
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                        ),
                       ),
                     ),
                     DropdownMenuItem<String>(
                       value: 'ar',
+                      onTap: () => myLocaleController.changeLanguage('ar'),
                       child: Text(
                         'Arabic',
                         style: TextStyle(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .inversePrimary),
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                        ),
                       ),
                     ),
                   ],
