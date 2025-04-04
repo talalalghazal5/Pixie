@@ -88,7 +88,7 @@ class MyLocale implements Translations {
 
           //set wallpaper button
           //dialog
-          "dialogTitle": "اختر شاشة الخلفية",
+          "dialogTitle": "اختر شاشة الخلفية:",
           "homeScreenChoice": "الشاشة الرئيسية",
           "lockScreenChoice": "شاشة القفل",
           "bothScreensChoice": "الشاشتين معاً",
