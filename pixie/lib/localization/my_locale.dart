@@ -60,7 +60,6 @@ class MyLocale implements Translations {
           "languageListLabel": "اللغة",
           //languages
           "arabic": "العربية",
-          "english": "الإنجليزية",
           //my credits
           "myName": "تم إنشاؤه بواسطة طلال الغزال",
           "copyrights": "الحقوق محفوظة",
@@ -145,7 +144,7 @@ class MyLocale implements Translations {
           //languages list
           "languageListLabel": "Language",
           //languages
-          "arabic": "Arabic",
+          "arabic": "العربية",
           "english": "English",
           //my credits
           "myName": "Made by Talal Alghazal",

@@ -10,5 +10,6 @@ class MyLocaleController extends GetxController {
     Locale currentlocale = Locale(languageCode);
     preferences.setString('language', languageCode);
     Get.updateLocale(currentlocale);
+    update();
   }
 }

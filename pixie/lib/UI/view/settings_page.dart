@@ -12,7 +12,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  String langValue = 'ar';
+  String langValue = MyLocaleController().locale.languageCode;
   SettingsController settingsController = Get.find<SettingsController>();
   @override
   void initState() {
@@ -26,7 +26,7 @@ class _SettingsPageState extends State<SettingsPage> {
       child: Center(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(
-            'Settings',
+            'settingsHeading'.tr,
             style: TextStyle(
               fontFamily: 'space',
               fontSize: 25,
@@ -48,7 +48,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   // Get.changeThemeMode(Get.isDarkMode ? ThemeMode.dark : Theme)
                 },
                 title: Text(
-                  'Dark mode',
+                  'darkModeSwitchTitle'.tr,
                   style: TextStyle(
                     fontFamily: 'space',
                     color: Theme.of(context).colorScheme.inversePrimary,
@@ -76,51 +76,55 @@ class _SettingsPageState extends State<SettingsPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Language',
+                  'languageListLabel'.tr,
                   style: TextStyle(
                     fontFamily: 'space',
                     fontSize: 15,
                     color: Theme.of(context).colorScheme.inversePrimary,
                   ),
                 ),
-                DropdownButton(
-                  value: myLocaleController.locale.languageCode,
-                  items: [
-                    DropdownMenuItem<String>(
-                      value: 'en',
-                      onTap: () => myLocaleController.changeLanguage('en'),
-                      child: Text(
-                        'English',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.inversePrimary,
+                GetBuilder<MyLocaleController>(
+                  builder: (controller) {
+                    return DropdownButton(
+                      value: langValue,
+                      items: [
+                        DropdownMenuItem<String>(
+                          value: 'en',
+                          onTap: () => {controller.changeLanguage('en')},
+                          child: Text(
+                            'english',
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.inversePrimary,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'ar',
-                      onTap: () => myLocaleController.changeLanguage('ar'),
-                      child: Text(
-                        'Arabic',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.inversePrimary,
+                        DropdownMenuItem<String>(
+                          value: 'ar',
+                          onTap: () => controller.changeLanguage('ar'),
+                          child: Text(
+                            'arabic'.tr,
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.inversePrimary,
+                            ),
+                          ),
                         ),
+                      ],
+                      iconEnabledColor:
+                          Theme.of(context).colorScheme.inversePrimary,
+                      underline: Container(
+                        height: 0,
                       ),
-                    ),
-                  ],
-                  iconEnabledColor:
-                      Theme.of(context).colorScheme.inversePrimary,
-                  underline: Container(
-                    height: 0,
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                  style: const TextStyle(
-                    fontFamily: 'space',
-                  ),
-                  onChanged: (value) {
-                    setState(() {
-                      langValue = value!;
-                    });
-                  },
+                      borderRadius: BorderRadius.circular(10),
+                      style: const TextStyle(
+                        fontFamily: 'space',
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          langValue = value!;
+                        });
+                      },
+                    );
+                  }
                 )
               ],
             ),
