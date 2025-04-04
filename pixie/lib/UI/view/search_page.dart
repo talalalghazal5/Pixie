@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pixie/UI/components/search_grid.dart';
 import 'package:pixie/UI/components/search_text_field.dart';
-import 'package:pixie/bindings/my_bindings.dart';
 import 'package:pixie/controllers/categories_controller.dart';
 
 class SearchPage extends StatelessWidget {
@@ -26,7 +25,7 @@ class SearchPage extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            SearchGrid(queries: CategoriesController.categories),
+            SearchGrid(queries: CategoriesController().categories),
             const SizedBox(
               height: 10,
             ),
@@ -37,7 +36,7 @@ class SearchPage extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            SearchGrid(queries: CategoriesController.colors),
+            SearchGrid(queries: CategoriesController().colors),
           ],
         ),
       ),
