@@ -38,16 +38,16 @@ class _LoadingPageState extends State<LoadingPage> {
                     const SizedBox(
                       height: 14,
                     ),
-                    const Text(
-                      'Just a moment..',
-                      style: TextStyle(
+                    Text(
+                      'waitingMessage'.tr,
+                      style: const TextStyle(
                         fontFamily: 'space',
                         fontSize: 15,
                       ),
                     ),
                     const Spacer(),
                     const Text(
-                      'powered by',
+                      '',
                       style: TextStyle(
                         fontFamily: 'space',
                         fontSize: 10,
