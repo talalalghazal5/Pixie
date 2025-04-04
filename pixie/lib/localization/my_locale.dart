@@ -70,7 +70,7 @@ class MyLocale implements Translations {
           ,
           //error fetching photo
           "errorFetchingPhotoMessage": "لم يتم تحميل الصورة",
-          "takenBy": ":تم التقاطها بواسطة",
+          "takenBy": "تم التقاطها بواسطة:",
 
           //favorites button
           //favorite addition snackbar

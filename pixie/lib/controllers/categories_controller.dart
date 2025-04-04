@@ -16,8 +16,8 @@ class CategoriesController {
     {'name' : 'blueCategoryCard'.tr, 'imagePath' : '$colorsAssetsUrl/blue.jpg'},
     {'name' : 'redCategoryCard'.tr, 'imagePath' : '$colorsAssetsUrl/red.jpg'},
     {'name' : 'greenCategoryCard'.tr, 'imagePath' : '$colorsAssetsUrl/green.jpg'},
-    {'name' : 'brownCategoryCard', 'imagePath' : '$colorsAssetsUrl/brown.jpg'},
-    {'name' : 'blackCategoryCard', 'imagePath' : '$colorsAssetsUrl/black.jpg'},
-    {'name' : 'whiteCategoryCard', 'imagePath' : '$colorsAssetsUrl/white.jpg'},
+    {'name' : 'brownCategoryCard'.tr, 'imagePath' : '$colorsAssetsUrl/brown.jpg'},
+    {'name' : 'blackCategoryCard'.tr, 'imagePath' : '$colorsAssetsUrl/black.jpg'},
+    {'name' : 'whiteCategoryCard'.tr, 'imagePath' : '$colorsAssetsUrl/white.jpg'},
   ];
 }

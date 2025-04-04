@@ -143,9 +143,7 @@ class _PreviewPageState extends State<PreviewPage> {
                 ),
                 Positioned(
                   bottom: 14,
-                  right: MyLocaleController().locale.languageCode == "ar"
-                      ? 10
-                      : null,
+                  left: 10,
                   child: Padding(
                     padding: const EdgeInsets.only(top: 50.0, left: 10),
                     child: Column(
@@ -175,7 +173,7 @@ class _PreviewPageState extends State<PreviewPage> {
                   bottom: 10,
                   right: 10,
                   child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       ClipOval(
                         child: BackdropFilter(
@@ -399,7 +397,7 @@ class _PreviewPageState extends State<PreviewPage> {
 
   Widget buildWallpaperLocationDialog() {
     return AlertDialog(
-      title: Text('Choose where to apply:',
+      title: Text('dialogTitle'.tr,
           style: TextStyle(
               fontFamily: 'space',
               color: Theme.of(context).colorScheme.inversePrimary)),
@@ -416,7 +414,7 @@ class _PreviewPageState extends State<PreviewPage> {
               Navigator.pop(context);
             },
             child: Text(
-              'Cancel',
+              'cancelCTA'.tr,
               style: TextStyle(
                   fontFamily: 'space',
                   color: Theme.of(context)
@@ -434,7 +432,7 @@ class _PreviewPageState extends State<PreviewPage> {
             Navigator.pop(context);
           },
           child: Text(
-            'Save',
+            'saveCTA'.tr,
             style: TextStyle(
                 fontFamily: 'space',
                 color: Theme.of(context).colorScheme.primary,

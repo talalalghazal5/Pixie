@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pixie/bindings/my_bindings.dart';
 import 'package:wallpaper_manager_plus/wallpaper_manager_plus.dart';
 
 class WallpaperLocationDialogContents extends StatefulWidget {
@@ -20,7 +22,7 @@ class _WallpaperLocationDialogContentsState
       children: [
         RadioListTile<int>(
           title: Text(
-            'Home screen',
+            'homeScreenChoice'.tr,
             style: TextStyle(
                 fontFamily: 'space',
                 color: Theme.of(context).colorScheme.inversePrimary),
@@ -34,7 +36,7 @@ class _WallpaperLocationDialogContentsState
         ),
         RadioListTile<int>(
           title: Text(
-            'Lock screen',
+            'lockScreenChoice'.tr,
             style: TextStyle(
                 fontFamily: 'space',
                 color: Theme.of(context).colorScheme.inversePrimary),
@@ -48,7 +50,7 @@ class _WallpaperLocationDialogContentsState
         ),
         RadioListTile<int>(
           title: Text(
-            'Both screens',
+            'bothScreensChoice'.tr,
             style: TextStyle(
                 fontFamily: 'space',
                 color: Theme.of(context).colorScheme.inversePrimary),
