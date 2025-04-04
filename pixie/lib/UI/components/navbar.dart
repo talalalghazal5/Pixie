@@ -38,7 +38,7 @@ class Navbar extends StatelessWidget {
                 GButton(
                   icon: FontAwesomeIcons.house,
                   iconActiveColor: Theme.of(context).colorScheme.tertiary,
-                  text: 'Home',
+                  text: 'homePageNavBarTab'.tr,
                   gap: 13,
                   backgroundColor: const Color(0xff0000ff).withAlpha(40),
                   textStyle:  TextStyle(
@@ -49,7 +49,7 @@ class Navbar extends StatelessWidget {
                 ),
                 GButton(
                   icon: FontAwesomeIcons.magnifyingGlass,
-                  text: 'Search',
+                  text: 'searchPageNavBarTab'.tr,
                   iconActiveColor: Colors.cyan[800],
                   backgroundColor: const Color(0xFFB2EBF2).withAlpha(70),
                   textStyle: TextStyle(
@@ -60,7 +60,7 @@ class Navbar extends StatelessWidget {
                 ),
                 GButton(
                   icon: FontAwesomeIcons.heart,
-                  text: 'Favorites',
+                  text: 'favoritesPageNavBarTab'.tr,
                   iconActiveColor: const Color(0xffff0000).withAlpha(200),
                   backgroundColor: const Color(0xffff0000).withAlpha(30),
                   textStyle: TextStyle(
@@ -71,7 +71,7 @@ class Navbar extends StatelessWidget {
                 ),
                 GButton(
                   icon: FontAwesomeIcons.gear,
-                  text: 'Settings',
+                  text: 'settingsPageNavBarTab'.tr,
                   iconActiveColor: const Color(0xffFfa500),
                   backgroundColor: const Color(0xffFfa500).withAlpha(40),
                   textStyle: const TextStyle(
