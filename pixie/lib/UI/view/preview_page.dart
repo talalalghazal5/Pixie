@@ -12,6 +12,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:pixie/UI/components/wallpaper_location_dialog_contents.dart';
 import 'package:pixie/controllers/color_controller.dart';
+import 'package:pixie/controllers/my_locale_controller.dart';
 import 'package:pixie/controllers/photos_controller.dart';
 import 'package:pixie/data/models/photo.dart';
 import 'package:pixie/main.dart';
@@ -115,7 +116,7 @@ class _PreviewPageState extends State<PreviewPage> {
           Positioned(
             bottom: 0,
             child: Stack(
-              alignment: Alignment.centerLeft,
+              alignment: Alignment.bottomLeft,
               children: [
                 ImageFiltered(
                   imageFilter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
@@ -130,7 +131,7 @@ class _PreviewPageState extends State<PreviewPage> {
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width,
-                      height: 140,
+                      height: 250,
                       decoration: const BoxDecoration(
                         gradient: LinearGradient(
                           colors: [Colors.black, Colors.transparent],
@@ -140,186 +141,201 @@ class _PreviewPageState extends State<PreviewPage> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 50.0, left: 10),
+                Positioned(
+                  bottom: 14,
+                  right: MyLocaleController().locale.languageCode == "ar"
+                      ? 10
+                      : null,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 50.0, left: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'takenBy'.tr,
+                          style: TextStyle(
+                            color: Colors.white.withAlpha(150),
+                            fontFamily: 'space',
+                          ),
+                        ),
+                        Text(
+                          widget.photo.photographer,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontFamily: 'spaceBold',
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.justify,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 10,
+                  right: 10,
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(
-                        'Taken by:',
-                        style: TextStyle(
-                          color: Colors.white
-                              .withAlpha(150),
-                          fontFamily: 'space',
+                      ClipOval(
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                          child: IconButton(
+                            padding: const EdgeInsets.all(13),
+                            iconSize: 25,
+                            style: ButtonStyle(
+                              backgroundColor: WidgetStatePropertyAll(
+                                  Theme.of(context)
+                                      .colorScheme
+                                      .surface
+                                      .withAlpha(100)),
+                              iconColor: WidgetStatePropertyAll(
+                                  Theme.of(context).colorScheme.inversePrimary),
+                            ),
+                            onPressed: () {
+                              if (!widget.photo.liked!) {
+                                photosController.addToFavorites(widget.photo);
+                                widget.photo.liked = true;
+                                setState(() {});
+                                ScaffoldMessenger.of(context).clearSnackBars();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    behavior: SnackBarBehavior.floating,
+                                    backgroundColor:
+                                        Theme.of(context).colorScheme.surface,
+                                    content: Text(
+                                      'favoriteAdditionSnackbarMessage'.tr,
+                                      style: TextStyle(
+                                          fontFamily: 'space',
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .inversePrimary),
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 16, horizontal: 20),
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(10),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                photosController
+                                    .removeFromFavorites(widget.photo);
+                                widget.photo.liked = false;
+                                setState(() {});
+                                ScaffoldMessenger.of(context).clearSnackBars();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    behavior: SnackBarBehavior.floating,
+                                    backgroundColor:
+                                        Theme.of(context).colorScheme.surface,
+                                    content: Text(
+                                      'favoriteRemovalSnackbarMessage'.tr,
+                                      style: TextStyle(
+                                        fontFamily: 'space',
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .inversePrimary,
+                                      ),
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 16, horizontal: 20),
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(10),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }
+                            },
+                            icon: Center(
+                              child: FaIcon(
+                                widget.photo.liked!
+                                    ? LineIcons.heartAlt
+                                    : LineIcons.heart,
+                                color: widget.photo.liked!
+                                    ? Colors.red[400]
+                                    : Theme.of(context)
+                                        .colorScheme
+                                        .inversePrimary,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                      Text(
-                        widget.photo.photographer,
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontFamily: 'spaceBold',
-                          color: Colors.white,
-                        ),
-                        textAlign: TextAlign.justify,
+                      const SizedBox(
+                        height: 10,
                       ),
+                      ClipOval(
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                          child: IconButton(
+                            onPressed: () {
+                              savePhoto();
+                            },
+                            iconSize: 25,
+                            padding: const EdgeInsets.all(13),
+                            style: ButtonStyle(
+                              backgroundColor: WidgetStatePropertyAll(
+                                Theme.of(context)
+                                    .colorScheme
+                                    .surface
+                                    .withAlpha(100),
+                              ),
+                              iconColor: WidgetStatePropertyAll(
+                                Theme.of(context).colorScheme.inversePrimary,
+                              ),
+                            ),
+                            icon: const LineIcon(
+                              LineIcons.download,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      ClipOval(
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                          child: IconButton(
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) => SizedBox(
+                                  height: 250,
+                                  child: buildWallpaperLocationDialog(),
+                                ),
+                              );
+                            },
+                            iconSize: 25,
+                            padding: const EdgeInsets.all(13),
+                            style: ButtonStyle(
+                              backgroundColor: WidgetStatePropertyAll(
+                                Theme.of(context)
+                                    .colorScheme
+                                    .surface
+                                    .withAlpha(100),
+                              ),
+                              iconColor: WidgetStatePropertyAll(
+                                Theme.of(context).colorScheme.inversePrimary,
+                              ),
+                            ),
+                            icon: const LineIcon(
+                              LineIcons.paintRoller,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      )
                     ],
                   ),
                 ),
-              ],
-            ),
-          ),
-          Positioned(
-            bottom: 10,
-            right: 10,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                ClipOval(
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                    child: IconButton(
-                      padding: const EdgeInsets.all(13),
-                      iconSize: 25,
-                      style: ButtonStyle(
-                        backgroundColor: WidgetStatePropertyAll(
-                            Theme.of(context)
-                                .colorScheme
-                                .surface
-                                .withAlpha(100)),
-                        iconColor: WidgetStatePropertyAll(
-                            Theme.of(context).colorScheme.inversePrimary),
-                      ),
-                      onPressed: () {
-                        if (!widget.photo.liked!) {
-                          photosController.addToFavorites(widget.photo);
-                          widget.photo.liked = true;
-                          setState(() {});
-                          ScaffoldMessenger.of(context).clearSnackBars();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              behavior: SnackBarBehavior.floating,
-                              backgroundColor:
-                                  Theme.of(context).colorScheme.surface,
-                              content: Text(
-                                'Added to favorites',
-                                style: TextStyle(
-                                    fontFamily: 'space',
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .inversePrimary),
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 16, horizontal: 20),
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
-                            ),
-                          );
-                        } else {
-                          photosController.removeFromFavorites(widget.photo);
-                          widget.photo.liked = false;
-                          setState(() {});
-                          ScaffoldMessenger.of(context).clearSnackBars();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              behavior: SnackBarBehavior.floating,
-                              backgroundColor:
-                                  Theme.of(context).colorScheme.surface,
-                              content: Text(
-                                'Removed from favorites',
-                                style: TextStyle(
-                                    fontFamily: 'space',
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .inversePrimary),
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 16, horizontal: 20),
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
-                            ),
-                          );
-                        }
-                      },
-                      icon: Center(
-                        child: FaIcon(
-                          widget.photo.liked!
-                              ? LineIcons.heartAlt
-                              : LineIcons.heart,
-                          color: widget.photo.liked!
-                              ? Colors.red[400]
-                              : Theme.of(context).colorScheme.inversePrimary,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                ClipOval(
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                    child: IconButton(
-                      onPressed: () {
-                        savePhoto();
-                      },
-                      iconSize: 25,
-                      padding: const EdgeInsets.all(13),
-                      style: ButtonStyle(
-                        backgroundColor: WidgetStatePropertyAll(
-                          Theme.of(context).colorScheme.surface.withAlpha(100),
-                        ),
-                        iconColor: WidgetStatePropertyAll(
-                          Theme.of(context).colorScheme.inversePrimary,
-                        ),
-                      ),
-                      icon: const LineIcon(
-                        LineIcons.download,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                ClipOval(
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                    child: IconButton(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) => SizedBox(
-                            height: 250,
-                            child: buildWallpaperLocationDialog(),
-                          ),
-                        );
-                      },
-                      iconSize: 25,
-                      padding: const EdgeInsets.all(13),
-                      style: ButtonStyle(
-                        backgroundColor: WidgetStatePropertyAll(
-                          Theme.of(context).colorScheme.surface.withAlpha(100),
-                        ),
-                        iconColor: WidgetStatePropertyAll(
-                          Theme.of(context).colorScheme.inversePrimary,
-                        ),
-                      ),
-                      icon: const LineIcon(
-                        LineIcons.paintRoller,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 8,
-                )
               ],
             ),
           ),
@@ -336,9 +352,11 @@ class _PreviewPageState extends State<PreviewPage> {
         backgroundColor: Theme.of(context).colorScheme.surface,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         content: Text(
-          'Downloading photo...',
+          'downloadStartedSnackbarMessage'.tr,
           // ignore: use_build_context_synchronously
-          style: TextStyle(fontFamily: 'space', color: Theme.of(context).colorScheme.inversePrimary),
+          style: TextStyle(
+              fontFamily: 'space',
+              color: Theme.of(context).colorScheme.inversePrimary),
         ),
       ),
     );
@@ -382,7 +400,9 @@ class _PreviewPageState extends State<PreviewPage> {
   Widget buildWallpaperLocationDialog() {
     return AlertDialog(
       title: Text('Choose where to apply:',
-          style: TextStyle(fontFamily: 'space', color: Theme.of(context).colorScheme.inversePrimary)),
+          style: TextStyle(
+              fontFamily: 'space',
+              color: Theme.of(context).colorScheme.inversePrimary)),
       content: WallpaperLocationDialogContents(
         onValueChanged: (value) {
           setState(() {
@@ -397,7 +417,13 @@ class _PreviewPageState extends State<PreviewPage> {
             },
             child: Text(
               'Cancel',
-              style: TextStyle(fontFamily: 'space', color: Theme.of(context).colorScheme.inversePrimary.withAlpha(190), fontWeight: FontWeight.w600),
+              style: TextStyle(
+                  fontFamily: 'space',
+                  color: Theme.of(context)
+                      .colorScheme
+                      .inversePrimary
+                      .withAlpha(190),
+                  fontWeight: FontWeight.w600),
             )),
         TextButton(
           onPressed: () {
@@ -410,10 +436,9 @@ class _PreviewPageState extends State<PreviewPage> {
           child: Text(
             'Save',
             style: TextStyle(
-              fontFamily: 'space',
-              color: Theme.of(context).colorScheme.primary,
-              fontWeight: FontWeight.w600
-            ),
+                fontFamily: 'space',
+                color: Theme.of(context).colorScheme.primary,
+                fontWeight: FontWeight.w600),
           ),
         ),
       ],
