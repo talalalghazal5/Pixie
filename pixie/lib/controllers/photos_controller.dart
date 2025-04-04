@@ -77,9 +77,7 @@ class PhotosController extends GetxController {
       isLoading(true);
       photos = await homePageService.getCuratedPhotos();
     } on SocketException {
-      errorMessage.value = 'No internet connection';
-    } catch (e) {
-      errorMessage.value = 'Error occured while fetching photos';
+      errorMessage.value = 'errorMessage'.tr;
     } finally {
       isLoading(false);
       update();
