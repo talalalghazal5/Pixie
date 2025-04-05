@@ -45,7 +45,7 @@ class _ResultsPageState extends State<ResultsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Showing results for "${widget.query.trim()}"',),
+        title: Text('${'resultHeaderTitle'.tr} "${widget.query.trim()}"',),
         titleTextStyle: TextStyle(fontFamily: 'space', fontWeight: FontWeight.w600, color: Theme.of(context).colorScheme.inversePrimary, fontSize: 17),
         surfaceTintColor: Colors.blue,
       ),
@@ -163,7 +163,7 @@ class _ResultsPageState extends State<ResultsPage> {
           }
           else if(controller.results.isEmpty) {
             return Center(
-              child: Text('Results not found for "${widget.query.trim()}"', style: const TextStyle(fontFamily: 'space'),),
+              child: Text('${'noResultsFound'.tr} "${widget.query.trim()}"', style: const TextStyle(fontFamily: 'space'),),
             );
           }
           if (controller.errorMessage.value.isNotEmpty) {

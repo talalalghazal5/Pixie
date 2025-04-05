@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:pixie/UI/view/results_page.dart';
+import 'package:pixie/bindings/my_bindings.dart';
 
 class SearchTextField extends StatelessWidget {
   const SearchTextField({super.key});
@@ -23,7 +25,7 @@ class SearchTextField extends StatelessWidget {
           ),
           filled: true,
           fillColor: Theme.of(context).colorScheme.inversePrimary.withAlpha(50),
-          hintText: 'Search anything',
+          hintText: 'inputFieldHint'.tr,
           hintStyle: TextStyle(
             fontFamily: 'space',
             color: Theme.of(context).colorScheme.inversePrimary,

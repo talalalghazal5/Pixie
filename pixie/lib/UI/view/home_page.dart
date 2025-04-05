@@ -151,7 +151,7 @@ class _TestHomePageState extends State<HomePage> {
                               ),
                             )
                           : Text(
-                              'Load more',
+                              'loadMoreCTA'.tr,
                               style: TextStyle(
                                 fontFamily: 'space',
                                 color: Theme.of(context)
@@ -188,7 +188,7 @@ class _TestHomePageState extends State<HomePage> {
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Text(
-                      'Retry',
+                      'retryCTA'.tr,
                       style: TextStyle(
                         fontFamily: 'spaceMedium',
                         color: Theme.of(context).colorScheme.primary,

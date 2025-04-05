@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:pixie/controllers/my_locale_controller.dart';
 import 'package:pixie/controllers/settings_controller.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -11,22 +12,21 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  String langValue = 'ar';
+  String langValue = MyLocaleController().locale.languageCode;
   SettingsController settingsController = Get.find<SettingsController>();
   @override
   void initState() {
     super.initState();
   }
-
+  MyLocaleController myLocaleController = Get.find<MyLocaleController>();
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15),
       child: Center(
-        child:
-            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(
-            'Settings',
+            'settingsHeading'.tr,
             style: TextStyle(
               fontFamily: 'space',
               fontSize: 25,
@@ -48,7 +48,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   // Get.changeThemeMode(Get.isDarkMode ? ThemeMode.dark : Theme)
                 },
                 title: Text(
-                  'Dark mode',
+                  'darkModeSwitchTitle'.tr,
                   style: TextStyle(
                     fontFamily: 'space',
                     color: Theme.of(context).colorScheme.inversePrimary,
@@ -56,8 +56,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 contentPadding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-                tileColor:
-                    Theme.of(context).colorScheme.primary.withAlpha(50),
+                tileColor: Theme.of(context).colorScheme.primary.withAlpha(50),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(13),
                 ),
@@ -68,8 +67,7 @@ class _SettingsPageState extends State<SettingsPage> {
             height: 15,
           ),
           Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.primary.withAlpha(50),
               borderRadius: BorderRadius.circular(13),
@@ -78,51 +76,55 @@ class _SettingsPageState extends State<SettingsPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Language',
+                  'languageListLabel'.tr,
                   style: TextStyle(
                     fontFamily: 'space',
                     fontSize: 15,
                     color: Theme.of(context).colorScheme.inversePrimary,
                   ),
                 ),
-                DropdownButton(
-                  value: langValue,
-                  items: [
-                    DropdownMenuItem<String>(
-                      value: 'en',
-                      child: Text(
-                        'English',
-                        style: TextStyle(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .inversePrimary),
+                GetBuilder<MyLocaleController>(
+                  builder: (controller) {
+                    return DropdownButton(
+                      value: langValue,
+                      items: [
+                        DropdownMenuItem<String>(
+                          value: 'en',
+                          onTap: () => {controller.changeLanguage('en')},
+                          child: Text(
+                            'english',
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.inversePrimary,
+                            ),
+                          ),
+                        ),
+                        DropdownMenuItem<String>(
+                          value: 'ar',
+                          onTap: () => controller.changeLanguage('ar'),
+                          child: Text(
+                            'arabic'.tr,
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.inversePrimary,
+                            ),
+                          ),
+                        ),
+                      ],
+                      iconEnabledColor:
+                          Theme.of(context).colorScheme.inversePrimary,
+                      underline: Container(
+                        height: 0,
                       ),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'ar',
-                      child: Text(
-                        'Arabic',
-                        style: TextStyle(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .inversePrimary),
+                      borderRadius: BorderRadius.circular(10),
+                      style: const TextStyle(
+                        fontFamily: 'space',
                       ),
-                    ),
-                  ],
-                  iconEnabledColor:
-                      Theme.of(context).colorScheme.inversePrimary,
-                  underline: Container(
-                    height: 0,
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                  style: const TextStyle(
-                    fontFamily: 'space',
-                  ),
-                  onChanged: (value) {
-                    setState(() {
-                      langValue = value!;
-                    });
-                  },
+                      onChanged: (value) {
+                        setState(() {
+                          langValue = value!;
+                        });
+                      },
+                    );
+                  }
                 )
               ],
             ),
@@ -136,7 +138,7 @@ class _SettingsPageState extends State<SettingsPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  'Made by: Eng. Talal Alghazal',
+                  'myName'.tr,
                   style: TextStyle(
                     fontFamily: 'space',
                     fontSize: 15,
@@ -164,7 +166,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       width: 5,
                     ),
                     Text(
-                      'Copyrights reserved',
+                      'copyrights'.tr,
                       style: TextStyle(
                         fontFamily: 'space',
                         fontSize: 14,
@@ -187,7 +189,7 @@ class _SettingsPageState extends State<SettingsPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Powered by',
+                  'poweredBy'.tr,
                   style: TextStyle(
                       fontSize: 11,
                       color: Theme.of(context)

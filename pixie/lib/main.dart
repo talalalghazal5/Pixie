@@ -7,9 +7,11 @@ import 'package:pixie/UI/view/loading_page.dart';
 import 'package:pixie/UI/view/main_page.dart';
 import 'package:pixie/bindings/my_api_key.dart';
 import 'package:pixie/bindings/my_bindings.dart';
+import 'package:pixie/controllers/my_locale_controller.dart';
 import 'package:pixie/controllers/settings_controller.dart';
 import 'package:pixie/data/models/photo.dart';
 import 'package:pixie/data/models/photo_src.dart';
+import 'package:pixie/localization/my_locale.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 late SharedPreferences preferences;
@@ -31,6 +33,7 @@ class MainApp extends StatelessWidget {
   const MainApp({super.key});
   @override
   Widget build(BuildContext context) {
+    MyLocaleController myLocaleController = Get.put(MyLocaleController());
     return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           initialBinding: MyBindings(),
@@ -38,6 +41,8 @@ class MainApp extends StatelessWidget {
           theme: lightTheme,
           darkTheme: darkTheme,
           themeMode: SettingsController().isDarkMode.value ? ThemeMode.dark : ThemeMode.light,
+          translations: MyLocale(),
+          locale: myLocaleController.locale,
           getPages: [
             GetPage(
               name: '/mainPage',
