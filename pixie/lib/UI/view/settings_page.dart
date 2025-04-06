@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:pixie/controllers/my_locale_controller.dart';
 import 'package:pixie/controllers/settings_controller.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -18,6 +19,14 @@ class _SettingsPageState extends State<SettingsPage> {
   void initState() {
     super.initState();
   }
+
+  Future<void> launchUrl(String url) async {
+    bool launched = await launchUrlString(url, mode: LaunchMode.externalApplication);
+    if (!launched) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text('could not open url')));
+    }
+  }
+
   MyLocaleController myLocaleController = Get.find<MyLocaleController>();
   @override
   Widget build(BuildContext context) {
@@ -132,6 +141,7 @@ class _SettingsPageState extends State<SettingsPage> {
           const Spacer(
             flex: 20,
           ),
+          MaterialButton(onPressed: () =>{launchUrl('www.pexels.com')}, child: const Text('Open site'),),
           Align(
             alignment: Alignment.center,
             child: Column(
