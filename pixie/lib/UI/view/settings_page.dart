@@ -141,7 +141,6 @@ class _SettingsPageState extends State<SettingsPage> {
           const Spacer(
             flex: 20,
           ),
-          MaterialButton(onPressed: () =>{launchUrl('www.pexels.com')}, child: const Text('Open site'),),
           Align(
             alignment: Alignment.center,
             child: Column(
