@@ -10,11 +10,13 @@ import 'package:pixie/UI/view/preview_page.dart';
 import 'package:pixie/controllers/color_controller.dart';
 import 'package:pixie/controllers/photos_controller.dart';
 import 'package:pixie/data/models/photo.dart';
+import 'package:pixie/data/models/search_category.dart';
 import 'package:pixie/services/home_page_service.dart';
 
 class ResultsPage extends StatefulWidget {
-  const ResultsPage({super.key, required this.query});
-  final String query;
+  ResultsPage({super.key, this.query, this.category});
+  String? query;
+  SearchCategory? category;
   @override
   State<ResultsPage> createState() => _ResultsPageState();
 }
@@ -34,7 +36,7 @@ class _ResultsPageState extends State<ResultsPage> {
   @override
   void initState() {
     super.initState();
-    photosController.loadResults(query: widget.query);
+    photosController.loadResults(query: widget.category?.value ?? widget.query);
   }
   @override
   void dispose() {
@@ -45,7 +47,7 @@ class _ResultsPageState extends State<ResultsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${'resultHeaderTitle'.tr} "${widget.query.trim()}"',),
+        title: Text('${'resultHeaderTitle'.tr}'' "${widget.category?.name!.tr ?? widget.query!.trim()}"',),
         titleTextStyle: TextStyle(fontFamily: 'space', fontWeight: FontWeight.w600, color: Theme.of(context).colorScheme.inversePrimary, fontSize: 17),
         surfaceTintColor: Colors.blue,
       ),
@@ -124,7 +126,7 @@ class _ResultsPageState extends State<ResultsPage> {
                         try {
                           pageNumber++;
                           List<Photo> newPhotos = await HomePageService()
-                              .searchPhotos(page: pageNumber, query: widget.query);
+                              .searchPhotos(page: pageNumber, query: widget.category?.value ?? widget.query);
                           setState(() {
                             controller.results = newPhotos;
                           });
@@ -163,7 +165,7 @@ class _ResultsPageState extends State<ResultsPage> {
           }
           else if(controller.results.isEmpty) {
             return Center(
-              child: Text('${'noResultsFound'.tr} "${widget.query.trim()}"', style: const TextStyle(fontFamily: 'space'),),
+              child: Text('${'noResultsFound'.tr} "${widget.query!.trim()}"', style: const TextStyle(fontFamily: 'space'),),
             );
           }
           if (controller.errorMessage.value.isNotEmpty) {

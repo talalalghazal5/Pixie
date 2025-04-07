@@ -4,19 +4,19 @@ class CategoriesController {
   static const categoriesAssetsUrl = 'assets/images/categories';
   static const colorsAssetsUrl = 'assets/images/colors';
   List<Map<String, String>> categories = [
-    {'name' : 'animalsCategoryCard'.tr, 'imagePath' : '$categoriesAssetsUrl/animals.jpg'},
-    {'name' : 'natureCategoryCard'.tr, 'imagePath' : '$categoriesAssetsUrl/nature.jpg'},
-    {'name' : 'foodCategoryCard'.tr, 'imagePath' : '$categoriesAssetsUrl/food.jpg'},
-    {'name' : 'architectureCategoryCard'.tr, 'imagePath' : '$categoriesAssetsUrl/architecture.jpg'},
-    {'name' : 'minimalCategoryCard'.tr, 'imagePath' : '$categoriesAssetsUrl/minimal.jpg'},
-    {'name' : 'spaceCategoryCard'.tr, 'imagePath' : '$categoriesAssetsUrl/space.jpg'},
+    {'name' : 'Animals'.tr, 'value': 'Animals' ,'imagePath' : '$categoriesAssetsUrl/animals.jpg'},
+    {'name' : 'Nature'.tr, 'value': 'Nature' ,'imagePath' : '$categoriesAssetsUrl/nature.jpg'},
+    {'name' : 'Food'.tr, 'value': 'Food' ,'imagePath' : '$categoriesAssetsUrl/food.jpg'},
+    {'name' : 'Architecture'.tr, 'value': 'Architecture' ,'imagePath' : '$categoriesAssetsUrl/architecture.jpg'},
+    {'name' : 'Minimal'.tr, 'value': 'Minimal' ,'imagePath' : '$categoriesAssetsUrl/minimal.jpg'},
+    {'name' : 'Space'.tr, 'value': 'Space' ,'imagePath' : '$categoriesAssetsUrl/space.jpg'},
   ];
   List<Map<String, String>> colors = [
-    {'name' : 'blueCategoryCard'.tr, 'imagePath' : '$colorsAssetsUrl/blue.jpg'},
-    {'name' : 'redCategoryCard'.tr, 'imagePath' : '$colorsAssetsUrl/red.jpg'},
-    {'name' : 'greenCategoryCard'.tr, 'imagePath' : '$colorsAssetsUrl/green.jpg'},
-    {'name' : 'brownCategoryCard'.tr, 'imagePath' : '$colorsAssetsUrl/brown.jpg'},
-    {'name' : 'blackCategoryCard'.tr, 'imagePath' : '$colorsAssetsUrl/black.jpg'},
-    {'name' : 'whiteCategoryCard'.tr, 'imagePath' : '$colorsAssetsUrl/white.jpg'},
+    {'name' : 'Blue'.tr, 'value': 'Blue' ,'imagePath' : '$colorsAssetsUrl/blue.jpg'},
+    {'name' : 'Red'.tr, 'value': 'Red' ,'imagePath' : '$colorsAssetsUrl/red.jpg'},
+    {'name' : 'Green'.tr, 'value': 'Green' ,'imagePath' : '$colorsAssetsUrl/green.jpg'},
+    {'name' : 'Brown'.tr, 'value': 'Brown' ,'imagePath' : '$colorsAssetsUrl/brown.jpg'},
+    {'name' : 'Black'.tr, 'value': 'Black' ,'imagePath' : '$colorsAssetsUrl/black.jpg'},
+    {'name' : 'White'.tr, 'value': 'White' ,'imagePath' : '$colorsAssetsUrl/white.jpg'},
   ];
 }

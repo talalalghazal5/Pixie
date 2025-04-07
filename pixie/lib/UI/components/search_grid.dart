@@ -27,6 +27,7 @@ class SearchGrid extends StatelessWidget {
               SearchCategory category = SearchCategory(
                 queries[index]['name']!,
                 queries[index]['imagePath']!,
+                queries[index]['value']!
               );
               return CategoryCard(searchCategory: category);
             },

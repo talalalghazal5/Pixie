@@ -10,7 +10,7 @@ class CategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ResultsPage(query: searchCategory.name!,),)); /// TODO: REPLACE THE PAGE W/ RESULTS PAGE.
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ResultsPage(query: searchCategory.name!, category: searchCategory,),)); /// TODO: REPLACE THE PAGE W/ RESULTS PAGE.
       },
       child: SizedBox(
         child: Stack(

@@ -30,20 +30,20 @@ class MyLocale implements Translations {
           //Category Cards
           //categories
           "youMightLikeHeading": "أشياء قد تعجبك",
-          "animalsCategoryCard": "حيوانات",
-          "natureCategoryCard": "طبيعة",
-          "foodCategoryCard": "طعام",
-          "architectureCategoryCard": "أبنية وعمارة",
-          "minimalCategoryCard": "بسيط",
-          "spaceCategoryCard": "الفضاء",
+          "Animals": "حيوانات",
+          "Nature": "طبيعة",
+          "Food": "طعام",
+          "Architecture": "أبنية وعمارة",
+          "Minimal": "بسيط",
+          "Space": "الفضاء",
           //colors
           "searchByColorsHeading": "ابحث بالألوان",
-          "blueCategoryCard": "أزرق",
-          "redCategoryCard": "أحمر",
-          "greenCategoryCard": "أخضر",
-          "brownCategoryCard": "بني",
-          "blackCategoryCard": "أسود",
-          "whiteCategoryCard": "أبيض",
+          "Blue": "أزرق",
+          "Red": "أحمر",
+          "Green": "أخضر",
+          "Brown": "بني",
+          "Black": "أسود",
+          "White": "أبيض",
 
           //Results Page
           "noResultsFound" : " لم يتم العثور على نتائج لـ",

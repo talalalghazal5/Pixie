@@ -1,9 +1,7 @@
 class SearchCategory {
   String? name;
+  String value;
   String? imagePath;
 
-  SearchCategory(String name, String imagePath) {
-    this.name = name;
-    this.imagePath = imagePath;
-  }
+  SearchCategory(String this.name, String this.imagePath, this.value);
 }
