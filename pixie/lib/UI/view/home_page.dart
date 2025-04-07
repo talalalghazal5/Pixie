@@ -50,7 +50,7 @@ class _TestHomePageState extends State<HomePage> {
 
           if (controller.photos.isNotEmpty) {
             return Padding(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: SingleChildScrollView(
                 controller: scrollController,
                 child: Column(
