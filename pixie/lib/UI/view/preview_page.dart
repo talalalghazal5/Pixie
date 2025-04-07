@@ -18,6 +18,7 @@ import 'package:pixie/data/models/photo.dart';
 import 'package:pixie/main.dart';
 import 'package:pixie/services/home_page_service.dart';
 import 'package:pixie/services/permssion_service.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:wallpaper_manager_plus/wallpaper_manager_plus.dart';
 
 class PreviewPage extends StatefulWidget {
@@ -156,14 +157,27 @@ class _PreviewPageState extends State<PreviewPage> {
                             fontFamily: 'space',
                           ),
                         ),
-                        Text(
-                          widget.photo.photographer,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontFamily: 'spaceBold',
-                            color: Colors.white,
+                        GestureDetector(
+                          onTap: () => launchUrlString(
+                            'https://www.pexels.com/@${widget.photo.photographerId}',
                           ),
-                          textAlign: TextAlign.justify,
+                          child: Row(
+                            textDirection: MyLocaleController().locale.languageCode == "en" ? TextDirection.rtl : TextDirection.ltr,
+                            children: [
+                              const FaIcon(FontAwesomeIcons.squareArrowUpRight, size: 15, color: Colors.white,),
+                              const SizedBox(width: 5,),
+                              Text(
+                                widget.photo.photographer,
+                                style: const TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  fontSize: 18,
+                                  fontFamily: 'spaceBold',
+                                  color: Colors.white,
+                                ),
+                                textAlign: TextAlign.justify,
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -346,6 +360,7 @@ class _PreviewPageState extends State<PreviewPage> {
     var status = await PermissionService().requestPermissions();
     ScaffoldMessenger.of(context.mounted ? context : context).showSnackBar(
       SnackBar(
+        dismissDirection: DismissDirection.horizontal,
         behavior: SnackBarBehavior.floating,
         backgroundColor: Theme.of(context).colorScheme.surface,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -376,9 +391,10 @@ class _PreviewPageState extends State<PreviewPage> {
       );
       ScaffoldMessenger.of(context.mounted ? context : context).showSnackBar(
         SnackBar(
-          content: const Text(
-            'Applied Wallpaper',
-            style: TextStyle(fontFamily: 'space', fontWeight: FontWeight.w700),
+          dismissDirection: DismissDirection.horizontal,
+          content: Text(
+            'appliedWallpaperSnackbarMessage'.tr,
+            style: const TextStyle(fontFamily: 'space',),
           ),
           backgroundColor: Colors.lightGreen[700],
           behavior: SnackBarBehavior.floating,
