@@ -23,7 +23,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Future<void> launchUrl(String url) async {
     bool launched = await launchUrlString(url, mode: LaunchMode.externalApplication);
     if (!launched) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text('could not open url')));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('could not open url')));
     }
   }
 

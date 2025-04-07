@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:pixie/controllers/main_controller.dart';
-import 'package:pixie/controllers/settings_controller.dart';
 
 ///TODO: MAKE ACTIVE ICON SOLID AND THE OTHER ARE OUTLINED.
 class Navbar extends StatelessWidget {
