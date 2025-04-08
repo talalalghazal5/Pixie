@@ -113,9 +113,10 @@ class _FavoritesPageState extends State<FavoritesPage>
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  
+                  Image.asset('assets/images/empty.png', width: 200, isAntiAlias: true,),
+                  const SizedBox(height: 20,),
                   Text(
-                    'Nothing here',
+                    'emptyPageLabel'.tr,
                     style: TextStyle(fontFamily: 'space', fontSize: 20, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.inversePrimary),
                   ),
                 ],

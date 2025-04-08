@@ -196,6 +196,7 @@ class _ResultsPageState extends State<ResultsPage> {
     } on SocketException {
       ScaffoldMessenger.of(context.mounted ? context : context).showSnackBar(
         SnackBar(
+          dismissDirection: DismissDirection.horizontal,
           content: Text(
             'errorMessage'.tr,
             style: const TextStyle(fontFamily: 'space'),
@@ -205,6 +206,7 @@ class _ResultsPageState extends State<ResultsPage> {
     } on DioException catch (e) {
       ScaffoldMessenger.of(context.mounted ? context : context).showSnackBar(
         SnackBar(
+          dismissDirection: DismissDirection.horizontal,
           content: Text(
             e.message!,
             style: const TextStyle(fontFamily: 'space'),

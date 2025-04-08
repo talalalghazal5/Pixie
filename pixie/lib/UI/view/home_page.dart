@@ -170,6 +170,7 @@ class _TestHomePageState extends State<HomePage> {
     } on SocketException {
       ScaffoldMessenger.of(context.mounted ? context : context).showSnackBar(
         SnackBar(
+          dismissDirection: DismissDirection.horizontal,
           content: Text(
             'No internet connection, please try again later',
             style: TextStyle(

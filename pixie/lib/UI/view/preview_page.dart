@@ -218,6 +218,8 @@ class _PreviewPageState extends State<PreviewPage> {
                                 ScaffoldMessenger.of(context).clearSnackBars();
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
+                                    dismissDirection:
+                                        DismissDirection.horizontal,
                                     behavior: SnackBarBehavior.floating,
                                     backgroundColor:
                                         Theme.of(context).colorScheme.surface,
@@ -246,6 +248,8 @@ class _PreviewPageState extends State<PreviewPage> {
                                 ScaffoldMessenger.of(context).clearSnackBars();
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
+                                    dismissDirection:
+                                        DismissDirection.horizontal,
                                     behavior: SnackBarBehavior.floating,
                                     backgroundColor:
                                         Theme.of(context).colorScheme.surface,

@@ -70,11 +70,14 @@ class HomePageService extends GetxService {
         if (scaffoldKey.currentContext != null) {
           ScaffoldMessenger.of(scaffoldKey.currentContext!).showSnackBar(
             SnackBar(
+              dismissDirection: DismissDirection.horizontal,
               behavior: SnackBarBehavior.floating,
               backgroundColor: Colors.lightGreen[600],
               content: Text(
                 'downloadedSuccessfullySnackbarMessage'.tr,
-                style: TextStyle(fontFamily: 'space', color: Theme.of(context).colorScheme.inversePrimary),
+                style: TextStyle(
+                    fontFamily: 'space',
+                    color: Theme.of(context).colorScheme.inversePrimary),
               ),
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
               shape: const RoundedRectangleBorder(
@@ -92,9 +95,12 @@ class HomePageService extends GetxService {
         ScaffoldMessenger.maybeOf(scaffoldKey.currentContext!)!.showSnackBar(
           SnackBar(
             behavior: SnackBarBehavior.floating,
+            dismissDirection: DismissDirection.horizontal,
             content: Text(
               'downloadFailedSnackbarMessage'.tr,
-              style: TextStyle(fontFamily: 'space', color: Theme.of(context).colorScheme.inversePrimary),
+              style: TextStyle(
+                  fontFamily: 'space',
+                  color: Theme.of(context).colorScheme.inversePrimary),
             ),
             backgroundColor: Theme.of(context).colorScheme.surface,
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
