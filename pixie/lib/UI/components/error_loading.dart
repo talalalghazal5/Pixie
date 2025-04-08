@@ -12,7 +12,7 @@ class ErrorLoading extends StatelessWidget {
       children: [
         Text(
           messageText,
-          style: const TextStyle(fontFamily: 'space'),
+          style: const TextStyle(fontFamily: 'space', fontFamilyFallback: ['sfArabic'],),
         ),
         const SizedBox(
           height: 15,
@@ -28,6 +28,7 @@ class ErrorLoading extends StatelessWidget {
             'retryCTA'.tr,
             style: TextStyle(
               fontFamily: 'spaceMedium',
+              fontFamilyFallback: ['sfArabic'],
               color: Theme.of(context).colorScheme.primary,
             ),
           ),

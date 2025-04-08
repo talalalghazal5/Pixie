@@ -117,7 +117,7 @@ class _FavoritesPageState extends State<FavoritesPage>
                   const SizedBox(height: 20,),
                   Text(
                     'emptyPageLabel'.tr,
-                    style: TextStyle(fontFamily: 'space', fontSize: 20, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.inversePrimary),
+                    style: TextStyle(fontFamily: 'space', fontFamilyFallback: const ['sfArabic'],fontSize: 20, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.inversePrimary),
                   ),
                 ],
               ),
@@ -130,7 +130,7 @@ class _FavoritesPageState extends State<FavoritesPage>
                 children: [
                   Text(
                     controller.errorMessage.value,
-                    style: const TextStyle(fontFamily: 'space'),
+                    style: const TextStyle(fontFamily: 'space',fontFamilyFallback: ['sfArabic'],),
                   ),
                 ],
               ),

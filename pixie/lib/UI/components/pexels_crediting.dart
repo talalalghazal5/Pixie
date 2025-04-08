@@ -20,6 +20,7 @@ class PexelsCrediting extends StatelessWidget {
           Text(
             'poweredBy'.tr,
             style: TextStyle(
+              fontFamilyFallback: ['sfArabic'],
                 fontSize: 11,
                 color:
                     Theme.of(context).colorScheme.inversePrimary.withAlpha(100)),

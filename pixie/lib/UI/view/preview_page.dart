@@ -150,6 +150,7 @@ class _PreviewPageState extends State<PreviewPage> {
                         Text(
                           'takenBy'.tr,
                           style: TextStyle(
+                            fontFamilyFallback: ['sfArabic'],
                             color: Colors.white.withAlpha(150),
                             fontFamily: 'space',
                           ),
@@ -175,6 +176,7 @@ class _PreviewPageState extends State<PreviewPage> {
                               Text(
                                 widget.photo.photographer,
                                 style: const TextStyle(
+                                  fontFamilyFallback: ['sfArabic'],
                                   decoration: TextDecoration.underline,
                                   fontSize: 18,
                                   fontFamily: 'spaceBold',
@@ -226,6 +228,7 @@ class _PreviewPageState extends State<PreviewPage> {
                                     content: Text(
                                       'favoriteAdditionSnackbarMessage'.tr,
                                       style: TextStyle(
+                                        fontFamilyFallback: ['sfArabic'],
                                           fontFamily: 'space',
                                           color: Theme.of(context)
                                               .colorScheme
@@ -256,6 +259,7 @@ class _PreviewPageState extends State<PreviewPage> {
                                     content: Text(
                                       'favoriteRemovalSnackbarMessage'.tr,
                                       style: TextStyle(
+                                        fontFamilyFallback: ['sfArabic'],
                                         fontFamily: 'space',
                                         color: Theme.of(context)
                                             .colorScheme
@@ -379,6 +383,7 @@ class _PreviewPageState extends State<PreviewPage> {
           // ignore: use_build_context_synchronously
           style: TextStyle(
               fontFamily: 'space',
+              fontFamilyFallback: ['sfArabic'],
               color: Theme.of(context).colorScheme.inversePrimary),
         ),
       ),
@@ -405,6 +410,7 @@ class _PreviewPageState extends State<PreviewPage> {
           content: Text(
             'appliedWallpaperSnackbarMessage'.tr,
             style: const TextStyle(
+              fontFamilyFallback: ['sfArabic'],
               fontFamily: 'space',
             ),
           ),
@@ -427,6 +433,7 @@ class _PreviewPageState extends State<PreviewPage> {
     return AlertDialog(
       title: Text('dialogTitle'.tr,
           style: TextStyle(
+            fontFamilyFallback: ['sfArabic'],
               fontFamily: 'space',
               color: Theme.of(context).colorScheme.inversePrimary)),
       content: WallpaperLocationDialogContents(
@@ -445,6 +452,7 @@ class _PreviewPageState extends State<PreviewPage> {
               'cancelCTA'.tr,
               style: TextStyle(
                   fontFamily: 'space',
+                  fontFamilyFallback: ['sfArabic'],
                   color: Theme.of(context)
                       .colorScheme
                       .inversePrimary
@@ -463,6 +471,7 @@ class _PreviewPageState extends State<PreviewPage> {
             'saveCTA'.tr,
             style: TextStyle(
                 fontFamily: 'space',
+                fontFamilyFallback: ['sfArabic'],
                 color: Theme.of(context).colorScheme.primary,
                 fontWeight: FontWeight.w600),
           ),

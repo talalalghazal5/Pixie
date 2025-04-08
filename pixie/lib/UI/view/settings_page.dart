@@ -39,6 +39,7 @@ class _SettingsPageState extends State<SettingsPage> {
             'settingsHeading'.tr,
             style: TextStyle(
               fontFamily: 'space',
+              fontFamilyFallback: ['sfArabic'],
               fontSize: 25,
               fontWeight: FontWeight.bold,
               color: Theme.of(context).colorScheme.inversePrimary,
@@ -61,6 +62,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   'darkModeSwitchTitle'.tr,
                   style: TextStyle(
                     fontFamily: 'space',
+                    fontFamilyFallback: ['sfArabic'],
                     color: Theme.of(context).colorScheme.inversePrimary,
                   ),
                 ),
@@ -89,6 +91,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   'languageListLabel'.tr,
                   style: TextStyle(
                     fontFamily: 'space',
+                    fontFamilyFallback: ['sfArabic'],
                     fontSize: 15,
                     color: Theme.of(context).colorScheme.inversePrimary,
                   ),
@@ -104,6 +107,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           child: Text(
                             'english',
                             style: TextStyle(
+                              fontFamilyFallback: ['sfArabic'],
                               color: Theme.of(context).colorScheme.inversePrimary,
                             ),
                           ),
@@ -114,6 +118,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           child: Text(
                             'arabic'.tr,
                             style: TextStyle(
+                              fontFamilyFallback: ['sfArabic'],
                               color: Theme.of(context).colorScheme.inversePrimary,
                             ),
                           ),
@@ -127,6 +132,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       borderRadius: BorderRadius.circular(10),
                       style: const TextStyle(
                         fontFamily: 'space',
+                        fontFamilyFallback: ['sfArabic'],
                       ),
                       onChanged: (value) {
                         setState(() {
@@ -151,6 +157,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   'myName'.tr,
                   style: TextStyle(
                     fontFamily: 'space',
+                    fontFamilyFallback: ['sfArabic'],
                     fontSize: 15,
                     color: Theme.of(context)
                         .colorScheme
@@ -179,6 +186,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       'copyrights'.tr,
                       style: TextStyle(
                         fontFamily: 'space',
+                        fontFamilyFallback: ['sfArabic'],
                         fontSize: 14,
                         color: Theme.of(context)
                             .colorScheme

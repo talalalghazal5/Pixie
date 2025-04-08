@@ -127,6 +127,7 @@ class _TestHomePageState extends State<HomePage> {
                           : Text(
                               'loadMoreCTA'.tr,
                               style: TextStyle(
+                                fontFamilyFallback: ['sfArabic'],
                                 fontFamily: 'space',
                                 color: Theme.of(context)
                                     .colorScheme
@@ -175,6 +176,7 @@ class _TestHomePageState extends State<HomePage> {
             'No internet connection, please try again later',
             style: TextStyle(
               fontFamily: 'space',
+              fontFamilyFallback: ['sfArabic'],
               color: Theme.of(
                 context.mounted ? context : context,
               ).colorScheme.inversePrimary,

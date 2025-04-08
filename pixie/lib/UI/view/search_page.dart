@@ -20,7 +20,7 @@ class SearchPage extends StatelessWidget {
             ),
             Text(
               'youMightLikeHeading'.tr,
-              style: TextStyle(fontFamily: 'space', fontSize: 16, color: Theme.of(context).colorScheme.inversePrimary),
+              style: TextStyle(fontFamily: 'space', fontFamilyFallback: ['sfArabic'], fontSize: 16, color: Theme.of(context).colorScheme.inversePrimary),
             ),
             const SizedBox(
               height: 20,
@@ -31,7 +31,7 @@ class SearchPage extends StatelessWidget {
             ),
             Text(
               'searchByColorsHeading'.tr,
-              style: TextStyle(fontFamily: 'space', fontSize: 16, color: Theme.of(context).colorScheme.inversePrimary),
+              style: TextStyle(fontFamily: 'space', fontFamilyFallback: ['sfArabic'], fontSize: 16, color: Theme.of(context).colorScheme.inversePrimary),
             ),
             const SizedBox(
               height: 20,

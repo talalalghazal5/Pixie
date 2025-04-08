@@ -74,6 +74,9 @@ flutter:
     - family: yesterday
       fonts:
         - asset: assets/fonts/Yesterday.otf
+    - family: sfArabic
+      fonts:
+        - asset: assets/fonts/SF-Arabic.ttf
   
   assets:
     - assets/animations/

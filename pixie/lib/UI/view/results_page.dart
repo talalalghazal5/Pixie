@@ -58,6 +58,7 @@ class _ResultsPageState extends State<ResultsPage> {
         ),
         titleTextStyle: TextStyle(
             fontFamily: 'space',
+            fontFamilyFallback: ['sfArabic'],
             fontWeight: FontWeight.w600,
             color: Theme.of(context).colorScheme.inversePrimary,
             fontSize: 17),
@@ -149,7 +150,7 @@ class _ResultsPageState extends State<ResultsPage> {
                             )
                           : Text(
                               'loadMoreCTA'.tr,
-                              style: const TextStyle(fontFamily: 'space'),
+                              style: const TextStyle(fontFamily: 'space', fontFamilyFallback: ['sfArabic'],),
                             ),
                     )
                   ],
@@ -162,6 +163,7 @@ class _ResultsPageState extends State<ResultsPage> {
                 '${'noResultsFound'.tr} "${widget.query!.trim()}"',
                 style: TextStyle(
                     fontFamily: 'space',
+                    fontFamilyFallback: ['sfArabic'],
                     color: Theme.of(context).colorScheme.inversePrimary),
               ),
             );
@@ -199,7 +201,7 @@ class _ResultsPageState extends State<ResultsPage> {
           dismissDirection: DismissDirection.horizontal,
           content: Text(
             'errorMessage'.tr,
-            style: const TextStyle(fontFamily: 'space'),
+            style: const TextStyle(fontFamily: 'space', fontFamilyFallback: ['sfArabic'],),
           ),
         ),
       );
@@ -209,7 +211,7 @@ class _ResultsPageState extends State<ResultsPage> {
           dismissDirection: DismissDirection.horizontal,
           content: Text(
             e.message!,
-            style: const TextStyle(fontFamily: 'space'),
+            style: const TextStyle(fontFamily: 'space', fontFamilyFallback: ['sfArabic'],),
           ),
         ),
       );

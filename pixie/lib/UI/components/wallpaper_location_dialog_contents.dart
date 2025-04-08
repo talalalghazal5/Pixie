@@ -23,6 +23,7 @@ class _WallpaperLocationDialogContentsState
           title: Text(
             'homeScreenChoice'.tr,
             style: TextStyle(
+              fontFamilyFallback: ['sfArabic'],
                 fontFamily: 'space',
                 color: Theme.of(context).colorScheme.inversePrimary),
           ),
@@ -37,6 +38,7 @@ class _WallpaperLocationDialogContentsState
           title: Text(
             'lockScreenChoice'.tr,
             style: TextStyle(
+              fontFamilyFallback: ['sfArabic'],
                 fontFamily: 'space',
                 color: Theme.of(context).colorScheme.inversePrimary),
           ),
@@ -51,6 +53,7 @@ class _WallpaperLocationDialogContentsState
           title: Text(
             'bothScreensChoice'.tr,
             style: TextStyle(
+              fontFamilyFallback: ['sfArabic'],
                 fontFamily: 'space',
                 color: Theme.of(context).colorScheme.inversePrimary),
           ),

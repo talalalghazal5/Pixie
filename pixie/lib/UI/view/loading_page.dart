@@ -42,6 +42,7 @@ class _LoadingPageState extends State<LoadingPage> {
                     Text(
                       'waitingMessage'.tr,
                       style: const TextStyle(
+                        fontFamilyFallback: ['sfArabic'],
                         fontFamily: 'space',
                         fontSize: 15,
                       ),

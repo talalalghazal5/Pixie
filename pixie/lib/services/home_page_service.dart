@@ -75,9 +75,10 @@ class HomePageService extends GetxService {
               backgroundColor: Colors.lightGreen[600],
               content: Text(
                 'downloadedSuccessfullySnackbarMessage'.tr,
-                style: TextStyle(
+                style: const TextStyle(
                     fontFamily: 'space',
-                    color: Theme.of(context).colorScheme.inversePrimary),
+                    fontFamilyFallback: ['sfArabic'],
+                    color: Colors.white),
               ),
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
               shape: const RoundedRectangleBorder(
@@ -99,6 +100,7 @@ class HomePageService extends GetxService {
             content: Text(
               'downloadFailedSnackbarMessage'.tr,
               style: TextStyle(
+                fontFamilyFallback: ['sfArabic'],
                   fontFamily: 'space',
                   color: Theme.of(context).colorScheme.inversePrimary),
             ),
