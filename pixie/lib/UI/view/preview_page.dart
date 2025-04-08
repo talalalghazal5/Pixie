@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:pixie/UI/components/error_loading.dart';
 import 'package:pixie/UI/components/wallpaper_location_dialog_contents.dart';
 import 'package:pixie/controllers/color_controller.dart';
 import 'package:pixie/controllers/my_locale_controller.dart';
@@ -47,14 +48,20 @@ class _PreviewPageState extends State<PreviewPage> {
               height: MediaQuery.of(context).size.height,
               child: CachedNetworkImage(
                 imageUrl: widget.photo.src.original!,
-                progressIndicatorBuilder: (context, url, progress) => Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  decoration: BoxDecoration(
-                    color: Color(
-                      ColorController().convertColor(widget.photo.avgColor),
+                progressIndicatorBuilder: (context, url, progress) => Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
+                      decoration: BoxDecoration(
+                        color: Color(
+                          ColorController().convertColor(widget.photo.avgColor),
+                        ),
+                      ),
                     ),
-                  ),
+                    // TweenAnimationBuilder(tween: Tween<double>(begin: 0, end: progress.totalSize!.toDouble()), duration: Duration(seconds: 2), builder: (context, value, child) => CircularProgressIndicator(value: value,),)
+                  ],
                 ),
                 errorWidget: (context, url, error) =>
                     Stack(alignment: Alignment.center, children: [
@@ -65,20 +72,10 @@ class _PreviewPageState extends State<PreviewPage> {
                       ColorController().convertColor(widget.photo.avgColor),
                     ),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      ///Todo: add a retry button to get the image again
-                      Text(
-                        'Error occured while getting the image',
-                        style: TextStyle(
-                          fontFamily: 'space',
-                          color: Theme.of(context).colorScheme.inversePrimary,
-                        ),
-                      ),
-                    ],
-                  ),
+                  ErrorLoading(
+                    onPressed: () => setState(() {}),
+                    messageText: "errorFetchingPhotoMessage".tr,
+                  )
                 ]),
                 placeholderFadeInDuration: const Duration(milliseconds: 0),
                 fadeInCurve: Curves.linear,
@@ -162,10 +159,19 @@ class _PreviewPageState extends State<PreviewPage> {
                             'https://www.pexels.com/@${widget.photo.photographerId}',
                           ),
                           child: Row(
-                            textDirection: MyLocaleController().locale.languageCode == "en" ? TextDirection.rtl : TextDirection.ltr,
+                            textDirection:
+                                MyLocaleController().locale.languageCode == "en"
+                                    ? TextDirection.rtl
+                                    : TextDirection.ltr,
                             children: [
-                              const FaIcon(FontAwesomeIcons.squareArrowUpRight, size: 15, color: Colors.white,),
-                              const SizedBox(width: 5,),
+                              const FaIcon(
+                                FontAwesomeIcons.squareArrowUpRight,
+                                size: 15,
+                                color: Colors.white,
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
                               Text(
                                 widget.photo.photographer,
                                 style: const TextStyle(
@@ -394,7 +400,9 @@ class _PreviewPageState extends State<PreviewPage> {
           dismissDirection: DismissDirection.horizontal,
           content: Text(
             'appliedWallpaperSnackbarMessage'.tr,
-            style: const TextStyle(fontFamily: 'space',),
+            style: const TextStyle(
+              fontFamily: 'space',
+            ),
           ),
           backgroundColor: Colors.lightGreen[700],
           behavior: SnackBarBehavior.floating,
