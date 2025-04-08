@@ -5,6 +5,7 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:pixie/UI/components/error_loading.dart';
 import 'package:pixie/UI/view/preview_page.dart';
 import 'package:pixie/controllers/color_controller.dart';
 import 'package:pixie/controllers/photos_controller.dart';
@@ -91,7 +92,9 @@ class _TestHomePageState extends State<HomePage> {
                               imageUrl: photo.src.large!,
                               placeholder: (context, url) => Container(
                                 decoration: BoxDecoration(
-                                  color: Color(ColorController().convertColor(photo.avgColor)).withAlpha(200),
+                                  color: Color(ColorController()
+                                          .convertColor(photo.avgColor))
+                                      .withAlpha(200),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
@@ -122,7 +125,9 @@ class _TestHomePageState extends State<HomePage> {
                             controller.photos = newPhotos;
                           });
                         } on SocketException {
-                          ScaffoldMessenger.of(context.mounted ? context : context).showSnackBar(
+                          ScaffoldMessenger.of(
+                                  context.mounted ? context : context)
+                              .showSnackBar(
                             SnackBar(
                               content: Text(
                                 'No internet connection, please try again later',
@@ -166,35 +171,12 @@ class _TestHomePageState extends State<HomePage> {
           }
           if (controller.errorMessage.value.isNotEmpty) {
             return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    controller.errorMessage.value,
-                    style: const TextStyle(fontFamily: 'space'),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  MaterialButton(
-                    onPressed: () {
-                      controller.loadPhotos();
-                      setState(() {});
-                    },
-                    color: Theme.of(context).colorScheme.secondary.withAlpha(150),
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Text(
-                      'retryCTA'.tr,
-                      style: TextStyle(
-                        fontFamily: 'spaceMedium',
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    ),
-                  )
-                ],
+              child: ErrorLoading(
+                onPressed: () {
+                  controller.loadPhotos();
+                  setState(() {});
+                },
+                messageText: controller.errorMessage.value,
               ),
             );
           }
