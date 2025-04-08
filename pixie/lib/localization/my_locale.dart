@@ -107,6 +107,13 @@ class MyLocale implements Translations {
           "settingsPageNavBarTab": "Settings",
 
           //home page
+
+          //error message
+          "errorMessage": "No internet connection",
+
+          //retry button
+          "retryCTA": "Retry",
+
           "loadMoreCTA": "Load more",
 
           //Search Page
