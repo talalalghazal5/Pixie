@@ -93,9 +93,7 @@ class PhotosController extends GetxController {
         perPage: perPage,
       );
     } on SocketException {
-      errorMessage.value = 'No internet connection';
-    } catch (e) {
-      errorMessage.value = 'Error occured';
+      errorMessage.value = 'errorMessage'.tr;
     } finally {
       isLoading(false);
       update();
