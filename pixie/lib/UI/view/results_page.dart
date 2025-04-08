@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -39,17 +40,26 @@ class _ResultsPageState extends State<ResultsPage> {
     super.initState();
     photosController.loadResults(query: widget.category?.value ?? widget.query);
   }
+
   @override
   void dispose() {
     super.dispose();
     photosController.results.clear();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${'resultHeaderTitle'.tr}'' "${widget.category?.name!.tr ?? widget.query!.trim()}"',),
-        titleTextStyle: TextStyle(fontFamily: 'space', fontWeight: FontWeight.w600, color: Theme.of(context).colorScheme.inversePrimary, fontSize: 17),
+        title: Text(
+          '${'resultHeaderTitle'.tr}'
+          ' "${widget.category?.name!.tr ?? widget.query!.trim()}"',
+        ),
+        titleTextStyle: TextStyle(
+            fontFamily: 'space',
+            fontWeight: FontWeight.w600,
+            color: Theme.of(context).colorScheme.inversePrimary,
+            fontSize: 17),
         surfaceTintColor: Colors.blue,
       ),
       body: GetBuilder<PhotosController>(
@@ -86,9 +96,12 @@ class _ResultsPageState extends State<ResultsPage> {
                           Photo photo = controller.results[index];
                           return GestureDetector(
                             onTap: () {
-                              Get.to(() => PreviewPage(
-                                    photo: photo,
-                                  ), transition: Transition.cupertino,);
+                              Get.to(
+                                () => PreviewPage(
+                                  photo: photo,
+                                ),
+                                transition: Transition.cupertino,
+                              );
                             },
                             child: Container(
                               height: 400,
@@ -103,14 +116,16 @@ class _ResultsPageState extends State<ResultsPage> {
                                 imageUrl: photo.src.portrait!,
                                 placeholder: (context, url) => Container(
                                   decoration: BoxDecoration(
-                                    color: Color(ColorController().convertColor(photo.avgColor)).withAlpha(200),
+                                    color: Color(ColorController()
+                                            .convertColor(photo.avgColor))
+                                        .withAlpha(200),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                 ),
                                 errorWidget: (context, error, stackTrace) =>
                                     const Center(
-                                  child: Icon(
-                                      CupertinoIcons.exclamationmark_circle_fill),
+                                  child: Icon(CupertinoIcons
+                                      .exclamationmark_circle_fill),
                                 ),
                               ),
                             ),
@@ -120,31 +135,8 @@ class _ResultsPageState extends State<ResultsPage> {
                       height: 10,
                     ),
                     MaterialButton(
-                      onPressed: () async {
-                        setState(() {
-                          isLoading = true;
-                        });
-                        try {
-                          pageNumber++;
-                          List<Photo> newPhotos = await HomePageService()
-                              .searchPhotos(page: pageNumber, query: widget.category?.value ?? widget.query);
-                          setState(() {
-                            controller.results = newPhotos;
-                          });
-                        } on SocketException {
-                          ScaffoldMessenger.of(context.mounted ? context : context).showSnackBar(
-                            const SnackBar(
-                              content: Text(
-                                'No internet connection, please try again later',
-                                style: TextStyle(fontFamily: 'space'),
-                              ),
-                            ),
-                          );
-                        } finally {
-                          setState(() {
-                            isLoading = false;
-                          });
-                        }
+                      onPressed: () {
+                        loadMorePhotos(controller);
                       },
                       height: 20,
                       child: isLoading
@@ -154,19 +146,21 @@ class _ResultsPageState extends State<ResultsPage> {
                                 width: 100,
                               ),
                             )
-                          : const Text(
-                              'Load more',
-                              style: TextStyle(fontFamily: 'space'),
+                          : Text(
+                              'loadMoreCTA'.tr,
+                              style: const TextStyle(fontFamily: 'space'),
                             ),
                     )
                   ],
                 ),
               ),
             );
-          }
-          else if(controller.results.isEmpty) {
+          } else if (controller.results.isEmpty) {
             return Center(
-              child: Text('${'noResultsFound'.tr} "${widget.query!.trim()}"', style: const TextStyle(fontFamily: 'space'),),
+              child: Text(
+                '${'noResultsFound'.tr} "${widget.query!.trim()}"',
+                style: const TextStyle(fontFamily: 'space'),
+              ),
             );
           }
           if (controller.errorMessage.value.isNotEmpty) {
@@ -178,13 +172,13 @@ class _ResultsPageState extends State<ResultsPage> {
                     controller.errorMessage.value,
                     style: const TextStyle(fontFamily: 'space'),
                   ),
-                  const SizedBox(height: 15,),
+                  const SizedBox(
+                    height: 15,
+                  ),
                   MaterialButton(
                     onPressed: () {
                       controller.loadResults(query: widget.query);
-                      setState(() {
-                        
-                      });
+                      setState(() {});
                     },
                     color: const Color(0xff0000ff).withAlpha(50),
                     elevation: 0,
@@ -207,5 +201,41 @@ class _ResultsPageState extends State<ResultsPage> {
         },
       ),
     );
+  }
+
+  void loadMorePhotos(PhotosController controller) async {
+    setState(() {
+      isLoading = true;
+    });
+    try {
+      pageNumber++;
+      List<Photo> newPhotos = await HomePageService().searchPhotos(
+          page: pageNumber, query: widget.category?.value ?? widget.query);
+      setState(() {
+        controller.results = newPhotos;
+      });
+    } on SocketException {
+      ScaffoldMessenger.of(context.mounted ? context : context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'errorMessage'.tr,
+            style: const TextStyle(fontFamily: 'space'),
+          ),
+        ),
+      );
+    } on DioException catch (e) {
+      ScaffoldMessenger.of(context.mounted ? context : context).showSnackBar(
+        SnackBar(
+          content: Text(
+            e.message!,
+            style: const TextStyle(fontFamily: 'space'),
+          ),
+        ),
+      );
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 }

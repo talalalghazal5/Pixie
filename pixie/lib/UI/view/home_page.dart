@@ -113,38 +113,8 @@ class _TestHomePageState extends State<HomePage> {
                       height: 10,
                     ),
                     MaterialButton(
-                      onPressed: () async {
-                        setState(() {
-                          isLoading = true;
-                        });
-                        try {
-                          pageNumber++;
-                          List<Photo> newPhotos = await HomePageService()
-                              .getCuratedPhotos(page: pageNumber, perPage: 40);
-                          setState(() {
-                            controller.photos = newPhotos;
-                          });
-                        } on SocketException {
-                          ScaffoldMessenger.of(
-                                  context.mounted ? context : context)
-                              .showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                'No internet connection, please try again later',
-                                style: TextStyle(
-                                  fontFamily: 'space',
-                                  color: Theme.of(
-                                    context.mounted ? context : context,
-                                  ).colorScheme.inversePrimary,
-                                ),
-                              ),
-                            ),
-                          );
-                        } finally {
-                          setState(() {
-                            isLoading = false;
-                          });
-                        }
+                      onPressed: () {
+                        loadMorePhotos(controller);
                       },
                       height: 20,
                       child: isLoading
@@ -184,5 +154,37 @@ class _TestHomePageState extends State<HomePage> {
         },
       ),
     );
+  }
+
+  void loadMorePhotos(PhotosController controller) async {
+    setState(() {
+      isLoading = true;
+    });
+    try {
+      pageNumber++;
+      List<Photo> newPhotos = await HomePageService()
+          .getCuratedPhotos(page: pageNumber, perPage: 40);
+      setState(() {
+        controller.photos = newPhotos;
+      });
+    } on SocketException {
+      ScaffoldMessenger.of(context.mounted ? context : context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'No internet connection, please try again later',
+            style: TextStyle(
+              fontFamily: 'space',
+              color: Theme.of(
+                context.mounted ? context : context,
+              ).colorScheme.inversePrimary,
+            ),
+          ),
+        ),
+      );
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 }
