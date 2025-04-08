@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:pixie/UI/components/pexels_crediting.dart';
 import 'package:pixie/controllers/my_locale_controller.dart';
 import 'package:pixie/controllers/settings_controller.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -191,32 +192,9 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
           ),
           const Spacer(),
-          Align(
+          const Align(
             alignment: Alignment.center,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'poweredBy'.tr,
-                  style: TextStyle(
-                      fontSize: 11,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .inversePrimary
-                          .withAlpha(100)),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Image.asset(
-                  settingsController.isDarkMode.value
-                      ? 'assets/images/pexels_logo_white.png'
-                      : 'assets/images/pexels_logo_black.png',
-                  width: 60,
-                )
-              ],
-            ),
+            child: PexelsCrediting()
           ),
         ]),
       ),
