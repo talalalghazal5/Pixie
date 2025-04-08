@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:pixie/UI/components/error_loading.dart';
 import 'package:pixie/UI/view/preview_page.dart';
 import 'package:pixie/controllers/color_controller.dart';
 import 'package:pixie/controllers/photos_controller.dart';
@@ -159,43 +160,21 @@ class _ResultsPageState extends State<ResultsPage> {
             return Center(
               child: Text(
                 '${'noResultsFound'.tr} "${widget.query!.trim()}"',
-                style: const TextStyle(fontFamily: 'space'),
+                style: TextStyle(
+                    fontFamily: 'space',
+                    color: Theme.of(context).colorScheme.inversePrimary),
               ),
             );
           }
           if (controller.errorMessage.value.isNotEmpty) {
             return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    controller.errorMessage.value,
-                    style: const TextStyle(fontFamily: 'space'),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  MaterialButton(
-                    onPressed: () {
-                      controller.loadResults(query: widget.query);
-                      setState(() {});
-                    },
-                    color: const Color(0xff0000ff).withAlpha(50),
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Text(
-                      'Retry',
-                      style: TextStyle(
-                        fontFamily: 'spaceMedium',
-                        color: const Color(0xff0000ff).withAlpha(200),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            );
+                child: ErrorLoading(
+              onPressed: () {
+                controller.loadResults(query: widget.query);
+                setState(() {});
+              },
+              messageText: controller.errorMessage.value,
+            ));
           }
           return Container();
         },
