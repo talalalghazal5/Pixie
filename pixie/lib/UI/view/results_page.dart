@@ -13,6 +13,7 @@ import 'package:pixie/data/models/photo.dart';
 import 'package:pixie/data/models/search_category.dart';
 import 'package:pixie/services/home_page_service.dart';
 
+// ignore: must_be_immutable
 class ResultsPage extends StatefulWidget {
   ResultsPage({super.key, this.query, this.category});
   String? query;
