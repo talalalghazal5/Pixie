@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -36,7 +35,6 @@ class _PreviewPageState extends State<PreviewPage> {
   PhotosController photosController = Get.find<PhotosController>();
   @override
   Widget build(BuildContext context) {
-    print(ColorController().convertColor(widget.photo.avgColor));
     return Scaffold(
       key: scaffoldKey,
       body: Stack(
@@ -61,8 +59,9 @@ class _PreviewPageState extends State<PreviewPage> {
                         ),
                       ),
                     ),
-                    PixieLogoText(fontSize: 50,)
-                    // TweenAnimationBuilder(tween: Tween<double>(begin: 0, end: progress.totalSize!.toDouble()), duration: Duration(seconds: 2), builder: (context, value, child) => CircularProgressIndicator(value: value,),)
+                    const PixieLogoText(
+                      fontSize: 50,
+                    )
                   ],
                 ),
                 errorWidget: (context, url, error) =>
@@ -104,8 +103,8 @@ class _PreviewPageState extends State<PreviewPage> {
                             .withAlpha(100),
                       ),
                       child: Center(
-                        child: FaIcon(
-                          FontAwesomeIcons.chevronLeft,
+                        child: LineIcon(
+                          LineIcons.chevronLeft,
                           color: Theme.of(context).colorScheme.inversePrimary,
                         ),
                       ),
@@ -152,7 +151,7 @@ class _PreviewPageState extends State<PreviewPage> {
                         Text(
                           'takenBy'.tr,
                           style: TextStyle(
-                            fontFamilyFallback: ['sfArabic'],
+                            fontFamilyFallback: const ['sfArabic'],
                             color: Colors.white.withAlpha(150),
                             fontFamily: 'space',
                           ),
@@ -230,7 +229,9 @@ class _PreviewPageState extends State<PreviewPage> {
                                     content: Text(
                                       'favoriteAdditionSnackbarMessage'.tr,
                                       style: TextStyle(
-                                        fontFamilyFallback: ['sfArabic'],
+                                          fontFamilyFallback: const [
+                                            'sfArabic'
+                                          ],
                                           fontFamily: 'space',
                                           color: Theme.of(context)
                                               .colorScheme
@@ -261,7 +262,7 @@ class _PreviewPageState extends State<PreviewPage> {
                                     content: Text(
                                       'favoriteRemovalSnackbarMessage'.tr,
                                       style: TextStyle(
-                                        fontFamilyFallback: ['sfArabic'],
+                                        fontFamilyFallback: const ['sfArabic'],
                                         fontFamily: 'space',
                                         color: Theme.of(context)
                                             .colorScheme
@@ -378,15 +379,17 @@ class _PreviewPageState extends State<PreviewPage> {
       SnackBar(
         dismissDirection: DismissDirection.horizontal,
         behavior: SnackBarBehavior.floating,
-        backgroundColor: Theme.of(context).colorScheme.surface,
+        backgroundColor:
+            Theme.of(context.mounted ? context : context).colorScheme.surface,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         content: Text(
           'downloadStartedSnackbarMessage'.tr,
-          // ignore: use_build_context_synchronously
           style: TextStyle(
               fontFamily: 'space',
-              fontFamilyFallback: ['sfArabic'],
-              color: Theme.of(context).colorScheme.inversePrimary),
+              fontFamilyFallback: const ['sfArabic'],
+              color: Theme.of(context.mounted ? context : context)
+                  .colorScheme
+                  .inversePrimary),
         ),
       ),
     );
@@ -435,7 +438,7 @@ class _PreviewPageState extends State<PreviewPage> {
     return AlertDialog(
       title: Text('dialogTitle'.tr,
           style: TextStyle(
-            fontFamilyFallback: ['sfArabic'],
+              fontFamilyFallback: const ['sfArabic'],
               fontFamily: 'space',
               color: Theme.of(context).colorScheme.inversePrimary)),
       content: WallpaperLocationDialogContents(
@@ -454,7 +457,7 @@ class _PreviewPageState extends State<PreviewPage> {
               'cancelCTA'.tr,
               style: TextStyle(
                   fontFamily: 'space',
-                  fontFamilyFallback: ['sfArabic'],
+                  fontFamilyFallback: const ['sfArabic'],
                   color: Theme.of(context)
                       .colorScheme
                       .inversePrimary
@@ -473,7 +476,7 @@ class _PreviewPageState extends State<PreviewPage> {
             'saveCTA'.tr,
             style: TextStyle(
                 fontFamily: 'space',
-                fontFamilyFallback: ['sfArabic'],
+                fontFamilyFallback: const ['sfArabic'],
                 color: Theme.of(context).colorScheme.primary,
                 fontWeight: FontWeight.w600),
           ),

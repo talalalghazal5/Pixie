@@ -1,5 +1,3 @@
-import 'dart:io';
-import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -34,10 +32,6 @@ class _TestHomePageState extends State<HomePage> {
     ),
   );
 
-  void refresh() async {
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +56,7 @@ class _TestHomePageState extends State<HomePage> {
                   });
                 },
                 child: SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   controller: scrollController,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -147,7 +141,7 @@ class _TestHomePageState extends State<HomePage> {
                             : Text(
                                 'loadMoreCTA'.tr,
                                 style: TextStyle(
-                                  fontFamilyFallback: ['sfArabic'],
+                                  fontFamilyFallback: const ['sfArabic'],
                                   fontFamily: 'space',
                                   color: Theme.of(context)
                                       .colorScheme
@@ -189,18 +183,20 @@ class _TestHomePageState extends State<HomePage> {
       setState(() {
         controller.photos = newPhotos;
       });
-    } on NetworkException catch (e) {
+    } on NetworkException {
       ScaffoldMessenger.of(context.mounted ? context : context).showSnackBar(
         SnackBar(
           dismissDirection: DismissDirection.horizontal,
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          backgroundColor: Theme.of(context.mounted ? context : context)
+              .colorScheme
+              .inversePrimary,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           content: Text(
             'errorMessage'.tr,
             style: TextStyle(
               fontFamily: 'space',
-              fontFamilyFallback: ['sfArabic'],
+              fontFamilyFallback: const ['sfArabic'],
               color: Theme.of(
                 context.mounted ? context : context,
               ).colorScheme.surface,

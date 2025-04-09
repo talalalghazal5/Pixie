@@ -1,8 +1,6 @@
 import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -60,7 +58,7 @@ class _ResultsPageState extends State<ResultsPage> {
         ),
         titleTextStyle: TextStyle(
             fontFamily: 'space',
-            fontFamilyFallback: ['sfArabic'],
+            fontFamilyFallback: const ['sfArabic'],
             fontWeight: FontWeight.w600,
             color: Theme.of(context).colorScheme.inversePrimary,
             fontSize: 17),
@@ -87,7 +85,7 @@ class _ResultsPageState extends State<ResultsPage> {
                   });
                 },
                 child: SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   controller: scrollController,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -108,13 +106,13 @@ class _ResultsPageState extends State<ResultsPage> {
                             return GestureDetector(
                               onTap: () {
                                 Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => PreviewPage(
-                                    photo: photo,
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PreviewPage(
+                                      photo: photo,
+                                    ),
                                   ),
-                                ),
-                              );
+                                );
                               },
                               child: Container(
                                 height: 400,
@@ -202,7 +200,7 @@ class _ResultsPageState extends State<ResultsPage> {
                 '${'noResultsFound'.tr} "${widget.query!.trim()}"',
                 style: TextStyle(
                     fontFamily: 'space',
-                    fontFamilyFallback: ['sfArabic'],
+                    fontFamilyFallback: const ['sfArabic'],
                     color: Theme.of(context).colorScheme.inversePrimary),
               ),
             );

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pixie/UI/themes/dark_theme.dart';
 import 'package:pixie/UI/themes/light_theme.dart';
 import 'package:pixie/UI/view/loading_page.dart';
 import 'package:pixie/UI/view/main_page.dart';
-import 'package:pixie/bindings/my_api_key.dart';
 import 'package:pixie/bindings/my_bindings.dart';
 import 'package:pixie/controllers/my_locale_controller.dart';
 import 'package:pixie/controllers/settings_controller.dart';
@@ -15,10 +15,14 @@ import 'package:pixie/localization/my_locale.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 late SharedPreferences preferences;
-final String apiKey = MyApiKey.apiKey;
+late String apiKey;
+late String baseUrl;
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: '.env');
+  apiKey = dotenv.env['API_KEY'] ?? '';
+  baseUrl = dotenv.env['BASE_URL'] ?? '';
   preferences = await SharedPreferences.getInstance();
   await Hive.initFlutter();
   Hive.registerAdapter(PhotoAdapter());
@@ -53,7 +57,6 @@ class MainApp extends StatelessWidget {
               page: () => const LoadingPage(),
             ),
           ],
-          // home: const HomePage(),
         );
   }
 }

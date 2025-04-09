@@ -11,7 +11,7 @@ class PixieLogoText extends StatelessWidget {
       style: TextStyle(
         fontFamily: 'yesterday',
         fontSize: fontSize ?? 30,
-        color: Theme.of(context).colorScheme.inversePrimary.withAlpha(100)
+        color: Theme.of(context).colorScheme.inversePrimary.withAlpha(100),
       ),
     );
   }

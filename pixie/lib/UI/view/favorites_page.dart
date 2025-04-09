@@ -1,10 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:line_icons/line_icons.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pixie/UI/components/pixie_logo_text.dart';
 import 'package:pixie/UI/view/preview_page.dart';
@@ -65,7 +63,7 @@ class _FavoritesPageState extends State<FavoritesPage>
                 padding: const EdgeInsets.all(10),
                 child: SingleChildScrollView(
                   controller: scrollController,
-                  physics: AlwaysScrollableScrollPhysics(),
+                  physics: const AlwaysScrollableScrollPhysics(),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [

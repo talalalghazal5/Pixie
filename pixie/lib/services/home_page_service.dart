@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously, avoid_print
-
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +9,6 @@ import 'package:pixie/data/models/photo.dart';
 import 'package:pixie/main.dart';
 
 class HomePageService extends GetxService {
-  String baseUrl = 'https://api.pexels.com/v1';
   static final Dio dio = Dio();
 
   Future<List<Photo>> getCuratedPhotos({int page = 1, int perPage = 40}) async {
@@ -35,7 +32,6 @@ class HomePageService extends GetxService {
       if (response.statusCode == 200) {
         var responseBody = response.data;
         List<dynamic> jsonPhotos = responseBody['photos'];
-        // await preferences.setString('cachedPhotos', jsonEncode(jsonPhotos)); // caching the images when fetching them.
         photos = jsonPhotos.map((photo) => Photo.fromJson(photo)).toList();
         return photos;
       }
@@ -67,10 +63,15 @@ class HomePageService extends GetxService {
       if (!downloadsPath.existsSync()) {
         downloadsPath.createSync(recursive: true);
       }
-      var response = await dio.get(imageUrl,
-          options: Options(responseType: ResponseType.bytes, headers: {
+      var response = await dio.get(
+        imageUrl,
+        options: Options(
+          responseType: ResponseType.bytes,
+          headers: {
             'Authorization': apiKey,
-          }));
+          },
+        ),
+      );
 
       if (response.statusCode == 200) {
         var bytes = response.data;
@@ -98,11 +99,11 @@ class HomePageService extends GetxService {
             ),
           );
         }
-        // Save the image to the gallery
       }
     } catch (e) {
       if (scaffoldKey.currentContext != null) {
-        ScaffoldMessenger.maybeOf(scaffoldKey.currentContext!)!.clearSnackBars();
+        ScaffoldMessenger.maybeOf(scaffoldKey.currentContext!)!
+            .clearSnackBars();
         ScaffoldMessenger.maybeOf(scaffoldKey.currentContext!)!.showSnackBar(
           SnackBar(
             behavior: SnackBarBehavior.floating,
@@ -110,11 +111,15 @@ class HomePageService extends GetxService {
             content: Text(
               'downloadFailedSnackbarMessage'.tr,
               style: TextStyle(
-                  fontFamilyFallback: ['sfArabic'],
+                  fontFamilyFallback: const ['sfArabic'],
                   fontFamily: 'space',
-                  color: Theme.of(context).colorScheme.inversePrimary),
+                  color: Theme.of(context.mounted ? context : context)
+                      .colorScheme
+                      .inversePrimary),
             ),
-            backgroundColor: Theme.of(context).colorScheme.surface,
+            backgroundColor: Theme.of(context.mounted ? context : context)
+                .colorScheme
+                .surface,
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
@@ -124,7 +129,6 @@ class HomePageService extends GetxService {
           ),
         );
       }
-      print('${e.toString()}======');
     }
   }
 
