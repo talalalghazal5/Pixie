@@ -4,6 +4,9 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pixie/bindings/api_exception.dart';
+import 'package:pixie/bindings/network_exception.dart';
+import 'package:pixie/bindings/unknown_exception.dart';
 import 'package:pixie/data/models/photo.dart';
 import 'package:pixie/main.dart';
 
@@ -36,12 +39,18 @@ class HomePageService extends GetxService {
         photos = jsonPhotos.map((photo) => Photo.fromJson(photo)).toList();
         return photos;
       }
-      // ignore: duplicate_ignore
-      // ignore: avoid_print
-      print(response.statusCode);
-      throw {'message': response.statusMessage};
+      throw ApiException(response.statusMessage!, response.statusCode);
     } on DioException catch (e) {
-      throw e.error!;
+      if (e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.sendTimeout ||
+          e.type == DioExceptionType.receiveTimeout) {
+        throw NetworkException('connectionTimedOut'.tr);
+      } else if (e.type == DioExceptionType.connectionError ||
+          e.type is SocketException) {
+        throw NetworkException('connectionError'.tr);
+      } else {
+        throw UnknownException('unkownError'.tr);
+      }
     }
   }
 
@@ -100,7 +109,7 @@ class HomePageService extends GetxService {
             content: Text(
               'downloadFailedSnackbarMessage'.tr,
               style: TextStyle(
-                fontFamilyFallback: ['sfArabic'],
+                  fontFamilyFallback: ['sfArabic'],
                   fontFamily: 'space',
                   color: Theme.of(context).colorScheme.inversePrimary),
             ),
@@ -143,9 +152,18 @@ class HomePageService extends GetxService {
         results = jsonPhotos.map((photo) => Photo.fromJson(photo)).toList();
         return results;
       }
-      throw {'message': response.statusMessage};
+      throw ApiException(response.statusMessage!, response.statusCode);
     } on DioException catch (e) {
-      throw e.message!;
+      if (e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.sendTimeout ||
+          e.type == DioExceptionType.receiveTimeout) {
+        throw NetworkException('connectionTimedOut'.tr);
+      } else if (e.type == DioExceptionType.connectionError ||
+          e.type is SocketException) {
+        throw NetworkException('connectionError'.tr);
+      } else {
+        throw UnknownException('unkownError'.tr);
+      }
     }
   }
 
@@ -167,9 +185,18 @@ class HomePageService extends GetxService {
         photo = Photo.fromJson(responseBody);
         return photo;
       }
-      throw {'message': response.statusMessage};
+      throw ApiException(response.statusMessage!, response.statusCode);
     } on DioException catch (e) {
-      throw e.message!;
+      if (e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.sendTimeout ||
+          e.type == DioExceptionType.receiveTimeout) {
+        throw NetworkException('connectionTimedOut'.tr);
+      } else if (e.type == DioExceptionType.connectionError ||
+          e.type is SocketException) {
+        throw NetworkException('connectionError'.tr);
+      } else {
+        throw UnknownException('unkownError'.tr);
+      }
     }
   }
 }
