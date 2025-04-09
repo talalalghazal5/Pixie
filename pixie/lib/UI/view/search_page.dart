@@ -9,6 +9,7 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(

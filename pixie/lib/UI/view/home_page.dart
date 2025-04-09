@@ -62,6 +62,7 @@ class _TestHomePageState extends State<HomePage> {
                   });
                 },
                 child: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
                   controller: scrollController,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,

@@ -87,6 +87,7 @@ class _ResultsPageState extends State<ResultsPage> {
                   });
                 },
                 child: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
                   controller: scrollController,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
