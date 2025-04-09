@@ -102,6 +102,7 @@ class HomePageService extends GetxService {
       }
     } catch (e) {
       if (scaffoldKey.currentContext != null) {
+        ScaffoldMessenger.maybeOf(scaffoldKey.currentContext!)!.clearSnackBars();
         ScaffoldMessenger.maybeOf(scaffoldKey.currentContext!)!.showSnackBar(
           SnackBar(
             behavior: SnackBarBehavior.floating,
