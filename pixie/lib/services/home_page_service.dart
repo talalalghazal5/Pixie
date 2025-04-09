@@ -3,6 +3,7 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:pixie/bindings/api_exception.dart';
 import 'package:pixie/bindings/network_exception.dart';
@@ -11,7 +12,7 @@ import 'package:pixie/data/models/photo.dart';
 import 'package:pixie/main.dart';
 
 class HomePageService extends GetxService {
-  String baseUrl = 'https://api.pexels.com/v1';
+
   static final Dio dio = Dio();
 
   Future<List<Photo>> getCuratedPhotos({int page = 1, int perPage = 40}) async {
