@@ -18,7 +18,6 @@ class Navbar extends StatelessWidget {
       child: Obx(
         () => GNav(
           gap: 8,
-          // activeColor: Theme.of(context).colorScheme.inversePrimary,
           iconSize: 24,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           duration: const Duration(milliseconds: 200),
@@ -35,7 +34,7 @@ class Navbar extends StatelessWidget {
               text: 'homePageNavBarTab'.tr,
               gap: 13,
               backgroundColor: const Color(0xff0000ff).withAlpha(40),
-              textStyle:  TextStyle(
+              textStyle: TextStyle(
                 fontFamilyFallback: const ['sfArabic'],
                 color: Theme.of(context).colorScheme.tertiary,
                 fontWeight: FontWeight.bold,

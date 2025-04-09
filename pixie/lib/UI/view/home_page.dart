@@ -1,5 +1,3 @@
-import 'dart:io';
-import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -33,10 +31,6 @@ class _TestHomePageState extends State<HomePage> {
       maxNrOfCacheObjects: 100,
     ),
   );
-
-  void refresh() async {
-    setState(() {});
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -193,7 +187,9 @@ class _TestHomePageState extends State<HomePage> {
       ScaffoldMessenger.of(context.mounted ? context : context).showSnackBar(
         SnackBar(
           dismissDirection: DismissDirection.horizontal,
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          backgroundColor: Theme.of(context.mounted ? context : context)
+              .colorScheme
+              .inversePrimary,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           content: Text(

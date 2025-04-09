@@ -1,8 +1,6 @@
 import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -108,13 +106,13 @@ class _ResultsPageState extends State<ResultsPage> {
                             return GestureDetector(
                               onTap: () {
                                 Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => PreviewPage(
-                                    photo: photo,
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PreviewPage(
+                                      photo: photo,
+                                    ),
                                   ),
-                                ),
-                              );
+                                );
                               },
                               child: Container(
                                 height: 400,

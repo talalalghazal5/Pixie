@@ -57,7 +57,6 @@ class MainApp extends StatelessWidget {
               page: () => const LoadingPage(),
             ),
           ],
-          // home: const HomePage(),
         );
   }
 }
