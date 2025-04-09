@@ -21,6 +21,7 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   line_icons: ^2.0.3
+  liquid_pull_to_refresh: ^3.0.1
   lottie: ^3.2.0
   path_provider: ^2.1.5
   permission_handler: ^11.3.1
@@ -40,8 +41,8 @@ dev_dependencies:
 flutter_launcher_icons:
   android: true
   image_path: "assets/images/icon.png"
-  # adaptive_icon_foreground: "assets/images/icon.png"
-  # adaptive_icon_background: "assets/images/icon.png"
+  adaptive_icon_foreground: "assets/images/icon.png"
+  adaptive_icon_background: "assets/images/icon.png"
 
 flutter:
   uses-material-design: true
