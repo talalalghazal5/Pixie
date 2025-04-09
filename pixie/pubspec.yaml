@@ -24,7 +24,6 @@ dependencies:
   lottie: ^3.2.0
   path_provider: ^2.1.5
   permission_handler: ^11.3.1
-  popover: ^0.3.1
   provider: ^6.1.2
   shared_preferences: ^2.3.5
   url_launcher: ^6.3.1
@@ -40,8 +39,8 @@ dev_dependencies:
 flutter_launcher_icons:
   android: true
   image_path: "assets/images/icon.png"
-  # adaptive_icon_foreground: "assets/images/icon.png"
-  # adaptive_icon_background: "assets/images/icon.png"
+  adaptive_icon_foreground: "assets/images/icon.png"
+  adaptive_icon_background: "assets/images/icon.png"
 
 flutter:
   uses-material-design: true
@@ -74,6 +73,9 @@ flutter:
     - family: yesterday
       fonts:
         - asset: assets/fonts/Yesterday.otf
+    - family: sfArabic
+      fonts:
+        - asset: assets/fonts/SF-Arabic.ttf
   
   assets:
     - assets/animations/

@@ -10,7 +10,7 @@ class CategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ResultsPage(query: searchCategory.name!,),)); /// TODO: REPLACE THE PAGE W/ RESULTS PAGE.
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ResultsPage(query: searchCategory.name!, category: searchCategory,),)); /// TODO: REPLACE THE PAGE W/ RESULTS PAGE.
       },
       child: SizedBox(
         child: Stack(
@@ -39,6 +39,7 @@ class CategoryCard extends StatelessWidget {
                   searchCategory.name!,
                   style: const TextStyle(
                       fontFamily: 'space',
+                      fontFamilyFallback: ['sfArabic'],
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
                       color: Colors.white),

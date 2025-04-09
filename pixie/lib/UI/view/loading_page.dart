@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pixie/UI/components/pexels_crediting.dart';
 import 'package:pixie/UI/view/main_page.dart';
 import 'package:pixie/controllers/photos_controller.dart';
 
@@ -41,26 +42,13 @@ class _LoadingPageState extends State<LoadingPage> {
                     Text(
                       'waitingMessage'.tr,
                       style: const TextStyle(
+                        fontFamilyFallback: ['sfArabic'],
                         fontFamily: 'space',
                         fontSize: 15,
                       ),
                     ),
                     const Spacer(),
-                    const Text(
-                      '',
-                      style: TextStyle(
-                        fontFamily: 'space',
-                        fontSize: 10,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Image.asset('assets/images/pexels_logo_black.png',
-                        width: 60),
-                    const SizedBox(
-                      height: 40,
-                    )
+                    const PexelsCrediting()
                   ],
                 );
               }

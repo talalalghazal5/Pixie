@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pixie/bindings/my_bindings.dart';
 import 'package:wallpaper_manager_plus/wallpaper_manager_plus.dart';
 
 class WallpaperLocationDialogContents extends StatefulWidget {
@@ -24,6 +23,7 @@ class _WallpaperLocationDialogContentsState
           title: Text(
             'homeScreenChoice'.tr,
             style: TextStyle(
+              fontFamilyFallback: ['sfArabic'],
                 fontFamily: 'space',
                 color: Theme.of(context).colorScheme.inversePrimary),
           ),
@@ -38,6 +38,7 @@ class _WallpaperLocationDialogContentsState
           title: Text(
             'lockScreenChoice'.tr,
             style: TextStyle(
+              fontFamilyFallback: ['sfArabic'],
                 fontFamily: 'space',
                 color: Theme.of(context).colorScheme.inversePrimary),
           ),
@@ -52,6 +53,7 @@ class _WallpaperLocationDialogContentsState
           title: Text(
             'bothScreensChoice'.tr,
             style: TextStyle(
+              fontFamilyFallback: ['sfArabic'],
                 fontFamily: 'space',
                 color: Theme.of(context).colorScheme.inversePrimary),
           ),

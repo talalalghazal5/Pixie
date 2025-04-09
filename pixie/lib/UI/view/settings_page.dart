@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:pixie/UI/components/pexels_crediting.dart';
 import 'package:pixie/controllers/my_locale_controller.dart';
 import 'package:pixie/controllers/settings_controller.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -23,7 +24,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Future<void> launchUrl(String url) async {
     bool launched = await launchUrlString(url, mode: LaunchMode.externalApplication);
     if (!launched) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text('could not open url')));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('could not open url')));
     }
   }
 
@@ -38,6 +39,7 @@ class _SettingsPageState extends State<SettingsPage> {
             'settingsHeading'.tr,
             style: TextStyle(
               fontFamily: 'space',
+              fontFamilyFallback: ['sfArabic'],
               fontSize: 25,
               fontWeight: FontWeight.bold,
               color: Theme.of(context).colorScheme.inversePrimary,
@@ -60,6 +62,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   'darkModeSwitchTitle'.tr,
                   style: TextStyle(
                     fontFamily: 'space',
+                    fontFamilyFallback: ['sfArabic'],
                     color: Theme.of(context).colorScheme.inversePrimary,
                   ),
                 ),
@@ -88,6 +91,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   'languageListLabel'.tr,
                   style: TextStyle(
                     fontFamily: 'space',
+                    fontFamilyFallback: ['sfArabic'],
                     fontSize: 15,
                     color: Theme.of(context).colorScheme.inversePrimary,
                   ),
@@ -103,6 +107,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           child: Text(
                             'english',
                             style: TextStyle(
+                              fontFamilyFallback: ['sfArabic'],
                               color: Theme.of(context).colorScheme.inversePrimary,
                             ),
                           ),
@@ -113,6 +118,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           child: Text(
                             'arabic'.tr,
                             style: TextStyle(
+                              fontFamilyFallback: ['sfArabic'],
                               color: Theme.of(context).colorScheme.inversePrimary,
                             ),
                           ),
@@ -126,6 +132,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       borderRadius: BorderRadius.circular(10),
                       style: const TextStyle(
                         fontFamily: 'space',
+                        fontFamilyFallback: ['sfArabic'],
                       ),
                       onChanged: (value) {
                         setState(() {
@@ -150,6 +157,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   'myName'.tr,
                   style: TextStyle(
                     fontFamily: 'space',
+                    fontFamilyFallback: ['sfArabic'],
                     fontSize: 15,
                     color: Theme.of(context)
                         .colorScheme
@@ -178,6 +186,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       'copyrights'.tr,
                       style: TextStyle(
                         fontFamily: 'space',
+                        fontFamilyFallback: ['sfArabic'],
                         fontSize: 14,
                         color: Theme.of(context)
                             .colorScheme
@@ -191,32 +200,9 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
           ),
           const Spacer(),
-          Align(
+          const Align(
             alignment: Alignment.center,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'poweredBy'.tr,
-                  style: TextStyle(
-                      fontSize: 11,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .inversePrimary
-                          .withAlpha(100)),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Image.asset(
-                  settingsController.isDarkMode.value
-                      ? 'assets/images/pexels_logo_white.png'
-                      : 'assets/images/pexels_logo_black.png',
-                  width: 60,
-                )
-              ],
-            ),
+            child: PexelsCrediting()
           ),
         ]),
       ),

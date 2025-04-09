@@ -30,24 +30,24 @@ class MyLocale implements Translations {
           //Category Cards
           //categories
           "youMightLikeHeading": "أشياء قد تعجبك",
-          "animalsCategoryCard": "حيوانات",
-          "natureCategoryCard": "طبيعة",
-          "foodCategoryCard": "طعام",
-          "architectureCategoryCard": "أبنية وعمارة",
-          "minimalCategoryCard": "بسيط",
-          "spaceCategoryCard": "الفضاء",
+          "Animals": "حيوانات",
+          "Nature": "طبيعة",
+          "Food": "طعام",
+          "Architecture": "أبنية وعمارة",
+          "Minimal": "بسيط",
+          "Space": "الفضاء",
           //colors
           "searchByColorsHeading": "ابحث بالألوان",
-          "blueCategoryCard": "أزرق",
-          "redCategoryCard": "أحمر",
-          "greenCategoryCard": "أخضر",
-          "brownCategoryCard": "بني",
-          "blackCategoryCard": "أسود",
-          "whiteCategoryCard": "أبيض",
+          "Blue": "أزرق",
+          "Red": "أحمر",
+          "Green": "أخضر",
+          "Brown": "بني",
+          "Black": "أسود",
+          "White": "أبيض",
 
           //Results Page
-          "noResultsFound" : " لم يتم العثور على نتائج لـ",
-          "resultHeaderTitle" : " يتم عرض النتائج لـ",
+          "noResultsFound": " لم يتم العثور على نتائج لـ",
+          "resultHeaderTitle": " يتم عرض النتائج لـ",
 
           //Favorites Page
           "emptyPageLabel": "لاشيء هنا",
@@ -95,6 +95,11 @@ class MyLocale implements Translations {
           "saveCTA": "حفظ",
           //wallpaper application message
           "appliedWallpaperSnackbarMessage": "تم تعيين الخلفية",
+
+          //errors:
+          "connectionError": "خطأ في الشبكة، يرجى المحاولة مجدداً",
+          "connectionTimedOut": "انتهت مدة الاتصال، حاول مجدداً",
+          "unkownError": "خطأ غير معروف، حاول مجدداً",
         },
         "en": {
           //Loading Page
@@ -107,6 +112,13 @@ class MyLocale implements Translations {
           "settingsPageNavBarTab": "Settings",
 
           //home page
+
+          //error message
+          "errorMessage": "No internet connection",
+
+          //retry button
+          "retryCTA": "Retry",
+
           "loadMoreCTA": "Load more",
 
           //Search Page
@@ -131,8 +143,8 @@ class MyLocale implements Translations {
           "whiteCategoryCard": "White",
 
           //Results Page
-          "noResultsFound" : "No results found for",
-          "resultHeaderTitle" : "Showing results for ",
+          "noResultsFound": "No results found for",
+          "resultHeaderTitle": "Showing results for ",
 
           //Favorites Page
           "emptyPageLabel": "Nothing here",
@@ -184,6 +196,11 @@ class MyLocale implements Translations {
           "saveCTA": "Save",
           //wallpaper application message
           "appliedWallpaperSnackbarMessage": "Applied wallpaper",
+
+          //errors:
+          "connectionError": "Connection error, please retry again",
+          "connectionTimedOut": "Connection timed out, please retry again",
+          "unkownError": "Unkown error occured, please retry again",
         },
       };
 }

@@ -1,6 +1,10 @@
 import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:pixie/bindings/api_exception.dart';
+import 'package:pixie/bindings/network_exception.dart';
+import 'package:pixie/bindings/unknown_exception.dart';
 import 'package:pixie/data/models/photo.dart';
 import 'package:pixie/services/home_page_service.dart';
 
@@ -76,8 +80,12 @@ class PhotosController extends GetxController {
     try {
       isLoading(true);
       photos = await homePageService.getCuratedPhotos();
-    } on SocketException {
-      errorMessage.value = 'errorMessage'.tr;
+    } on NetworkException catch (e) {
+      errorMessage.value = e.message;
+    } on ApiException catch (e) {
+      errorMessage.value = e.message;
+    } on UnknownException catch (e) {
+      errorMessage.value = e.message;
     } finally {
       isLoading(false);
       update();
@@ -92,16 +100,17 @@ class PhotosController extends GetxController {
         page: page,
         perPage: perPage,
       );
-    } on SocketException {
-      errorMessage.value = 'No internet connection';
-    } catch (e) {
-      errorMessage.value = 'Error occured';
+    } on NetworkException catch (e) {
+      errorMessage.value = e.message;
+    } on ApiException catch (e) {
+      errorMessage.value = e.message;
+    } on UnknownException catch (e) {
+      errorMessage.value = e.message;
     } finally {
       isLoading(false);
       update();
     }
   }
-
 
   // HIVE FUNCTIONS:
   void addToFavorites(Photo photo) {

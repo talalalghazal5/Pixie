@@ -47,6 +47,7 @@ class _MainPageState extends State<MainPage> {
           overflow: TextOverflow.visible,
           style: TextStyle(
             fontFamily: 'yesterday',
+            fontFamilyFallback: ['sfArabic'],
             fontSize: 40,
             color: Theme.of(context).colorScheme.inversePrimary,
           ),
