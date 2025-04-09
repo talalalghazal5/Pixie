@@ -52,90 +52,97 @@ class _TestHomePageState extends State<HomePage> {
           if (controller.photos.isNotEmpty) {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: SingleChildScrollView(
-                controller: scrollController,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    GridView.builder(
-                      controller: scrollController,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 10,
-                        crossAxisSpacing: 10,
-                        childAspectRatio: .6,
+              child: RefreshIndicator(
+                onRefresh: () async {
+                  setState(() {
+                    controller.loadPhotos();
+                  });
+                },
+                child: SingleChildScrollView(
+                  controller: scrollController,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      GridView.builder(
+                        controller: scrollController,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 10,
+                          childAspectRatio: .6,
+                        ),
+                        shrinkWrap: true,
+                        itemCount: controller.photos.length,
+                        itemBuilder: (context, index) {
+                          Photo photo = controller.photos[index];
+                          return GestureDetector(
+                            onTap: () {
+                              Get.to(
+                                () => PreviewPage(
+                                  photo: photo,
+                                ),
+                                transition: Transition.cupertino,
+                              );
+                            },
+                            child: Container(
+                              height: 400,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              clipBehavior: Clip.hardEdge,
+                              child: CachedNetworkImage(
+                                key: UniqueKey(),
+                                cacheManager: cacheManager,
+                                fit: BoxFit.cover,
+                                imageUrl: photo.src.large!,
+                                placeholder: (context, url) => Container(
+                                  decoration: BoxDecoration(
+                                    color: Color(ColorController()
+                                            .convertColor(photo.avgColor))
+                                        .withAlpha(200),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                errorWidget: (context, error, stackTrace) =>
+                                    const Center(
+                                  child: Icon(
+                                    FontAwesomeIcons.exclamation,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
                       ),
-                      shrinkWrap: true,
-                      itemCount: controller.photos.length,
-                      itemBuilder: (context, index) {
-                        Photo photo = controller.photos[index];
-                        return GestureDetector(
-                          onTap: () {
-                            Get.to(
-                              () => PreviewPage(
-                                photo: photo,
-                              ),
-                              transition: Transition.cupertino,
-                            );
-                          },
-                          child: Container(
-                            height: 400,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            clipBehavior: Clip.hardEdge,
-                            child: CachedNetworkImage(
-                              key: UniqueKey(),
-                              cacheManager: cacheManager,
-                              fit: BoxFit.cover,
-                              imageUrl: photo.src.large!,
-                              placeholder: (context, url) => Container(
-                                decoration: BoxDecoration(
-                                  color: Color(ColorController()
-                                          .convertColor(photo.avgColor))
-                                      .withAlpha(200),
-                                  borderRadius: BorderRadius.circular(10),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      MaterialButton(
+                        onPressed: () {
+                          loadMorePhotos(controller);
+                        },
+                        height: 20,
+                        child: isLoading
+                            ? Center(
+                                child: Lottie.asset(
+                                  'assets/animations/Animation - 1737652724809 (1).json',
+                                  width: 100,
+                                ),
+                              )
+                            : Text(
+                                'loadMoreCTA'.tr,
+                                style: TextStyle(
+                                  fontFamilyFallback: ['sfArabic'],
+                                  fontFamily: 'space',
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .inversePrimary,
                                 ),
                               ),
-                              errorWidget: (context, error, stackTrace) =>
-                                  const Center(
-                                child: Icon(
-                                  FontAwesomeIcons.exclamation,
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    MaterialButton(
-                      onPressed: () {
-                        loadMorePhotos(controller);
-                      },
-                      height: 20,
-                      child: isLoading
-                          ? Center(
-                              child: Lottie.asset(
-                                'assets/animations/Animation - 1737652724809 (1).json',
-                                width: 100,
-                              ),
-                            )
-                          : Text(
-                              'loadMoreCTA'.tr,
-                              style: TextStyle(
-                                fontFamilyFallback: ['sfArabic'],
-                                fontFamily: 'space',
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .inversePrimary,
-                              ),
-                            ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             );

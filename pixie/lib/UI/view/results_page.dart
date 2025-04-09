@@ -78,82 +78,89 @@ class _ResultsPageState extends State<ResultsPage> {
           if (controller.results.isNotEmpty) {
             return Padding(
               padding: const EdgeInsets.all(10),
-              child: SingleChildScrollView(
-                controller: scrollController,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    GridView.builder(
-                        controller: scrollController,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 10,
-                          crossAxisSpacing: 10,
-                          childAspectRatio: .6,
-                        ),
-                        shrinkWrap: true,
-                        itemCount: controller.results.length,
-                        itemBuilder: (context, index) {
-                          Photo photo = controller.results[index];
-                          return GestureDetector(
-                            onTap: () {
-                              Get.to(
-                                () => PreviewPage(
-                                  photo: photo,
+              child: RefreshIndicator(
+                onRefresh: () async {
+                  setState(() {
+                    controller.loadResults();
+                  });
+                },
+                child: SingleChildScrollView(
+                  controller: scrollController,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      GridView.builder(
+                          controller: scrollController,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 10,
+                            crossAxisSpacing: 10,
+                            childAspectRatio: .6,
+                          ),
+                          shrinkWrap: true,
+                          itemCount: controller.results.length,
+                          itemBuilder: (context, index) {
+                            Photo photo = controller.results[index];
+                            return GestureDetector(
+                              onTap: () {
+                                Get.to(
+                                  () => PreviewPage(
+                                    photo: photo,
+                                  ),
+                                  transition: Transition.cupertino,
+                                );
+                              },
+                              child: Container(
+                                height: 400,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
-                                transition: Transition.cupertino,
-                              );
-                            },
-                            child: Container(
-                              height: 400,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              clipBehavior: Clip.hardEdge,
-                              child: CachedNetworkImage(
-                                key: UniqueKey(),
-                                cacheManager: cacheManager,
-                                fit: BoxFit.cover,
-                                imageUrl: photo.src.portrait!,
-                                placeholder: (context, url) => Container(
-                                  decoration: BoxDecoration(
-                                    color: Color(ColorController()
-                                            .convertColor(photo.avgColor))
-                                        .withAlpha(200),
-                                    borderRadius: BorderRadius.circular(10),
+                                clipBehavior: Clip.hardEdge,
+                                child: CachedNetworkImage(
+                                  key: UniqueKey(),
+                                  cacheManager: cacheManager,
+                                  fit: BoxFit.cover,
+                                  imageUrl: photo.src.portrait!,
+                                  placeholder: (context, url) => Container(
+                                    decoration: BoxDecoration(
+                                      color: Color(ColorController()
+                                              .convertColor(photo.avgColor))
+                                          .withAlpha(200),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                  errorWidget: (context, error, stackTrace) =>
+                                      const Center(
+                                    child: Icon(CupertinoIcons
+                                        .exclamationmark_circle_fill),
                                   ),
                                 ),
-                                errorWidget: (context, error, stackTrace) =>
-                                    const Center(
-                                  child: Icon(CupertinoIcons
-                                      .exclamationmark_circle_fill),
+                              ),
+                            );
+                          }),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      MaterialButton(
+                        onPressed: () {
+                          loadMorePhotos(controller);
+                        },
+                        height: 20,
+                        child: isLoading
+                            ? Center(
+                                child: Lottie.asset(
+                                  'assets/animations/Animation - 1737652724809 (1).json',
+                                  width: 100,
                                 ),
+                              )
+                            : Text(
+                                'loadMoreCTA'.tr,
+                                style: const TextStyle(fontFamily: 'space', fontFamilyFallback: ['sfArabic'],),
                               ),
-                            ),
-                          );
-                        }),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    MaterialButton(
-                      onPressed: () {
-                        loadMorePhotos(controller);
-                      },
-                      height: 20,
-                      child: isLoading
-                          ? Center(
-                              child: Lottie.asset(
-                                'assets/animations/Animation - 1737652724809 (1).json',
-                                width: 100,
-                              ),
-                            )
-                          : Text(
-                              'loadMoreCTA'.tr,
-                              style: const TextStyle(fontFamily: 'space', fontFamilyFallback: ['sfArabic'],),
-                            ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             );
