@@ -46,8 +46,8 @@ class MyLocale implements Translations {
           "White": "أبيض",
 
           //Results Page
-          "noResultsFound" : " لم يتم العثور على نتائج لـ",
-          "resultHeaderTitle" : " يتم عرض النتائج لـ",
+          "noResultsFound": " لم يتم العثور على نتائج لـ",
+          "resultHeaderTitle": " يتم عرض النتائج لـ",
 
           //Favorites Page
           "emptyPageLabel": "لاشيء هنا",
@@ -95,6 +95,11 @@ class MyLocale implements Translations {
           "saveCTA": "حفظ",
           //wallpaper application message
           "appliedWallpaperSnackbarMessage": "تم تعيين الخلفية",
+
+          //errors:
+          "connectionError": "خطأ في الشبكة، يرجى المحاولة مجدداً",
+          "connectionTimedOut": "انتهت مدة الاتصال، حاول مجدداً",
+          "unkownError": "خطأ غير معروف، حاول مجدداً",
         },
         "en": {
           //Loading Page
@@ -138,8 +143,8 @@ class MyLocale implements Translations {
           "whiteCategoryCard": "White",
 
           //Results Page
-          "noResultsFound" : "No results found for",
-          "resultHeaderTitle" : "Showing results for ",
+          "noResultsFound": "No results found for",
+          "resultHeaderTitle": "Showing results for ",
 
           //Favorites Page
           "emptyPageLabel": "Nothing here",
@@ -191,6 +196,11 @@ class MyLocale implements Translations {
           "saveCTA": "Save",
           //wallpaper application message
           "appliedWallpaperSnackbarMessage": "Applied wallpaper",
+
+          //errors:
+          "connectionError": "Connection error, please retry again",
+          "connectionTimedOut": "Connection timed out, please retry again",
+          "unkownError": "Unkown error occured, please retry again",
         },
       };
 }
