@@ -17,8 +17,6 @@ class Navbar extends StatelessWidget {
       ),
       child: Obx(
         () => GNav(
-          rippleColor: Colors.grey[300]!,
-          hoverColor: Colors.grey[100]!,
           gap: 8,
           // activeColor: Theme.of(context).colorScheme.inversePrimary,
           iconSize: 24,
