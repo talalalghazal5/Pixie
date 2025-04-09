@@ -104,8 +104,8 @@ class _PreviewPageState extends State<PreviewPage> {
                             .withAlpha(100),
                       ),
                       child: Center(
-                        child: FaIcon(
-                          FontAwesomeIcons.chevronLeft,
+                        child: LineIcon(
+                          LineIcons.chevronLeft,
                           color: Theme.of(context).colorScheme.inversePrimary,
                         ),
                       ),
