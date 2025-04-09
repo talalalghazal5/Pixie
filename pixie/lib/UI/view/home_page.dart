@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -6,7 +7,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pixie/UI/components/error_loading.dart';
+import 'package:pixie/UI/components/pixie_logo_text.dart';
 import 'package:pixie/UI/view/preview_page.dart';
+import 'package:pixie/bindings/network_exception.dart';
 import 'package:pixie/controllers/color_controller.dart';
 import 'package:pixie/controllers/photos_controller.dart';
 import 'package:pixie/data/models/photo.dart';
@@ -26,7 +29,7 @@ class _TestHomePageState extends State<HomePage> {
   static final CacheManager cacheManager = CacheManager(
     Config(
       'customCacheKey',
-      stalePeriod: const Duration(days: 3),
+      stalePeriod: const Duration(days: 1),
       maxNrOfCacheObjects: 100,
     ),
   );
@@ -96,13 +99,19 @@ class _TestHomePageState extends State<HomePage> {
                                 cacheManager: cacheManager,
                                 fit: BoxFit.cover,
                                 imageUrl: photo.src.large!,
-                                placeholder: (context, url) => Container(
-                                  decoration: BoxDecoration(
-                                    color: Color(ColorController()
-                                            .convertColor(photo.avgColor))
-                                        .withAlpha(200),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
+                                placeholder: (context, url) => Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: Color(ColorController()
+                                                .convertColor(photo.avgColor))
+                                            .withAlpha(200),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                                    const PixieLogoText(fontSize: 30,)
+                                  ],
                                 ),
                                 errorWidget: (context, error, stackTrace) =>
                                     const Center(
@@ -175,18 +184,20 @@ class _TestHomePageState extends State<HomePage> {
       setState(() {
         controller.photos = newPhotos;
       });
-    } on SocketException {
+    } on NetworkException catch (e) {
       ScaffoldMessenger.of(context.mounted ? context : context).showSnackBar(
         SnackBar(
           dismissDirection: DismissDirection.horizontal,
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           content: Text(
-            'No internet connection, please try again later',
+            'errorMessage'.tr,
             style: TextStyle(
               fontFamily: 'space',
               fontFamilyFallback: ['sfArabic'],
               color: Theme.of(
                 context.mounted ? context : context,
-              ).colorScheme.inversePrimary,
+              ).colorScheme.surface,
             ),
           ),
         ),

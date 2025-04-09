@@ -2,10 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:lottie/lottie.dart';
+import 'package:pixie/UI/components/pixie_logo_text.dart';
 import 'package:pixie/UI/view/preview_page.dart';
+import 'package:pixie/controllers/color_controller.dart';
 import 'package:pixie/controllers/photos_controller.dart';
 import 'package:pixie/data/models/photo.dart';
 
@@ -56,7 +59,7 @@ class _FavoritesPageState extends State<FavoritesPage>
                 ),
               );
             }
-      
+
             if (controller.favorites.isNotEmpty) {
               return Padding(
                 padding: const EdgeInsets.all(10),
@@ -99,16 +102,39 @@ class _FavoritesPageState extends State<FavoritesPage>
                                 cacheManager: cacheManager,
                                 fit: BoxFit.cover,
                                 imageUrl: photo.src.portrait!,
-                                placeholder: (context, url) => Container(
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xffeeeeee),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
+                                placeholder: (context, url) => Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: Color(ColorController()
+                                                .convertColor(photo.avgColor))
+                                            .withAlpha(200),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                                    const PixieLogoText(
+                                      fontSize: 30,
+                                    )
+                                  ],
                                 ),
                                 errorWidget: (context, error, stackTrace) =>
+                                    Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: Color(ColorController()
+                                                .convertColor(photo.avgColor))
+                                            .withAlpha(200),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
                                     const Center(
-                                  child: Icon(
-                                      CupertinoIcons.exclamationmark_circle_fill),
+                                      child: FaIcon(
+                                          FontAwesomeIcons.triangleExclamation),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
@@ -124,11 +150,22 @@ class _FavoritesPageState extends State<FavoritesPage>
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset('assets/images/empty.png', width: 200, isAntiAlias: true,),
-                    const SizedBox(height: 20,),
+                    Image.asset(
+                      'assets/images/empty.png',
+                      width: 200,
+                      isAntiAlias: true,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     Text(
                       'emptyPageLabel'.tr,
-                      style: TextStyle(fontFamily: 'space', fontFamilyFallback: const ['sfArabic'],fontSize: 20, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.inversePrimary),
+                      style: TextStyle(
+                          fontFamily: 'space',
+                          fontFamilyFallback: const ['sfArabic'],
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.inversePrimary),
                     ),
                   ],
                 ),
@@ -141,7 +178,10 @@ class _FavoritesPageState extends State<FavoritesPage>
                   children: [
                     Text(
                       controller.errorMessage.value,
-                      style: const TextStyle(fontFamily: 'space',fontFamilyFallback: ['sfArabic'],),
+                      style: const TextStyle(
+                        fontFamily: 'space',
+                        fontFamilyFallback: ['sfArabic'],
+                      ),
                     ),
                   ],
                 ),

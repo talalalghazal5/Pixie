@@ -5,9 +5,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pixie/UI/components/error_loading.dart';
+import 'package:pixie/UI/components/pixie_logo_text.dart';
 import 'package:pixie/UI/view/preview_page.dart';
 import 'package:pixie/controllers/color_controller.dart';
 import 'package:pixie/controllers/photos_controller.dart';
@@ -122,18 +124,42 @@ class _ResultsPageState extends State<ResultsPage> {
                                   cacheManager: cacheManager,
                                   fit: BoxFit.cover,
                                   imageUrl: photo.src.portrait!,
-                                  placeholder: (context, url) => Container(
-                                    decoration: BoxDecoration(
-                                      color: Color(ColorController()
-                                              .convertColor(photo.avgColor))
-                                          .withAlpha(200),
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
+                                  placeholder: (context, url) => Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          color: Color(ColorController()
+                                                  .convertColor(photo.avgColor))
+                                              .withAlpha(200),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                      ),
+                                      const PixieLogoText(
+                                        fontSize: 30,
+                                      )
+                                    ],
                                   ),
                                   errorWidget: (context, error, stackTrace) =>
+                                      Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          color: Color(ColorController()
+                                                  .convertColor(photo.avgColor))
+                                              .withAlpha(200),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                      ),
                                       const Center(
-                                    child: Icon(CupertinoIcons
-                                        .exclamationmark_circle_fill),
+                                        child: FaIcon(
+                                          FontAwesomeIcons.triangleExclamation,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
@@ -156,7 +182,10 @@ class _ResultsPageState extends State<ResultsPage> {
                               )
                             : Text(
                                 'loadMoreCTA'.tr,
-                                style: const TextStyle(fontFamily: 'space', fontFamilyFallback: ['sfArabic'],),
+                                style: const TextStyle(
+                                  fontFamily: 'space',
+                                  fontFamilyFallback: ['sfArabic'],
+                                ),
                               ),
                       )
                     ],
@@ -208,7 +237,10 @@ class _ResultsPageState extends State<ResultsPage> {
           dismissDirection: DismissDirection.horizontal,
           content: Text(
             'errorMessage'.tr,
-            style: const TextStyle(fontFamily: 'space', fontFamilyFallback: ['sfArabic'],),
+            style: const TextStyle(
+              fontFamily: 'space',
+              fontFamilyFallback: ['sfArabic'],
+            ),
           ),
         ),
       );
@@ -218,7 +250,10 @@ class _ResultsPageState extends State<ResultsPage> {
           dismissDirection: DismissDirection.horizontal,
           content: Text(
             e.message!,
-            style: const TextStyle(fontFamily: 'space', fontFamilyFallback: ['sfArabic'],),
+            style: const TextStyle(
+              fontFamily: 'space',
+              fontFamilyFallback: ['sfArabic'],
+            ),
           ),
         ),
       );

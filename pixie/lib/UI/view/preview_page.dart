@@ -11,6 +11,7 @@ import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:pixie/UI/components/error_loading.dart';
+import 'package:pixie/UI/components/pixie_logo_text.dart';
 import 'package:pixie/UI/components/wallpaper_location_dialog_contents.dart';
 import 'package:pixie/controllers/color_controller.dart';
 import 'package:pixie/controllers/my_locale_controller.dart';
@@ -60,6 +61,7 @@ class _PreviewPageState extends State<PreviewPage> {
                         ),
                       ),
                     ),
+                    PixieLogoText(fontSize: 50,)
                     // TweenAnimationBuilder(tween: Tween<double>(begin: 0, end: progress.totalSize!.toDouble()), duration: Duration(seconds: 2), builder: (context, value, child) => CircularProgressIndicator(value: value,),)
                   ],
                 ),
