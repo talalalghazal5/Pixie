@@ -65,7 +65,7 @@ class _FavoritesPageState extends State<FavoritesPage>
                 padding: const EdgeInsets.all(10),
                 child: SingleChildScrollView(
                   controller: scrollController,
-                  physics: AlwaysScrollableScrollPhysics(),
+                  physics: const AlwaysScrollableScrollPhysics(),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [

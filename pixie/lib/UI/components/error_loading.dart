@@ -28,7 +28,7 @@ class ErrorLoading extends StatelessWidget {
             'retryCTA'.tr,
             style: TextStyle(
               fontFamily: 'spaceMedium',
-              fontFamilyFallback: ['sfArabic'],
+              fontFamilyFallback: const ['sfArabic'],
               color: Theme.of(context).colorScheme.primary,
             ),
           ),

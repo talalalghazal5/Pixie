@@ -111,7 +111,7 @@ class HomePageService extends GetxService {
             content: Text(
               'downloadFailedSnackbarMessage'.tr,
               style: TextStyle(
-                  fontFamilyFallback: ['sfArabic'],
+                  fontFamilyFallback: const ['sfArabic'],
                   fontFamily: 'space',
                   color: Theme.of(context).colorScheme.inversePrimary),
             ),

@@ -36,7 +36,7 @@ class Navbar extends StatelessWidget {
               gap: 13,
               backgroundColor: const Color(0xff0000ff).withAlpha(40),
               textStyle:  TextStyle(
-                fontFamilyFallback: ['sfArabic'],
+                fontFamilyFallback: const ['sfArabic'],
                 color: Theme.of(context).colorScheme.tertiary,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'space',
@@ -49,7 +49,7 @@ class Navbar extends StatelessWidget {
               iconActiveColor: Colors.cyan[800],
               backgroundColor: const Color(0xFFB2EBF2).withAlpha(70),
               textStyle: TextStyle(
-                fontFamilyFallback: ['sfArabic'],
+                fontFamilyFallback: const ['sfArabic'],
                 color: Colors.cyan[800],
                 fontWeight: FontWeight.bold,
                 fontFamily: 'space',
@@ -62,7 +62,7 @@ class Navbar extends StatelessWidget {
               iconActiveColor: const Color(0xFFFF0000).withAlpha(200),
               backgroundColor: const Color(0xFFFF0000).withAlpha(30),
               textStyle: TextStyle(
-                fontFamilyFallback: ['sfArabic'],
+                fontFamilyFallback: const ['sfArabic'],
                 color: const Color(0xffff0000).withAlpha(200),
                 fontWeight: FontWeight.bold,
                 fontFamily: 'space',

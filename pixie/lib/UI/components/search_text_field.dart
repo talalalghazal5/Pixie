@@ -24,7 +24,7 @@ class SearchTextField extends StatelessWidget {
           fillColor: Theme.of(context).colorScheme.inversePrimary.withAlpha(50),
           hintText: 'inputFieldHint'.tr,
           hintStyle: TextStyle(
-            fontFamilyFallback: ['sfArabic'],
+            fontFamilyFallback: const ['sfArabic'],
             fontFamily: 'space',
             color: Theme.of(context).colorScheme.inversePrimary,
             fontSize: 14,

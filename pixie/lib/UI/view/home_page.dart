@@ -62,7 +62,7 @@ class _TestHomePageState extends State<HomePage> {
                   });
                 },
                 child: SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   controller: scrollController,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -147,7 +147,7 @@ class _TestHomePageState extends State<HomePage> {
                             : Text(
                                 'loadMoreCTA'.tr,
                                 style: TextStyle(
-                                  fontFamilyFallback: ['sfArabic'],
+                                  fontFamilyFallback: const ['sfArabic'],
                                   fontFamily: 'space',
                                   color: Theme.of(context)
                                       .colorScheme
@@ -189,7 +189,7 @@ class _TestHomePageState extends State<HomePage> {
       setState(() {
         controller.photos = newPhotos;
       });
-    } on NetworkException catch (e) {
+    } on NetworkException {
       ScaffoldMessenger.of(context.mounted ? context : context).showSnackBar(
         SnackBar(
           dismissDirection: DismissDirection.horizontal,
@@ -200,7 +200,7 @@ class _TestHomePageState extends State<HomePage> {
             'errorMessage'.tr,
             style: TextStyle(
               fontFamily: 'space',
-              fontFamilyFallback: ['sfArabic'],
+              fontFamilyFallback: const ['sfArabic'],
               color: Theme.of(
                 context.mounted ? context : context,
               ).colorScheme.surface,

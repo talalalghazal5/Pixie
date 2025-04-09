@@ -60,7 +60,7 @@ class _ResultsPageState extends State<ResultsPage> {
         ),
         titleTextStyle: TextStyle(
             fontFamily: 'space',
-            fontFamilyFallback: ['sfArabic'],
+            fontFamilyFallback: const ['sfArabic'],
             fontWeight: FontWeight.w600,
             color: Theme.of(context).colorScheme.inversePrimary,
             fontSize: 17),
@@ -87,7 +87,7 @@ class _ResultsPageState extends State<ResultsPage> {
                   });
                 },
                 child: SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   controller: scrollController,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -202,7 +202,7 @@ class _ResultsPageState extends State<ResultsPage> {
                 '${'noResultsFound'.tr} "${widget.query!.trim()}"',
                 style: TextStyle(
                     fontFamily: 'space',
-                    fontFamilyFallback: ['sfArabic'],
+                    fontFamilyFallback: const ['sfArabic'],
                     color: Theme.of(context).colorScheme.inversePrimary),
               ),
             );
