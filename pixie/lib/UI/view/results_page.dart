@@ -106,12 +106,14 @@ class _ResultsPageState extends State<ResultsPage> {
                             Photo photo = controller.results[index];
                             return GestureDetector(
                               onTap: () {
-                                Get.to(
-                                  () => PreviewPage(
+                                Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PreviewPage(
                                     photo: photo,
                                   ),
-                                  transition: Transition.cupertino,
-                                );
+                                ),
+                              );
                               },
                               child: Container(
                                 height: 400,

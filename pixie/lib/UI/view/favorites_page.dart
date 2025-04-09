@@ -84,11 +84,13 @@ class _FavoritesPageState extends State<FavoritesPage>
                           Photo photo = controller.favorites[index];
                           return GestureDetector(
                             onTap: () {
-                              Get.to(
-                                () => PreviewPage(
-                                  photo: photo,
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PreviewPage(
+                                    photo: photo,
+                                  ),
                                 ),
-                                transition: Transition.cupertino,
                               );
                             },
                             child: Container(

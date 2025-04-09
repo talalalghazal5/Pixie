@@ -81,11 +81,13 @@ class _TestHomePageState extends State<HomePage> {
                           Photo photo = controller.photos[index];
                           return GestureDetector(
                             onTap: () {
-                              Get.to(
-                                () => PreviewPage(
-                                  photo: photo,
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PreviewPage(
+                                    photo: photo,
+                                  ),
                                 ),
-                                transition: Transition.cupertino,
                               );
                             },
                             child: Container(
@@ -110,7 +112,9 @@ class _TestHomePageState extends State<HomePage> {
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                     ),
-                                    const PixieLogoText(fontSize: 30,)
+                                    const PixieLogoText(
+                                      fontSize: 30,
+                                    )
                                   ],
                                 ),
                                 errorWidget: (context, error, stackTrace) =>
@@ -189,7 +193,8 @@ class _TestHomePageState extends State<HomePage> {
         SnackBar(
           dismissDirection: DismissDirection.horizontal,
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           content: Text(
             'errorMessage'.tr,
             style: TextStyle(
